@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Component = () => (
+const Page = () => (
   <div className="p-6">
-    <h1 className="text-2xl font-bold text-gray-800">Sales Overview</h1>
-    <p className="text-gray-600 mt-2">This page will display details for: Sales Overview.</p>
+    <h1 className="text-2xl font-bold text-[#002147]">Sales Overview</h1>
+    <p className="text-gray-700 mt-2">View top-line sales metrics, trends, and order breakdowns.</p>
   </div>
 );
 
-export default Component;
+export default Page;
