@@ -1,14 +1,19 @@
+
 import React from 'react';
-import Header from './shared/Header';
+import Header from './Header';
+import SidebarLayout from './SidebarLayout';
 
 const PageWrapper = ({ children }) => {
   return (
-    <>
+    <div className="page-wrapper">
       <Header />
-      <div className="p-6">
-        {children}
+      <div className="layout">
+        <SidebarLayout />
+        <main className="content">
+          {children}
+        </main>
       </div>
-    </>
+    </div>
   );
 };
 
