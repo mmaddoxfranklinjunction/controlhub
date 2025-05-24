@@ -36,3 +36,21 @@
   background-color: #d9d8d6;
   width: 100%;
 }
+
+.header-account {
+  margin-left: auto;
+}
+
+.account-link {
+  color: #253847;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.account-link:hover {
+  text-decoration: underline;
+}
+
