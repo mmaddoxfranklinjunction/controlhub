@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
-import Home from '../../pages/Home';
 import ControlPanel from '../../pages/control-panel/ControlPanel';
 import MarketingPanel from '../../pages/control-panel/MarketingPanel';
 import OperationsPanel from '../../pages/control-panel/OperationsPanel';
@@ -57,7 +56,6 @@ const SidebarLayout = () => {
       </aside>
       <main className="flex-1 p-6 overflow-y-auto">
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/control-panel" element={<ControlPanel />} />
           <Route path="/control-panel/marketing" element={<MarketingPanel />} />
           <Route path="/control-panel/operations" element={<OperationsPanel />} />
