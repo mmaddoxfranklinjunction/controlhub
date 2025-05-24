@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#fefaf7] text-center px-4">
-      <img
+     <img src="/homelogo.png" alt="Franklin Junction Logo" className="w-40 mb-6" />
+
+    <img
         src={`${process.env.PUBLIC_URL}/control_hub_logo.png`}
         alt="Control Hub Logo"
-        className="w-36 mb-6"
+        className="w-56 mb-6"
       />
       <h1 className="text-4xl font-bold text-[#002147] mb-2">The GM for your Digital Restaurant</h1>
      
