@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PageWrapper from '../../components/shared/PageWrapper';
+
 
 const ControlPanel = () => {
   return (
-   <PageWrapper>
 
       <div className="px-6 py-10">
        
@@ -82,7 +81,7 @@ const ControlPanel = () => {
           </div>
         </div>
       </div>
-           </PageWrapper>
+           
   );
 };
 
