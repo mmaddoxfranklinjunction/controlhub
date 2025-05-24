@@ -10,14 +10,16 @@ const Home = () => {
         alt="Franklin Junction Logo"
         className="w-36 mb-6"
       />
-
+ <img
+        src="/control_hub_logo.png"
+        alt="Control Hub Logo"
+        className="w-36 mb-6"
+      />
       {/* Main Title */}
-      <h1 className="text-4xl md:text-5xl font-bold text-[#002147] mb-2 font-sans">
-        Control Hub
-      </h1>
+     
       <p className="text-[#253847] text-lg md:text-xl mb-12 font-light">
-        Control your digital restaurant<br />
-        like you do your physical
+        The GM for your Digital Restaurant
+        
       </p>
 
       {/* Grid Navigation Cards */}
