@@ -5,7 +5,7 @@ import SidebarLayout from './SidebarLayout';
 
 const PageWrapper = ({ children }) => {
   return (
-    <div className="page-wrapper">
+    <div className="header">
       <Header />
       <div className="layout">
         <SidebarLayout />
