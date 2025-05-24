@@ -15,8 +15,9 @@ const Header = () => {
         <a href="https://franklinjunction.com" target="_blank" rel="noopener noreferrer">Website</a>
         <Link to="/profile">Profile</Link>
       </nav>
-      <hr className="header-divider" />
+     
     </header>
+   <hr className="header-divider" />
   );
 };
 
