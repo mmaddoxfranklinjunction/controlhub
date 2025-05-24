@@ -11,7 +11,7 @@ const Header = () => {
        
       </div>
       <nav className="header-nav">
-        <Link to="/">Home</Link>
+        <Link to="/">wrong header</Link>
         <a href="https://franklinjunction.com" target="_blank" rel="noopener noreferrer">Website</a>
         <Link to="/profile">Profile</Link>
       </nav>
