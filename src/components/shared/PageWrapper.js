@@ -5,11 +5,13 @@ import SidebarLayout from './SidebarLayout';
 
 const PageWrapper = ({ children }) => {
   return (
-    <div className="header">
+    <div className="min-h-screen flex flex-col bg-[#F9F9F9]">
       <Header />
-      <div className="layout">
-        <SidebarLayout />
-        <main className="content">
+
+      <div className="flex flex-1">
+        <Sidebar />
+
+        <main className="flex-1 px-6 py-8 overflow-y-auto">
           {children}
         </main>
       </div>
