@@ -1,60 +1,87 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-const panels = [
-  {
-    title: "Marketing Promos",
-    icon: "📈",
-    toReport: "/analytics/promotions",
-    toChef: "/recommendations/marketing",
-    description: "Adjust ad spend, campaign timing, and promotional tags by platform.",
-  },
-  {
-    title: "Operations",
-    icon: "🕒",
-    toReport: "/analytics/operations",
-    toChef: "/recommendations/operations",
-    description: "Throttle order flow, override prep times, and track training schedules.",
-  },
-  {
-    title: "Locations",
-    icon: "🏪",
-    toReport: "/analytics/recovery",
-    toChef: "/recommendations/locations",
-    description: "Manage hours, rank visibility, and sync store settings across channels.",
-  },
-  {
-    title: "Menu",
-    icon: "🍽",
-    toReport: "/analytics/sales",
-    toChef: "/recommendations/menu",
-    description: "Toggle availability, adjust pricing, and test new combinations.",
-  }
-];
+import Header from '../Header';
 
 const ControlPanel = () => {
   return (
-    <div className="w-full max-w-[1440px] mx-auto px-6 py-8 bg-[#F9F9F9] min-h-screen">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold text-[#253847] font-sans">Control Panel</h1>
-        <p className="text-[#A5BAC9] text-base mt-1 font-sans">Control your digital restaurant like you do your physical one.</p>
-        <hr className="mt-4 border-t border-gray-300" />
-      </header>
+    <div className="w-full max-w-[1440px] mx-auto bg-[#F9F9F9] min-h-screen">
+      <Header />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {panels.map((panel, idx) => (
-          <div key={idx} className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition p-6">
-            <div className="flex items-center gap-3 mb-2">
-              <span className="text-2xl">{panel.icon}</span>
-              <h2 className="text-xl font-semibold text-[#253847] font-sans">{panel.title}</h2>
+      <div className="px-6 py-10">
+        <header className="mb-10">
+          <div className="flex flex-col items-center">
+            <div className="flex items-center gap-4 mb-2">
+              <img src="/fj-circle-logo.png" alt="Franklin Junction" className="w-12 h-12" />
+              <h1 className="text-xl font-bold text-[#253847] font-sans">Control Panel</h1>
             </div>
-            <p className="text-sm text-[#5C6B7A] mb-4">{panel.description}</p>
-            <div className="flex justify-between text-sm text-[#B3282D] font-medium">
-              <Link to={panel.toReport} className="hover:underline">📊 View Report</Link>
-              <Link to={panel.toChef} className="hover:underline">👨‍🍳 Chef’s Recommendations</Link>
-            </div>
+            <p className="text-[#A5BAC9] text-base font-sans text-center">
+              Control your digital restaurant like you do your physical one.
+            </p>
           </div>
-        ))}
+          <hr className="mt-6 border-t border-gray-300" />
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Marketing Promos */}
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">📈</span>
+                <h2 className="text-lg font-semibold text-[#253847] font-sans">Marketing Promos</h2>
+              </div>
+              <div className="flex gap-3 text-sm text-[#B3282D] font-medium">
+                <Link to="/analytics/promotions" className="hover:underline">📊 View Report</Link>
+                <Link to="/recommendations/marketing" className="hover:underline">👨‍🍳 Chef’s Recommendations</Link>
+              </div>
+            </div>
+            <p className="text-sm text-[#5C6B7A]">Adjust ad spend, campaign timing, and promotional tags by platform.</p>
+          </div>
+
+          {/* Operations */}
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🕒</span>
+                <h2 className="text-lg font-semibold text-[#253847] font-sans">Operations</h2>
+              </div>
+              <div className="flex gap-3 text-sm text-[#B3282D] font-medium">
+                <Link to="/analytics/operations" className="hover:underline">📊 View Report</Link>
+                <Link to="/recommendations/operations" className="hover:underline">👨‍🍳 Chef’s Recommendations</Link>
+              </div>
+            </div>
+            <p className="text-sm text-[#5C6B7A]">Throttle order flow, override prep times, and track training schedules.</p>
+          </div>
+
+          {/* Locations */}
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🏪</span>
+                <h2 className="text-lg font-semibold text-[#253847] font-sans">Locations</h2>
+              </div>
+              <div className="flex gap-3 text-sm text-[#B3282D] font-medium">
+                <Link to="/analytics/recovery" className="hover:underline">📊 View Report</Link>
+                <Link to="/recommendations/locations" className="hover:underline">👨‍🍳 Chef’s Recommendations</Link>
+              </div>
+            </div>
+            <p className="text-sm text-[#5C6B7A]">Manage hours, rank visibility, and sync store settings across channels.</p>
+          </div>
+
+          {/* Menu */}
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🍽</span>
+                <h2 className="text-lg font-semibold text-[#253847] font-sans">Menu</h2>
+              </div>
+              <div className="flex gap-3 text-sm text-[#B3282D] font-medium">
+                <Link to="/analytics/sales" className="hover:underline">📊 View Report</Link>
+                <Link to="/recommendations/menu" className="hover:underline">👨‍🍳 Chef’s Recommendations</Link>
+              </div>
+            </div>
+            <p className="text-sm text-[#5C6B7A]">Toggle availability, adjust pricing, and test new combinations.</p>
+          </div>
+        </div>
       </div>
     </div>
   );
