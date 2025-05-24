@@ -9,7 +9,7 @@ const PageWrapper = ({ children }) => {
       <Header />
 
       <div className="flex flex-1">
-        <Sidebar />
+        <SidebarLayout />
 
         <main className="flex-1 px-6 py-8 overflow-y-auto">
           {children}
