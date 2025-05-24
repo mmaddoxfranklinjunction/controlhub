@@ -1,5 +1,5 @@
 import React from 'react';
-import PageWrapper from '../PageWrapper';
+import PageWrapper from '../../PageWrapper';
 
 const SalesOverview = () => {
   return (
