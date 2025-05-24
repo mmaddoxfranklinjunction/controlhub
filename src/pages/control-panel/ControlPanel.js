@@ -1,25 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../Header';
+import PageWrapper from '../PageWrapper';
 
 const ControlPanel = () => {
   return (
-    <div className="w-full max-w-[1440px] mx-auto bg-[#F9F9F9] min-h-screen">
-      <Header />
-
+   
+<PageWrapper>
       <div className="px-6 py-10">
-        <header className="mb-10">
+       
           <div className="flex flex-col items-center">
             <div className="flex items-center gap-4 mb-2">
               <img src="/fj-circle-logo.png" alt="Franklin Junction" className="w-12 h-12" />
               <h1 className="text-xl font-bold text-[#253847] font-sans">Control Panel</h1>
             </div>
             <p className="text-[#A5BAC9] text-base font-sans text-center">
-              Control your digital restaurant like you do your physical one.
+              Control your digital restaurant
             </p>
           </div>
           <hr className="mt-6 border-t border-gray-300" />
-        </header>
+     
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Marketing Promos */}
@@ -83,7 +82,7 @@ const ControlPanel = () => {
           </div>
         </div>
       </div>
-    </div>
+    </PageWrapper>
   );
 };
 
