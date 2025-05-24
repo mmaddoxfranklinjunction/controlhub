@@ -25,7 +25,7 @@ const SidebarLayout = () => {
   return (
     <div className="flex h-screen bg-gray-100">
       <aside className="w-64 bg-gray-800 text-white p-4 space-y-2 overflow-y-auto">
-        <h2 className="text-lg font-bold mb-4">Control Hub</h2>
+     
         <nav className="space-y-2">
           <button onClick={() => setOpenSection(openSection === 'control' ? null : 'control')} className="w-full text-left py-2 px-2 font-semibold hover:bg-gray-700 rounded">
             {`Control Panel${openSection === 'control' ? ' ▼' : ' ▶'}`}
