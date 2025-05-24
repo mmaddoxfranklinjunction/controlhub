@@ -5,7 +5,7 @@ import PageWrapper from '../PageWrapper';
 const ControlPanel = () => {
   return (
    
-<PageWrapper>
+
       <div className="px-6 py-10">
        
           <div className="flex flex-col items-center">
@@ -82,7 +82,7 @@ const ControlPanel = () => {
           </div>
         </div>
       </div>
-    </PageWrapper>
+   
   );
 };
 
