@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
-import Home from './Home';
-import ControlPanel from './control-panel/ControlPanel';
-import MarketingPanel from './control-panel/MarketingPanel';
-import OperationsPanel from './control-panel/OperationsPanel';
-import LocationsPanel from './control-panel/LocationsPanel';
-import MenuPanel from './control-panel/MenuPanel';
+import Home from '../../pages/Home';
+import ControlPanel from '../../pages/control-panel/ControlPanel';
+import MarketingPanel from '../../pages/control-panel/MarketingPanel';
+import OperationsPanel from '../../pages/control-panel/OperationsPanel';
+import LocationsPanel from '../../pages/control-panel/LocationsPanel';
+import MenuPanel from '../../pages/control-panel/MenuPanel';
 
-import SalesOverview from './analytics/SalesOverview';
-import OperationsPerformance from './analytics/OperationsPerformance';
-import RatingsFeedback from './analytics/RatingsFeedback';
-import PromotionsReport from './analytics/PromotionsReport';
-import SponsoredListingReport from './analytics/SponsoredListingReport';
-import RevenueRecovery from './analytics/RevenueRecovery';
+import SalesOverview from '../../pages/analytics/SalesOverview';
+import OperationsPerformance from '../../pages/analytics/OperationsPerformance';
+import RatingsFeedback from '../../pages/analytics/RatingsFeedback';
+import PromotionsReport from '../../pages/analytics/PromotionsReport';
+import SponsoredListingReport from '../../pages/analytics/SponsoredListingReport';
+import RevenueRecovery from '../../pages/analytics/RevenueRecovery';
 
-import RecommendationsMarketing from './recommendations/RecommendationsMarketing';
-import RecommendationsOperations from './recommendations/RecommendationsOperations';
-import RecommendationsMenu from './recommendations/RecommendationsMenu';
-import RecommendationsLocations from './recommendations/RecommendationsLocations';
+import RecommendationsMarketing from '../../pages/recommendations/RecommendationsMarketing';
+import RecommendationsOperations from '../../pages/recommendations/RecommendationsOperations';
+import RecommendationsMenu from '../../pages/recommendations/RecommendationsMenu';
+import RecommendationsLocations from '../../pages/recommendations/RecommendationsLocations';
 
 const SidebarLayout = () => {
   const [openSection, setOpenSection] = useState("control");
