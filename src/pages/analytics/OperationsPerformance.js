@@ -6,7 +6,7 @@ import {
   avoidableCancellations,
   errorRateDetails,
   downtimeDetails
-} from './data/OperationsPerformanceFullData';
+} from '../data/OperationsPerformanceFullData';
 
 const OperationsPerformance = () => {
   const [filters, setFilters] = useState({
@@ -17,11 +17,8 @@ const OperationsPerformance = () => {
     search: ''
   });
 
-  // If you add location/brand to table data, filter accordingly.
-  // For demo, tables show all data. You can adapt below if data grows.
-  // const filteredAvoidableCancellations = avoidableCancellations.filter(row => ...);
-  // const filteredErrorRateDetails = errorRateDetails.filter(row => ...);
-  // const filteredDowntimeDetails = downtimeDetails.filter(row => ...);
+  // Filtering logic can be added here if your row data supports it
+  // For now, tables show all data
 
   return (
     <PageWrapper>
