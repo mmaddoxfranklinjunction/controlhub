@@ -1,6 +1,6 @@
 import { useState } from "react";
-import PageWrapper from '.../components/shared/PageWrapper';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
+import PageWrapper from '../../components/shared/PageWrapper';
 
 export default function LocationsPanel() {
   const [isOpen, setIsOpen] = useState(true);
@@ -43,8 +43,8 @@ export default function LocationsPanel() {
         </div>
         {/* Carousel Nav */}
         <div className="flex justify-between mt-8">
-          <Link href="/control-panel/MenuPanel" className="text-blue-500 hover:underline">← Menu</Link>
-          <Link href="/control-panel/OperationsPanel" className="text-blue-500 hover:underline">Operations →</Link>
+          <Link to="/control-panel/MenuPanel" className="text-blue-500 hover:underline">← Menu</Link>
+          <Link to="/control-panel/OperationsPanel" className="text-blue-500 hover:underline">Operations →</Link>
         </div>
       </div>
     </PageWrapper>
