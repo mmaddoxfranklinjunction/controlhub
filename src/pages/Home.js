@@ -1,8 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Header from '../shared/Header';
+
 const Home = () => {
   return (
+    <>
+      <Header />
+      <div className="...">
+       
+        
+        
+       
+
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#fefaf7] text-center px-4">
      <img src="/homelogo.png" alt="Franklin Junction Logo" className="w-20 mb-6" />
 
@@ -63,5 +73,12 @@ const Home = () => {
     </div>
   );
 };
+
+
+      </div>
+    </>
+  );
+};
+
 
 export default Home;
