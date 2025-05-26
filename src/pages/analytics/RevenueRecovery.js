@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { doordashData, uberData } from '../data/RevenueRecoveryFullData';
+import { doordashData, uberData } from './data/RevenueRecoveryFullData';
 
 const RevenueRecovery = () => {
   const [search, setSearch] = useState('');
