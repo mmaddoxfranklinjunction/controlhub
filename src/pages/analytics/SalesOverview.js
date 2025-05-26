@@ -6,7 +6,7 @@ import {
   salesPrevious,
   summaryByLocation,
   summaryTotals
-} from '../data/SalesOverviewFullData';
+} from './data/SalesOverviewFullData';
 
 // Charting library
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
