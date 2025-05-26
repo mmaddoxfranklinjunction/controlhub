@@ -6,7 +6,7 @@ import {
   avoidableCancellations,
   errorRateDetails,
   downtimeDetails
-} from '../data/OperationsPerformanceFullData';
+} from './data/OperationsPerformanceFullData';
 
 const OperationsPerformance = () => {
   const [filters, setFilters] = useState({
