@@ -2,14 +2,13 @@ import { useState } from "react";
 import { Link } from 'react-router-dom';
 import PageWrapper from '../../components/shared/PageWrapper';
 
-export default function LocationsPanel() {
+const LocationsPanel = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
     <PageWrapper>
       <div className="max-w-2xl mx-auto py-8">
         <h1 className="text-2xl font-bold mb-4">Location Details</h1>
-        {/* Storefront Status */}
         <div className="bg-white shadow p-4 rounded-2xl mb-6">
           <div className="flex justify-between items-center mb-2">
             <span className="font-medium">Storefront Uptime</span>
@@ -33,7 +32,6 @@ export default function LocationsPanel() {
             <span className="ml-2 text-xs">{isOpen ? "Open" : "Closed"}</span>
           </div>
         </div>
-        {/* Storefront Visibility Score */}
         <div className="bg-white shadow p-4 rounded-2xl mb-6">
           <div className="flex justify-between">
             <span className="font-medium">Visibility Score</span>
@@ -41,7 +39,6 @@ export default function LocationsPanel() {
           </div>
           <div className="mt-2 text-xs text-gray-500">Trending up (+0.3 this week)</div>
         </div>
-        {/* Carousel Nav */}
         <div className="flex justify-between mt-8">
           <Link to="/control-panel/MenuPanel" className="text-blue-500 hover:underline">← Menu</Link>
           <Link to="/control-panel/OperationsPanel" className="text-blue-500 hover:underline">Operations →</Link>
@@ -49,4 +46,6 @@ export default function LocationsPanel() {
       </div>
     </PageWrapper>
   );
-}
+};
+
+export default LocationsPanel;
