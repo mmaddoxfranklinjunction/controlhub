@@ -35,7 +35,7 @@ const Home = () => (
   <div className="flex flex-col min-h-screen bg-gray-100 px-4 relative">
     <div className="w-full flex justify-end items-center py-6 max-w-7xl mx-auto">
       <Link
-        to="/account-setup"
+        to="/account-setup/accountsetup.js"
         className="inline-block bg-[#B3282D] text-white px-6 py-2 rounded-full font-semibold text-md shadow hover:bg-[#8c1c24] transition-all mr-4 tracking-wide"
         style={{ letterSpacing: '0.02em' }}
       >
@@ -62,7 +62,7 @@ const Home = () => (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full mb-12 mt-6">
         {/* Analytics */}
         <Link
-          to="/analytics/sales"
+          to="/analytics/salesoverview.js"
           className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl border border-gray-200 transition flex flex-col items-center justify-center text-center"
         >
           <IconReport />
@@ -81,7 +81,7 @@ const Home = () => (
         </Link>
         {/* Store Search */}
         <Link
-          to="/store-search"
+          to="/store-search/storesearch.js"
           className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl border border-gray-200 transition flex flex-col items-center justify-center text-center"
         >
           <IconSearch />
@@ -94,7 +94,7 @@ const Home = () => (
         </Link>
         {/* Control Panel */}
         <Link
-          to="/control-panel"
+          to="/control-panel/controlpanel.js"
           className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl border border-gray-200 transition flex flex-col items-center justify-center text-center"
         >
           <IconStorefront />
@@ -124,7 +124,7 @@ const Home = () => (
         </Link>
         {/* Settings */}
         <Link
-          to="/settings"
+          to="/settings/settings.js"
           className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl border border-gray-200 transition flex flex-col items-center justify-center text-center"
         >
           <IconSettings />
