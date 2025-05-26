@@ -8,9 +8,6 @@ import {
   summaryTotals
 } from './data/SalesOverviewFullData';
 
-// Charting library
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-
 const SalesOverview = () => {
   const [filters, setFilters] = useState({
     location: 'All',
@@ -20,7 +17,7 @@ const SalesOverview = () => {
     search: ''
   });
 
-  // Optionally filter table/chart data here if you add brand/location/channel attributes
+  // Optional: filter table data here if your row data supports it
 
   return (
     <PageWrapper>
@@ -33,32 +30,50 @@ const SalesOverview = () => {
           showDate={true}
         />
 
-        {/* Sales Performance Current */}
+        {/* Sales Performance Current Period */}
         <div className="bg-white border rounded-xl shadow p-4 mb-6">
           <h2 className="text-lg font-bold mb-2">Sales Performance - Current Period (01 May - 31 May)</h2>
-          <ResponsiveContainer width="100%" height={200}>
-            <LineChart data={salesCurrent}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" fontSize={12} />
-              <YAxis fontSize={12} />
-              <Tooltip />
-              <Line type="monotone" dataKey="sales" stroke="#1870bf" strokeWidth={3} dot />
-            </LineChart>
-          </ResponsiveContainer>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="border-b text-[#5C6B7A]">
+                <tr>
+                  <th className="text-left py-2">Date</th>
+                  <th className="text-right py-2">Sales</th>
+                </tr>
+              </thead>
+              <tbody>
+                {salesCurrent.map((row, i) => (
+                  <tr key={i} className="border-b hover:bg-[#f4f7fa]">
+                    <td className="py-1">{row.date}</td>
+                    <td className="text-right">${row.sales.toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        {/* Sales Performance Previous */}
+        {/* Sales Performance Previous Month */}
         <div className="bg-white border rounded-xl shadow p-4 mb-6">
           <h2 className="text-lg font-bold mb-2">Sales Performance - Previous Month (01 Apr - 30 Apr)</h2>
-          <ResponsiveContainer width="100%" height={200}>
-            <LineChart data={salesPrevious}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" fontSize={12} />
-              <YAxis fontSize={12} />
-              <Tooltip />
-              <Line type="monotone" dataKey="sales" stroke="#1870bf" strokeWidth={2} dot={{ r: 4 }} strokeDasharray="4 2" />
-            </LineChart>
-          </ResponsiveContainer>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="border-b text-[#5C6B7A]">
+                <tr>
+                  <th className="text-left py-2">Date</th>
+                  <th className="text-right py-2">Sales</th>
+                </tr>
+              </thead>
+              <tbody>
+                {salesPrevious.map((row, i) => (
+                  <tr key={i} className="border-b hover:bg-[#f4f7fa]">
+                    <td className="py-1">{row.date}</td>
+                    <td className="text-right">${row.sales.toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         {/* Summary by Location Table */}
