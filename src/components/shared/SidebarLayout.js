@@ -1,48 +1,38 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
-import ControlPanel from '../../pages/control-panel/ControlPanel';
-import MarketingPanel from '../../pages/control-panel/MarketingPanel';
-import OperationsPanel from '../../pages/control-panel/OperationsPanel';
-import LocationsPanel from '../../pages/control-panel/LocationsPanel';
-import MenuPanel from '../../pages/control-panel/MenuPanel';
-
-import SalesOverview from '../../pages/analytics/SalesOverview';
-import OperationsPerformance from '../../pages/analytics/OperationsPerformance';
-import RatingsFeedback from '../../pages/analytics/RatingsFeedback';
-import PromotionsReport from '../../pages/analytics/PromotionsReport';
-import SponsoredListingReport from '../../pages/analytics/SponsoredListingReport';
-import RevenueRecovery from '../../pages/analytics/RevenueRecovery';
-
-import RecommendationsMarketing from '../../pages/recommendations/RecommendationsMarketing';
-import RecommendationsOperations from '../../pages/recommendations/RecommendationsOperations';
-import RecommendationsMenu from '../../pages/recommendations/RecommendationsMenu';
-import RecommendationsLocations from '../../pages/recommendations/RecommendationsLocations';
+// ...existing imports...
+import StoreSearch from '../../pages/store-search/StoreSearch';
+import Settings from '../../pages/settings/Settings';
 
 const SidebarLayout = () => {
-  const [openSection, setOpenSection] = useState("control");
+  const [openSections, setOpenSections] = useState({
+    analytics: true,
+    control: true,
+    storeSearch: false,
+    settings: false,
+  });
+
+  const toggleSection = (section) => {
+    setOpenSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
   return (
     <div className="flex h-screen bg-gray-100">
       <aside className="w-64 bg-gray-800 text-white p-4 space-y-2 overflow-y-auto">
-     
         <nav className="space-y-2">
-          <button onClick={() => setOpenSection(openSection === 'control' ? null : 'control')} className="w-full text-left py-2 px-2 font-semibold hover:bg-gray-700 rounded">
-            {`Control Panel${openSection === 'control' ? ' ▼' : ' ▶'}`}
+
+          {/* Analytics Section (now at top) */}
+          <button
+            onClick={() => toggleSection('analytics')}
+            className="w-full text-left py-2 px-2 font-semibold hover:bg-gray-700 rounded"
+          >
+            {`Analytics${openSections.analytics ? ' ▼' : ' ▶'}`}
           </button>
-          {openSection === "control" && (
-            <div className="pl-4 space-y-1">
-              <Link to="/control-panel" className="block py-1 px-2 hover:bg-gray-700 rounded">Overview</Link>
-              <Link to="/control-panel/marketing" className="block py-1 px-2 hover:bg-gray-700 rounded">Marketing</Link>
-              <Link to="/control-panel/operations" className="block py-1 px-2 hover:bg-gray-700 rounded">Operations</Link>
-              <Link to="/control-panel/locations" className="block py-1 px-2 hover:bg-gray-700 rounded">Locations</Link>
-              <Link to="/control-panel/menu" className="block py-1 px-2 hover:bg-gray-700 rounded">Menu</Link>
-            </div>
-          )}
-          <button onClick={() => setOpenSection(openSection === 'analytics' ? null : 'analytics')} className="w-full text-left py-2 px-2 font-semibold hover:bg-gray-700 rounded">
-            {`Analytics${openSection === 'analytics' ? ' ▼' : ' ▶'}`}
-          </button>
-          {openSection === "analytics" && (
+          {openSections.analytics && (
             <div className="pl-4 space-y-1">
               <Link to="/analytics/sales" className="block py-1 px-2 hover:bg-gray-700 rounded">Sales Overview</Link>
               <Link to="/analytics/operations" className="block py-1 px-2 hover:bg-gray-700 rounded">Operations Performance</Link>
@@ -52,16 +42,64 @@ const SidebarLayout = () => {
               <Link to="/analytics/recovery" className="block py-1 px-2 hover:bg-gray-700 rounded">Revenue Recovery</Link>
             </div>
           )}
+
+          {/* Control Panel Section */}
+          <button
+            onClick={() => toggleSection('control')}
+            className="w-full text-left py-2 px-2 font-semibold hover:bg-gray-700 rounded"
+          >
+            {`Control Panel${openSections.control ? ' ▼' : ' ▶'}`}
+          </button>
+          {openSections.control && (
+            <div className="pl-4 space-y-1">
+              <Link to="/control-panel" className="block py-1 px-2 hover:bg-gray-700 rounded">Overview</Link>
+              <Link to="/control-panel/marketing" className="block py-1 px-2 hover:bg-gray-700 rounded">Marketing</Link>
+              <Link to="/control-panel/operations" className="block py-1 px-2 hover:bg-gray-700 rounded">Operations</Link>
+              <Link to="/control-panel/locations" className="block py-1 px-2 hover:bg-gray-700 rounded">Locations</Link>
+              <Link to="/control-panel/menu" className="block py-1 px-2 hover:bg-gray-700 rounded">Menu</Link>
+            </div>
+          )}
+
+          {/* Store Search Section */}
+          <button
+            onClick={() => toggleSection('storeSearch')}
+            className="w-full text-left py-2 px-2 font-semibold hover:bg-gray-700 rounded"
+          >
+            {`Store Search${openSections.storeSearch ? ' ▼' : ' ▶'}`}
+          </button>
+          {openSections.storeSearch && (
+            <div className="pl-4 space-y-1">
+              <Link to="/store-search" className="block py-1 px-2 hover:bg-gray-700 rounded">Search</Link>
+              {/* Add more store search-related links here if needed */}
+            </div>
+          )}
+
+          {/* Settings Section */}
+          <button
+            onClick={() => toggleSection('settings')}
+            className="w-full text-left py-2 px-2 font-semibold hover:bg-gray-700 rounded"
+          >
+            {`Settings${openSections.settings ? ' ▼' : ' ▶'}`}
+          </button>
+          {openSections.settings && (
+            <div className="pl-4 space-y-1">
+              <Link to="/settings" className="block py-1 px-2 hover:bg-gray-700 rounded">Settings</Link>
+              {/* Add more settings-related links here if needed */}
+            </div>
+          )}
+
         </nav>
       </aside>
       <main className="flex-1 p-6 overflow-y-auto">
         <Routes>
+          {/* Control Panel */}
           <Route path="/control-panel" element={<ControlPanel />} />
           <Route path="/control-panel/marketing" element={<MarketingPanel />} />
           <Route path="/control-panel/operations" element={<OperationsPanel />} />
           <Route path="/control-panel/locations" element={<LocationsPanel />} />
           <Route path="/control-panel/menu" element={<MenuPanel />} />
 
+          {/* Analytics */}
           <Route path="/analytics/sales" element={<SalesOverview />} />
           <Route path="/analytics/operations" element={<OperationsPerformance />} />
           <Route path="/analytics/ratings" element={<RatingsFeedback />} />
@@ -69,6 +107,13 @@ const SidebarLayout = () => {
           <Route path="/analytics/sponsored" element={<SponsoredListingReport />} />
           <Route path="/analytics/recovery" element={<RevenueRecovery />} />
 
+          {/* Store Search */}
+          <Route path="/store-search" element={<StoreSearch />} />
+
+          {/* Settings */}
+          <Route path="/settings" element={<Settings />} />
+
+          {/* Recommendations (keep these at the end if still needed) */}
           <Route path="/recommendations/marketing" element={<RecommendationsMarketing />} />
           <Route path="/recommendations/operations" element={<RecommendationsOperations />} />
           <Route path="/recommendations/menu" element={<RecommendationsMenu />} />
