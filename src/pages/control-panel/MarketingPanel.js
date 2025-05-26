@@ -1,6 +1,6 @@
 import { useState } from "react";
-import PageWrapper from '.../components/shared/PageWrapper';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
+import PageWrapper from '../../components/shared/PageWrapper';
 
 export default function MarketingPanel() {
   const [spend, setSpend] = useState(60); // out of 100
@@ -66,8 +66,8 @@ export default function MarketingPanel() {
         </div>
         {/* Carousel Nav */}
         <div className="flex justify-between mt-8">
-          <Link href="/control-panel/OperationsPanel" className="text-blue-500 hover:underline">← Operations</Link>
-          <Link href="/control-panel/MenuPanel" className="text-blue-500 hover:underline">Menu →</Link>
+          <Link to="/control-panel/OperationsPanel" className="text-blue-500 hover:underline">← Operations</Link>
+          <Link to="/control-panel/MenuPanel" className="text-blue-500 hover:underline">Menu →</Link>
         </div>
       </div>
     </PageWrapper>
