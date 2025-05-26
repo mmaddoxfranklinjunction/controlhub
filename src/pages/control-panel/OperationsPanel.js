@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from 'react-router-dom';
 import PageWrapper from '../../components/shared/PageWrapper';
 
-export default function OperationsPanel() {
+const OperationsPanel = () => {
   const [autoTraining, setAutoTraining] = useState(true);
   const [alertLevel, setAlertLevel] = useState("moderate");
 
@@ -10,7 +10,6 @@ export default function OperationsPanel() {
     <PageWrapper>
       <div className="max-w-2xl mx-auto py-8">
         <h1 className="text-2xl font-bold mb-4">Operations</h1>
-        {/* M&I and Ratings */}
         <div className="grid grid-cols-2 gap-4 mb-6">
           <div className="bg-white shadow p-4 rounded-2xl flex flex-col items-center">
             <span className="text-2xl font-bold">4.7</span>
@@ -21,7 +20,6 @@ export default function OperationsPanel() {
             <span className="text-xs text-gray-500">Overall Uptime</span>
           </div>
         </div>
-        {/* Best/Worst Performing */}
         <div className="mb-6 bg-white shadow rounded-2xl p-4">
           <div className="font-medium mb-2">Performance</div>
           <div className="flex justify-between items-center">
@@ -29,7 +27,6 @@ export default function OperationsPanel() {
             <span>Worst: <span className="font-bold text-red-600">Store #5</span></span>
           </div>
         </div>
-        {/* Config Toggles */}
         <div className="mb-6 bg-white shadow rounded-2xl p-4">
           <div className="flex justify-between items-center mb-2">
             <span className="font-medium">Auto-Training Enabled</span>
@@ -58,7 +55,6 @@ export default function OperationsPanel() {
             <span className="ml-2 text-xs capitalize">{alertLevel}</span>
           </div>
         </div>
-        {/* Carousel Nav */}
         <div className="flex justify-between mt-8">
           <Link to="/control-panel/LocationsPanel" className="text-blue-500 hover:underline">← Locations</Link>
           <Link to="/control-panel/MarketingPanel" className="text-blue-500 hover:underline">Marketing →</Link>
@@ -66,4 +62,6 @@ export default function OperationsPanel() {
       </div>
     </PageWrapper>
   );
-}
+};
+
+export default OperationsPanel;
