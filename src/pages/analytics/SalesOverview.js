@@ -1,38 +1,104 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
+import FilterBar from '../../components/shared/FilterBar';
+import {
+  salesCurrent,
+  salesPrevious,
+  summaryByLocation,
+  summaryTotals
+} from '../data/SalesOverviewFullData';
+
+// Charting library
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const SalesOverview = () => {
+  const [filters, setFilters] = useState({
+    location: 'All',
+    brand: 'All',
+    channel: 'All',
+    date: 'Current Month',
+    search: ''
+  });
+
+  // Optionally filter table/chart data here if you add brand/location/channel attributes
+
   return (
     <PageWrapper>
-      <div className="text-[#253847] p-4">
-        <h1 className="text-xl font-semibold mb-4">Sales Overview</h1>
-        {/* Page content goes here */
-   //<p className="text-gray-700 mt-2">Top-line sales metrics with order volume and performance trends.</p>
+      <div className="px-4 py-6">
+        <h1 className="text-2xl font-bold mb-2">Sales Overview Analytics</h1>
+        <FilterBar
+          data={summaryByLocation.map(row => ({ location: row.location }))}
+          onFilterChange={setFilters}
+          showChannel={false}
+          showDate={true}
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-      
-          <div className="bg-white p-4 shadow rounded-md">
-            <h3 className="text-sm font-semibold text-gray-600">Total Sales</h3>
-            <p className="text-xl font-bold text-[#B22234] mt-1">$92,672</p>
-          </div>
-  
-          <div className="bg-white p-4 shadow rounded-md">
-            <h3 className="text-sm font-semibold text-gray-600">Orders (Completed)</h3>
-            <p className="text-xl font-bold text-[#B22234] mt-1">3,416</p>
-          </div>
-  
-          <div className="bg-white p-4 shadow rounded-md">
-            <h3 className="text-sm font-semibold text-gray-600">Orders (Incl. Cancelled)</h3>
-            <p className="text-xl font-bold text-[#B22234] mt-1">3,603</p>
-          </div>
-  
-          <div className="bg-white p-4 shadow rounded-md">
-            <h3 className="text-sm font-semibold text-gray-600">AOV</h3>
-            <p className="text-xl font-bold text-[#B22234] mt-1">$27</p>
+        {/* Sales Performance Current */}
+        <div className="bg-white border rounded-xl shadow p-4 mb-6">
+          <h2 className="text-lg font-bold mb-2">Sales Performance - Current Period (01 May - 31 May)</h2>
+          <ResponsiveContainer width="100%" height={200}>
+            <LineChart data={salesCurrent}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" fontSize={12} />
+              <YAxis fontSize={12} />
+              <Tooltip />
+              <Line type="monotone" dataKey="sales" stroke="#1870bf" strokeWidth={3} dot />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Sales Performance Previous */}
+        <div className="bg-white border rounded-xl shadow p-4 mb-6">
+          <h2 className="text-lg font-bold mb-2">Sales Performance - Previous Month (01 Apr - 30 Apr)</h2>
+          <ResponsiveContainer width="100%" height={200}>
+            <LineChart data={salesPrevious}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" fontSize={12} />
+              <YAxis fontSize={12} />
+              <Tooltip />
+              <Line type="monotone" dataKey="sales" stroke="#1870bf" strokeWidth={2} dot={{ r: 4 }} strokeDasharray="4 2" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Summary by Location Table */}
+        <div className="bg-white border rounded-xl shadow p-4 mb-6">
+          <h2 className="text-lg font-bold mb-2">Summary by Location</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="border-b text-[#5C6B7A]">
+                <tr>
+                  <th className="text-left py-2">Location</th>
+                  <th className="text-right py-2">$ Sales</th>
+                  <th className="text-right py-2">Orders</th>
+                  <th className="text-right py-2">% Sales</th>
+                  <th className="text-right py-2">AOV</th>
+                </tr>
+              </thead>
+              <tbody>
+                {summaryByLocation.map((row, i) => (
+                  <tr key={i} className="border-b hover:bg-[#f4f7fa]">
+                    <td className="py-1">{row.location}</td>
+                    <td className="text-right">${row.sales.toLocaleString()}</td>
+                    <td className="text-right">{row.orders}</td>
+                    <td className="text-right">{row.pct}%</td>
+                    <td className="text-right">${row.aov}</td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr className="font-bold border-t">
+                  <td className="py-1 text-right">Total</td>
+                  <td className="text-right">${summaryTotals.sales.toLocaleString()}</td>
+                  <td className="text-right">{summaryTotals.orders}</td>
+                  <td className="text-right">{summaryTotals.pct}%</td>
+                  <td className="text-right">${summaryTotals.aov}</td>
+                </tr>
+              </tfoot>
+            </table>
           </div>
         </div>
-        }
-          </div>
+      </div>
     </PageWrapper>
   );
 };
