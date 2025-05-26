@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { doordashData, uberData } from './data/RevenueRecoveryFullData';
+import PageWrapper from '../../components/shared/PageWrapper';
 
 const RevenueRecovery = () => {
   const [search, setSearch] = useState('');
@@ -10,6 +11,7 @@ const RevenueRecovery = () => {
   };
 
   return (
+    <PageWrapper>
     <div className="px-4 py-6">
       <header className="mb-6">
         <h1 className="text-2xl font-bold text-[#253847] mb-2">Revenue Recovery</h1>
@@ -77,6 +79,7 @@ const RevenueRecovery = () => {
       </div>
     </div>
   );
+</PageWrapper>
 };
 
 export default RevenueRecovery;
