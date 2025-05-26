@@ -1,33 +1,174 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PageWrapper from '../../components/shared/PageWrapper';
+import FilterBar from '../../components/shared/FilterBar';
+import {
+  summaryMetrics,
+  avoidableCancellations,
+  errorRateDetails,
+  downtimeDetails
+} from './data/OperationsPerformanceFullData';
 
-const OperationsPerformance = () => (
-  <div className="p-6">
-    <h1 className="text-2xl font-bold text-[#002147]">Operations Performance</h1>
-    <p className="text-gray-700 mt-2">Track operational quality, avoidable issues, and system uptime.</p>
+const OperationsPerformance = () => {
+  const [filters, setFilters] = useState({
+    location: 'All',
+    brand: 'All',
+    channel: 'All',
+    date: 'Current Week',
+    search: ''
+  });
 
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-      
-        <div className="bg-white p-4 shadow rounded-md">
-          <h3 className="text-sm font-semibold text-gray-600">% Cancellations</h3>
-          <p className="text-xl font-bold text-[#B22234] mt-1">5.2%</p>
+  // If you add location/brand to table data, filter accordingly.
+  // For demo, tables show all data. You can adapt below if data grows.
+  // const filteredAvoidableCancellations = avoidableCancellations.filter(row => ...);
+  // const filteredErrorRateDetails = errorRateDetails.filter(row => ...);
+  // const filteredDowntimeDetails = downtimeDetails.filter(row => ...);
+
+  return (
+    <PageWrapper>
+      <div className="px-4 py-6">
+        <h1 className="text-2xl font-bold mb-2">Operations Performance Analytics</h1>
+
+        {/* Filter Section */}
+        <FilterBar
+          data={[
+            ...avoidableCancellations.map(r => ({
+              location: r.location || '',
+              brand: r.brand || '',
+            })),
+            ...errorRateDetails.map(r => ({
+              location: r.location || '',
+              brand: r.brand || '',
+            })),
+            ...downtimeDetails.map(r => ({
+              location: r.location || '',
+              brand: r.brand || '',
+            })),
+          ]}
+          onFilterChange={setFilters}
+        />
+
+        {/* Summary Bar */}
+        <div className="grid grid-cols-5 gap-2 mb-6">
+          <div className="bg-[#f4f7fa] border rounded-xl p-2 text-center">
+            <div className="text-xs text-[#5C6B7A]">% Cancellations</div>
+            <div className="text-2xl font-bold">{summaryMetrics.percentCancellations}%</div>
+          </div>
+          <div className="bg-[#f4f7fa] border rounded-xl p-2 text-center">
+            <div className="text-xs text-[#5C6B7A]">Cancellations</div>
+            <div className="text-2xl font-bold">{summaryMetrics.cancellations}</div>
+          </div>
+          <div className="bg-[#f4f7fa] border rounded-xl p-2 text-center">
+            <div className="text-xs text-[#5C6B7A]">% Avoidable Cancellation</div>
+            <div className="text-2xl font-bold">{summaryMetrics.percentAvoidableCancellations}%</div>
+          </div>
+          <div className="bg-[#f4f7fa] border rounded-xl p-2 text-center">
+            <div className="text-xs text-[#5C6B7A]">Avoidable Cancellations</div>
+            <div className="text-2xl font-bold">{summaryMetrics.avoidableCancellations}</div>
+          </div>
+          <div className="bg-[#f4f7fa] border rounded-xl p-2 text-center">
+            <div className="text-xs text-[#5C6B7A]">Downtime %</div>
+            <div className="text-2xl font-bold">{summaryMetrics.downtimePercent}%</div>
+          </div>
+        </div>
+        <div className="grid grid-cols-5 gap-2 mb-6">
+          <div className="bg-[#f4f7fa] border rounded-xl p-2 text-center">
+            <div className="text-xs text-[#5C6B7A]">Total Errors</div>
+            <div className="text-2xl font-bold">{summaryMetrics.totalErrors}</div>
+          </div>
+          <div className="bg-[#f4f7fa] border rounded-xl p-2 text-center">
+            <div className="text-xs text-[#5C6B7A]">Error Rate</div>
+            <div className="text-2xl font-bold">{summaryMetrics.errorRate}%</div>
+          </div>
+          <div className="bg-[#f4f7fa] border rounded-xl p-2 text-center">
+            <div className="text-xs text-[#5C6B7A]">Error Charges</div>
+            <div className="text-2xl font-bold">${summaryMetrics.errorCharges.toLocaleString()}</div>
+          </div>
+          <div className="bg-[#f4f7fa] border rounded-xl p-2 text-center">
+            <div className="text-xs text-[#5C6B7A]">Error Charges %</div>
+            <div className="text-2xl font-bold">{summaryMetrics.errorChargesPercent}%</div>
+          </div>
+          <div className="bg-[#f4f7fa] border rounded-xl p-2 text-center">
+            <div className="text-xs text-[#5C6B7A]">Downtime</div>
+            <div className="text-2xl font-bold">{summaryMetrics.downtime}</div>
+          </div>
         </div>
 
-        <div className="bg-white p-4 shadow rounded-md">
-          <h3 className="text-sm font-semibold text-gray-600">Avoidable Cancellations</h3>
-          <p className="text-xl font-bold text-[#B22234] mt-1">3.8%</p>
+        {/* Data Tables */}
+        <div className="grid md:grid-cols-2 gap-4 mb-6">
+          {/* Avoidable Cancellation Rate Details */}
+          <div className="bg-white rounded-xl border shadow p-4">
+            <h2 className="text-lg font-bold mb-2">Avoidable Cancellation Rate Details</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="border-b text-[#5C6B7A]">
+                  <tr>
+                    <th className="text-left py-2">Merchant Store ID</th>
+                    <th className="text-left py-2">Cancel</th>
+                    <th className="text-left py-2">%</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {avoidableCancellations.map((row, i) => (
+                    <tr key={i} className="border-b hover:bg-[#f4f7fa]">
+                      <td className="py-1">{row.merchantStoreId}</td>
+                      <td>{row.cancel}</td>
+                      <td>{row.percent}%</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          {/* Error Rate Details */}
+          <div className="bg-white rounded-xl border shadow p-4">
+            <h2 className="text-lg font-bold mb-2">Error Rate Details</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="border-b text-[#5C6B7A]">
+                  <tr>
+                    <th className="text-left py-2">Merchant Store ID</th>
+                    <th className="text-left py-2">Total Errors</th>
+                    <th className="text-left py-2">%</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {errorRateDetails.map((row, i) => (
+                    <tr key={i} className="border-b hover:bg-[#f4f7fa]">
+                      <td className="py-1">{row.merchantStoreId}</td>
+                      <td>{row.totalErrors}</td>
+                      <td>{row.percent}%</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-
-        <div className="bg-white p-4 shadow rounded-md">
-          <h3 className="text-sm font-semibold text-gray-600">Total Errors</h3>
-          <p className="text-xl font-bold text-[#B22234] mt-1">189</p>
+        {/* Downtime Details */}
+        <div className="bg-white rounded-xl border shadow p-4">
+          <h2 className="text-lg font-bold mb-2">Downtime by Store Details</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="border-b text-[#5C6B7A]">
+                <tr>
+                  <th className="text-left py-2">Store Name</th>
+                  <th className="text-left py-2">Downtime %</th>
+                </tr>
+              </thead>
+              <tbody>
+                {downtimeDetails.map((row, i) => (
+                  <tr key={i} className="border-b hover:bg-[#f4f7fa]">
+                    <td className="py-1">{row.storeName}</td>
+                    <td>{row.downtimePercent}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-
-        <div className="bg-white p-4 shadow rounded-md">
-          <h3 className="text-sm font-semibold text-gray-600">Downtime</h3>
-          <p className="text-xl font-bold text-[#B22234] mt-1">424h 13m</p>
-        </div>
-    </div>
-  </div>
-);
+      </div>
+    </PageWrapper>
+  );
+};
 
 export default OperationsPerformance;
