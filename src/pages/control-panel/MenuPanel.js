@@ -1,9 +1,8 @@
 import { useState } from "react";
-import PageWrapper from '.../components/shared/PageWrapper';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
+import PageWrapper from '../../components/shared/PageWrapper';
 
 export default function MenuPanel() {
-  // Example toggles for missing data
   const [showMissing, setShowMissing] = useState(true);
 
   return (
@@ -34,43 +33,4 @@ export default function MenuPanel() {
               <span className="text-xs text-gray-500">Missing Photos</span>
             </div>
             <div className="flex flex-col items-center">
-              <span className="font-bold text-blue-600">12</span>
-              <span className="text-xs text-gray-500">Tagged 'Vegan'</span>
-            </div>
-          </div>
-          <div className="flex items-center mt-4 gap-2">
-            <input
-              type="checkbox"
-              checked={showMissing}
-              onChange={() => setShowMissing(!showMissing)}
-              className="accent-blue-500"
-              id="missingToggle"
-            />
-            <label htmlFor="missingToggle" className="text-sm">Show only items missing info</label>
-          </div>
-        </div>
-        {/* Price Comparisons */}
-        <div className="mb-6 bg-white shadow rounded-2xl p-4">
-          <div className="font-medium mb-2">Price Comparison</div>
-          <div className="flex justify-between text-sm">
-            <span>Burger</span>
-            <span>$9.00 (You) / $9.50 (Avg)</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span>Pizza</span>
-            <span>$13.00 (You) / $12.75 (Avg)</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span>Salad</span>
-            <span>$8.00 (You) / $8.25 (Avg)</span>
-          </div>
-        </div>
-        {/* Carousel Nav */}
-        <div className="flex justify-between mt-8">
-          <Link href="/control-panel/MarketingPanel" className="text-blue-500 hover:underline">← Marketing</Link>
-          <Link href="/control-panel/LocationsPanel" className="text-blue-500 hover:underline">Locations →</Link>
-        </div>
-      </div>
-    </PageWrapper>
-  );
-}
+              <span className="font-bold
