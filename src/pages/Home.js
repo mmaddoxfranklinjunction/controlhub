@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// --- Sample metrics for card visuals (replace with real data as needed) ---
+// --- Sample metrics for visuals (replace with real data as needed) ---
 const visibilityScores = { A: 22, B: 14, C: 8, D: 2 };
 const storeRatings = { '2.5-3.0': 1, '3.0-3.5': 3, '3.5-4.0': 10 };
 const training = { assigned: 18, complete: 13 };
@@ -33,8 +33,6 @@ const IconSettings = () => (
 
 const Home = () => (
   <div className="flex flex-col min-h-screen bg-gray-100 px-4 relative">
-
-    {/* Top right nav buttons */}
     <div className="w-full flex justify-end items-center py-6 max-w-7xl mx-auto">
       <Link
         to="/account-setup"
