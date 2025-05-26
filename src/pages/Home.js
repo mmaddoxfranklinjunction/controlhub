@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Metrics (mock data)
+// --- Sample metrics for card visuals (replace with real data as needed) ---
 const visibilityScores = { A: 22, B: 14, C: 8, D: 2 };
 const storeRatings = { '2.5-3.0': 1, '3.0-3.5': 3, '3.5-4.0': 10 };
 const training = { assigned: 18, complete: 13 };
@@ -9,25 +9,22 @@ const totalSales = "$244,286";
 const recentErrorRate = "5.5%";
 const userCount = 8;
 
-// SVG icon components (solid, red, centered)
+// --- SVG icon components ---
 const IconStorefront = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}>
     <path d="M3 9.75V19a2 2 0 002 2h2a1 1 0 001-1v-4a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 001 1h2a2 2 0 002-2V9.75M4.21 4.21A2.25 2.25 0 016.25 3h11.5a2.25 2.25 0 012.04 1.21l1.46 2.75A1.5 1.5 0 0120 9H4a1.5 1.5 0 01-1.25-2.04l1.46-2.75z"/>
   </svg>
 );
-
 const IconReport = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}>
     <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 12h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2zm10 0H7V7h10v14zm-4-8h2v2h-2v-2zm0-4h2v2h-2V9z"/>
   </svg>
 );
-
 const IconSearch = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}>
     <path d="M10 2a8 8 0 016.32 12.906l4.387 4.387a1 1 0 01-1.414 1.415l-4.387-4.387A8 8 0 1110 2zm0 2a6 6 0 100 12A6 6 0 0010 4z"/>
   </svg>
 );
-
 const IconSettings = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}>
     <path d="M12 15.5A3.5 3.5 0 1112 8.5a3.5 3.5 0 010 7zm7.43-1.72l1.44 1.11a1 1 0 01.17 1.4l-1.4 2.42a1 1 0 01-1.35.36l-1.7-.98a6.97 6.97 0 01-1.6.93l-.26 1.89A1 1 0 0113 23h-2a1 1 0 01-.99-1.07l-.26-1.89a6.97 6.97 0 01-1.6-.93l-1.7.98a1 1 0 01-1.35-.36l-1.4-2.42a1 1 0 01.17-1.4l1.44-1.11a6.86 6.86 0 010-1.86l-1.44-1.11a1 1 0 01-.17-1.4l1.4-2.42a1 1 0 011.35-.36l1.7.98a6.97 6.97 0 011.6-.93l.26-1.89A1 1 0 0111 1h2a1 1 0 01.99 1.07l.26 1.89a6.97 6.97 0 011.6.93l1.7-.98a1 1 0 011.35.36l1.4 2.42a1 1 0 01-.17 1.4l-1.44 1.11c.12.61.18 1.23.18 1.86s-.06 1.25-.18 1.86z"/>
@@ -37,7 +34,7 @@ const IconSettings = () => (
 const Home = () => (
   <div className="flex flex-col min-h-screen bg-gray-100 px-4 relative">
 
-    {/* Top Right Nav */}
+    {/* Top right nav buttons */}
     <div className="w-full flex justify-end items-center py-6 max-w-7xl mx-auto">
       <Link
         to="/account-setup"
