@@ -1,6 +1,6 @@
 import { useState } from "react";
-import PageWrapper from '.../components/shared/PageWrapper';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
+import PageWrapper from '../../components/shared/PageWrapper';
 
 export default function OperationsPanel() {
   const [autoTraining, setAutoTraining] = useState(true);
@@ -60,8 +60,8 @@ export default function OperationsPanel() {
         </div>
         {/* Carousel Nav */}
         <div className="flex justify-between mt-8">
-          <Link href="/control-panel/LocationsPanel" className="text-blue-500 hover:underline">← Locations</Link>
-          <Link href="/control-panel/MarketingPanel" className="text-blue-500 hover:underline">Marketing →</Link>
+          <Link to="/control-panel/LocationsPanel" className="text-blue-500 hover:underline">← Locations</Link>
+          <Link to="/control-panel/MarketingPanel" className="text-blue-500 hover:underline">Marketing →</Link>
         </div>
       </div>
     </PageWrapper>
