@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from 'react-router-dom';
 import PageWrapper from '../../components/shared/PageWrapper';
 
-export default function MarketingPanel() {
+const MarketingPanel = () => {
   const [spend, setSpend] = useState(60); // out of 100
   const aiRecommended = 70;
 
@@ -10,7 +10,6 @@ export default function MarketingPanel() {
     <PageWrapper>
       <div className="max-w-2xl mx-auto py-8">
         <h1 className="text-2xl font-bold mb-4">Marketing Settings</h1>
-        {/* Promo Spend Meter & Dial */}
         <div className="mb-6 p-4 rounded-2xl shadow bg-white">
           <div className="flex justify-between items-center mb-2">
             <span className="font-medium">Promotional Spend</span>
@@ -28,7 +27,6 @@ export default function MarketingPanel() {
             />
             <span className="font-bold">Aggressive</span>
           </div>
-          {/* Meter/AI mark */}
           <div className="relative h-2 w-full bg-gray-100 rounded-full mt-2">
             <div
               className="absolute top-0 h-2 bg-blue-400 rounded-full"
@@ -44,7 +42,6 @@ export default function MarketingPanel() {
             AI Recommended Spend: {aiRecommended}%
           </div>
         </div>
-        {/* Results Stat */}
         <div className="mb-6 p-4 rounded-2xl shadow bg-white">
           <div className="flex justify-between items-center mb-2">
             <span className="font-medium">Spend to Result (12w trend)</span>
@@ -64,7 +61,6 @@ export default function MarketingPanel() {
             </div>
           </div>
         </div>
-        {/* Carousel Nav */}
         <div className="flex justify-between mt-8">
           <Link to="/control-panel/OperationsPanel" className="text-blue-500 hover:underline">← Operations</Link>
           <Link to="/control-panel/MenuPanel" className="text-blue-500 hover:underline">Menu →</Link>
@@ -72,4 +68,6 @@ export default function MarketingPanel() {
       </div>
     </PageWrapper>
   );
-}
+};
+
+export default MarketingPanel;
