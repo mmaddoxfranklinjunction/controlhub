@@ -16,6 +16,8 @@ import SponsoredListingReport from '../../pages/analytics/SponsoredListingReport
 import OperationsPerformance from '../../pages/analytics/OperationsPerformance';
 import Reviews from '../../pages/analytics/Reviews';
 
+import Alerts from '../../pages/Alerts/alerts';
+
 import RecommendationsMarketing from '../../pages/recommendations/RecommendationsMarketing';
 import RecommendationsOperations from '../../pages/recommendations/RecommendationsOperations';
 import RecommendationsLocations from '../../pages/recommendations/RecommendationsLocations';
@@ -75,7 +77,7 @@ const SidebarLayout = () => {
           </button>
           {openSections.alerts && (
             <div className="pl-4 space-y-1 text-sm">
-              <span className="block py-1 px-2 text-gray-400">No active alerts</span>
+                <Link to="/Alerts/alerts" className="block py-1 px-2 hover:bg-gray-700 rounded">Alerts</Link>
             </div>
           )}
 
