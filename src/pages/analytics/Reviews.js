@@ -34,8 +34,11 @@ const storeRankings = [
 const Reviews = () => (
 
   <PageWrapper>
-  <div className="max-w-[1400px] mx-auto px-4 py-8">
-   {/* Filter Bar (just under title) */}
+ <div className="max-w-[1400px] mx-auto px-4 py-8">
+    {/* Page Title */}
+    <h1 className="text-2xl font-bold text-[#253847] mb-4">Reviews</h1>
+
+    {/* Filter Bar (just under title) */}
     <div className="mb-6">
       <FilterBar />
     </div>
