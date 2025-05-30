@@ -100,4 +100,8 @@
   color: #fff;
 }
 
-.fj-header-divider
+.fj-header-divider {
+  border: none;
+  border-bottom: 1px solid #ececec;
+  margin: 0;
+}
