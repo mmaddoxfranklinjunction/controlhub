@@ -35,6 +35,11 @@ const Reviews = () => (
 
   <PageWrapper>
   <div className="max-w-[1400px] mx-auto px-4 py-8">
+   {/* Filter Bar (just under title) */}
+    <div className="mb-6">
+      <FilterBar />
+    </div>
+
     {/* Top Row */}
     <div className="grid md:grid-cols-2 gap-6 mb-8">
       {/* Sentiment Card */}
