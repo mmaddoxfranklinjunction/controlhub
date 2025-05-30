@@ -1,6 +1,5 @@
 // src/data/alertsData.js
-
-const alertsData = [
+export const alertsData = [
   {
     ticket: "You've a new MDM Alert",
     ticketId: "9244047644",
@@ -173,4 +172,4 @@ const alertsData = [
   }
 ];
 
-export default alertsData;
+
