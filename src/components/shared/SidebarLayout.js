@@ -46,18 +46,18 @@ const SidebarLayout = ({ isSidebarOpen }) => {
     setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen w-full">
       {isSidebarOpen && (
-        <aside className="w-64 bg-[#253847] text-white p-4 space-y-1 overflow-y-scroll scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-gray-500 flex flex-col">
+        <aside className="w-64 min-w-[16rem] bg-[#253847] text-white p-4 space-y-1 flex flex-col">
           <HostDropdown />
           <nav className="flex-1 space-y-1">
-            {/* Control Panel Section */}
+            {/* Control Panel */}
             <button onClick={() => toggleSection('control')} className="w-full text-left py-2 font-semibold hover:bg-gray-700 rounded text-base">
               <Icon><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h10M4 18h16"/></svg></Icon>
               Control Panel {openSections.control ? '▼' : '▶'}
             </button>
             {openSections.control && (
-              <div className="pl-4 text-sm space-y-1">
+              <div className="pl-4 text-sm space-y-0.5">
                 <Link to="/control-panel" className="block py-1 hover:bg-gray-700 rounded">Overview</Link>
                 <Link to="/control-panel/marketing" className="block py-1 hover:bg-gray-700 rounded">Marketing</Link>
                 <Link to="/control-panel/operations" className="block py-1 hover:bg-gray-700 rounded">Operations</Link>
@@ -72,7 +72,7 @@ const SidebarLayout = ({ isSidebarOpen }) => {
               Alerts {openSections.alerts ? '▼' : '▶'}
             </button>
             {openSections.alerts && (
-              <div className="pl-4 text-sm space-y-1">
+              <div className="pl-4 text-sm space-y-0.5">
                 <Link to="/alerts" className="block py-1 hover:bg-gray-700 rounded">Alerts Inbox</Link>
               </div>
             )}
@@ -83,7 +83,7 @@ const SidebarLayout = ({ isSidebarOpen }) => {
               Analytics {openSections.analytics ? '▼' : '▶'}
             </button>
             {openSections.analytics && (
-              <div className="pl-4 text-sm space-y-1">
+              <div className="pl-4 text-sm space-y-0.5">
                 <Link to="/analytics/sales" className="block py-1 hover:bg-gray-700 rounded">Sales Overview</Link>
                 <Link to="/analytics/operations" className="block py-1 hover:bg-gray-700 rounded">Operations Performance</Link>
                 <Link to="/analytics/ratings" className="block py-1 hover:bg-gray-700 rounded">Ratings & Feedback</Link>
@@ -100,7 +100,7 @@ const SidebarLayout = ({ isSidebarOpen }) => {
               Store Search {openSections.storeSearch ? '▼' : '▶'}
             </button>
             {openSections.storeSearch && (
-              <div className="pl-4 text-sm space-y-1">
+              <div className="pl-4 text-sm space-y-0.5">
                 <Link to="/store-search" className="block py-1 hover:bg-gray-700 rounded">Search</Link>
               </div>
             )}
@@ -111,7 +111,7 @@ const SidebarLayout = ({ isSidebarOpen }) => {
               Settings {openSections.settings ? '▼' : '▶'}
             </button>
             {openSections.settings && (
-              <div className="pl-4 text-sm space-y-1">
+              <div className="pl-4 text-sm space-y-0.5">
                 <Link to="/settings" className="block py-1 hover:bg-gray-700 rounded">Settings</Link>
               </div>
             )}
