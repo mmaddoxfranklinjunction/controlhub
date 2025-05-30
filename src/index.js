@@ -22,6 +22,11 @@ import RecommendationsLocations from './pages/recommendations/RecommendationsLoc
 import RecommendationsMenu from './pages/recommendations/RecommendationsMenu';
 import StoreSearch from './pages/store-search/StoreSearch';
 import Settings from './pages/settings/Settings';
+import Reviews from './pages/analytics/Reviews';
+// ...other imports
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -47,6 +52,9 @@ root.render(
         <Route path="/recommendations/menu" element={<RecommendationsMenu />} />
         <Route path="/store-search" element={<StoreSearch />} />
         <Route path="/settings" element={<Settings />} />
+ 
+        <Route path="/analytics/reviews" element={<Reviews />} />
+      
       </Routes>
     </Router>
   </React.StrictMode>
