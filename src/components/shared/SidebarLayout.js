@@ -1,7 +1,9 @@
+// src/components/shared/SidebarLayout.js
+
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
+import HostDropdown from './HostDropdown';
 
-// Import all your pages as before
 import ControlPanel from '../../pages/control-panel/ControlPanel';
 import MarketingPanel from '../../pages/control-panel/MarketingPanel';
 import OperationsPanel from '../../pages/control-panel/OperationsPanel';
@@ -41,77 +43,74 @@ const SidebarLayout = () => {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      <aside
-        className="w-64 flex flex-col bg-[#253847] text-white p-4 space-y-2 overflow-y-auto"
-        style={{
-          fontFamily: 'Inter, sans-serif',
-          minHeight: '100vh',
-        }}
-      >
-        <nav className="space-y-4">
+      <aside className="w-64 bg-[#253847] text-white p-4 space-y-2 overflow-y-auto flex flex-col">
+        {/* Host Dropdown at top */}
+        <HostDropdown />
+
+        <nav className="space-y-2 flex-1">
           {/* Analytics Section */}
           <button
             onClick={() => toggleSection('analytics')}
-            className="w-full text-left py-2 px-2 font-semibold hover:bg-gray-700 rounded transition"
-            style={{ fontSize: '1.05rem', fontWeight: 700 }}
+            className="w-full text-left py-2 px-2 font-semibold text-base hover:bg-gray-700 rounded"
+            style={{ fontSize: "1.05rem" }}
           >
-            Analytics{openSections.analytics ? ' ▼' : ' ▶'}
+            {`Analytics${openSections.analytics ? ' ▼' : ' ▶'}`}
           </button>
           {openSections.analytics && (
-            <div className="pl-4 space-y-1">
-              <Link to="/analytics/sales" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Sales Overview</Link>
-              <Link to="/analytics/operations" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Operations Performance</Link>
-              <Link to="/analytics/ratings" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Ratings & Feedback</Link>
-              <Link to="/analytics/promotions" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Promotions</Link>
-              <Link to="/analytics/sponsored" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Sponsored Listing</Link>
-              <Link to="/analytics/recovery" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Revenue Recovery</Link>
-              <Link to="/analytics/reviews" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Reviews</Link>
+            <div className="pl-4 space-y-1 text-sm">
+              <Link to="/analytics/sales" className="block py-1 px-2 hover:bg-gray-700 rounded">Sales Overview</Link>
+              <Link to="/analytics/operations" className="block py-1 px-2 hover:bg-gray-700 rounded">Operations Performance</Link>
+              <Link to="/analytics/ratings" className="block py-1 px-2 hover:bg-gray-700 rounded">Ratings & Feedback</Link>
+              <Link to="/analytics/reviews" className="block py-1 px-2 hover:bg-gray-700 rounded">Reviews</Link>
+              <Link to="/analytics/promotions" className="block py-1 px-2 hover:bg-gray-700 rounded">Promotions</Link>
+              <Link to="/analytics/sponsored" className="block py-1 px-2 hover:bg-gray-700 rounded">Sponsored Listing</Link>
+              <Link to="/analytics/recovery" className="block py-1 px-2 hover:bg-gray-700 rounded">Revenue Recovery</Link>
             </div>
           )}
 
           {/* Control Panel Section */}
           <button
             onClick={() => toggleSection('control')}
-            className="w-full text-left py-2 px-2 font-semibold hover:bg-gray-700 rounded transition"
-            style={{ fontSize: '1.05rem', fontWeight: 700 }}
+            className="w-full text-left py-2 px-2 font-semibold text-base hover:bg-gray-700 rounded"
+            style={{ fontSize: "1.05rem" }}
           >
-            Control Panel{openSections.control ? ' ▼' : ' ▶'}
+            {`Control Panel${openSections.control ? ' ▼' : ' ▶'}`}
           </button>
           {openSections.control && (
-            <div className="pl-4 space-y-1">
-              <Link to="/control-panel" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Overview</Link>
-              <Link to="/control-panel/marketing" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Marketing</Link>
-              <Link to="/control-panel/operations" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Operations</Link>
-              <Link to="/control-panel/locations" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Locations</Link>
-              <Link to="/control-panel/menu" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Menu</Link>
+            <div className="pl-4 space-y-1 text-sm">
+              <Link to="/control-panel" className="block py-1 px-2 hover:bg-gray-700 rounded">Overview</Link>
+              <Link to="/control-panel/marketing" className="block py-1 px-2 hover:bg-gray-700 rounded">Marketing</Link>
+              <Link to="/control-panel/operations" className="block py-1 px-2 hover:bg-gray-700 rounded">Operations</Link>
+              <Link to="/control-panel/locations" className="block py-1 px-2 hover:bg-gray-700 rounded">Locations</Link>
+              <Link to="/control-panel/menu" className="block py-1 px-2 hover:bg-gray-700 rounded">Menu</Link>
             </div>
           )}
 
           {/* Store Search Section */}
           <button
             onClick={() => toggleSection('storeSearch')}
-            className="w-full text-left py-2 px-2 font-semibold hover:bg-gray-700 rounded transition"
-            style={{ fontSize: '1.05rem', fontWeight: 700 }}
+            className="w-full text-left py-2 px-2 font-semibold text-base hover:bg-gray-700 rounded"
+            style={{ fontSize: "1.05rem" }}
           >
-            Store Search{openSections.storeSearch ? ' ▼' : ' ▶'}
+            {`Store Search${openSections.storeSearch ? ' ▼' : ' ▶'}`}
           </button>
           {openSections.storeSearch && (
-            <div className="pl-4 space-y-1">
-              <Link to="/store-search" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Search</Link>
+            <div className="pl-4 space-y-1 text-sm">
+              <Link to="/store-search" className="block py-1 px-2 hover:bg-gray-700 rounded">Search</Link>
             </div>
           )}
 
           {/* Settings Section */}
           <button
             onClick={() => toggleSection('settings')}
-            className="w-full text-left py-2 px-2 font-semibold hover:bg-gray-700 rounded transition"
-            style={{ fontSize: '1.05rem', fontWeight: 700 }}
+            className="w-full text-left py-2 px-2 font-semibold text-base hover:bg-gray-700 rounded"
+            style={{ fontSize: "1.05rem" }}
           >
-            Settings{openSections.settings ? ' ▼' : ' ▶'}
+            {`Settings${openSections.settings ? ' ▼' : ' ▶'}`}
           </button>
           {openSections.settings && (
-            <div className="pl-4 space-y-1">
-              <Link to="/settings" className="block py-1 px-2 hover:bg-[#223040] rounded transition" style={{ fontSize: '0.85rem' }}>Settings</Link>
+            <div className="pl-4 space-y-1 text-sm">
+              <Link to="/settings" className="block py-1 px-2 hover:bg-gray-700 rounded">Settings</Link>
             </div>
           )}
         </nav>
@@ -129,10 +128,10 @@ const SidebarLayout = () => {
           <Route path="/analytics/sales" element={<SalesOverview />} />
           <Route path="/analytics/operations" element={<OperationsPerformance />} />
           <Route path="/analytics/ratings" element={<RatingsFeedback />} />
+          <Route path="/analytics/reviews" element={<Reviews />} />
           <Route path="/analytics/promotions" element={<PromotionsReport />} />
           <Route path="/analytics/sponsored" element={<SponsoredListingReport />} />
           <Route path="/analytics/recovery" element={<RevenueRecovery />} />
-          <Route path="/analytics/reviews" element={<Reviews />} />
 
           {/* Store Search */}
           <Route path="/store-search" element={<StoreSearch />} />
