@@ -1,48 +1,78 @@
-import { useState } from "react";
-import { Link } from 'react-router-dom';
+// src/pages/control-panel/LocationsPanel.js
+import React, { useState } from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
+import FilterBar from '../../components/shared/FilterBar';
+
+const KPI_CARDS = [
+  { label: 'Downtime', value: '185h' },
+  { label: 'Delivery Time', value: '15 min' },
+  { label: 'Menu Audit', value: '98%' },
+  { label: 'Rating', value: '4.4 ★★★★☆' },
+];
+
+const CHANNEL_BREAKDOWN = [
+  { channel: 'DoorDash', downtime: '63h' },
+  { channel: 'UberEats', downtime: '47h' },
+  { channel: 'Grubhub', downtime: '58h' },
+];
 
 const LocationsPanel = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [filters, setFilters] = useState({ dateRange: '5/22/2025 - 5/28/2025' });
+
+  const handleApply = (vals) => {
+    // vals.dateRange will be whatever the user typed – here we just echo it
+    setFilters((prev) => ({ ...prev, ...vals }));
+  };
 
   return (
     <PageWrapper>
-      <div className="max-w-2xl mx-auto py-8">
-        <h1 className="text-2xl font-bold mb-4">Location Details</h1>
-        <div className="bg-white shadow p-4 rounded-2xl mb-6">
-          <div className="flex justify-between items-center mb-2">
-            <span className="font-medium">Storefront Uptime</span>
-            <span className="text-green-600 font-bold">99.95%</span>
+      <div className="px-6 py-8 max-w-5xl mx-auto">
+
+        {/* Title + Filter */}
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl font-bold text-[#253847]">Location Analytics</h1>
+          <div className="flex items-center gap-4">
+            <FilterBar
+              filters={[{ name: 'dateRange', label: '', placeholder: 'Select date range' }]}
+              onApply={handleApply}
+            />
+            <span className="text-sm text-gray-600">{filters.dateRange}</span>
           </div>
-          <div className="flex items-center gap-2 mb-2">
-            <span>Current Hours:</span>
-            <span className="font-bold text-gray-700">10am – 10pm</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>Storefront Visible:</span>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className={`w-12 h-6 rounded-full ${isOpen ? 'bg-green-400' : 'bg-gray-300'} flex items-center transition-colors duration-200`}
-              aria-pressed={isOpen}
+        </div>
+
+        {/* KPI Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          {KPI_CARDS.map((card) => (
+            <div
+              key={card.label}
+              className="bg-white rounded-xl shadow p-4 flex flex-col justify-center"
             >
-              <span
-                className={`h-5 w-5 bg-white rounded-full shadow transform transition-transform duration-200 ${isOpen ? 'translate-x-6' : ''}`}
-              />
-            </button>
-            <span className="ml-2 text-xs">{isOpen ? "Open" : "Closed"}</span>
-          </div>
+              <div className="text-sm text-gray-500">{card.label}</div>
+              <div className="text-2xl font-semibold text-[#253847] mt-1">{card.value}</div>
+            </div>
+          ))}
         </div>
-        <div className="bg-white shadow p-4 rounded-2xl mb-6">
-          <div className="flex justify-between">
-            <span className="font-medium">Visibility Score</span>
-            <span className="text-blue-600 font-bold">8.7 / 10</span>
-          </div>
-          <div className="mt-2 text-xs text-gray-500">Trending up (+0.3 this week)</div>
+
+        {/* Trend Chart Placeholder */}
+        <div className="bg-white rounded-xl shadow p-4 mb-6 h-48 flex items-center justify-center text-gray-400">
+          {/* Replace this with your chart component */}
+          Trend chart goes here
         </div>
-        <div className="flex justify-between mt-8">
-          <Link to="/control-panel/MenuPanel" className="text-blue-500 hover:underline">← Menu</Link>
-          <Link to="/control-panel/OperationsPanel" className="text-blue-500 hover:underline">Operations →</Link>
+
+        {/* Breakdown by Channel */}
+        <h2 className="text-lg font-semibold text-[#253847] mb-4">Breakdown by Channel</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {CHANNEL_BREAKDOWN.map((ch) => (
+            <div
+              key={ch.channel}
+              className="bg-white rounded-xl shadow p-4 text-center"
+            >
+              <div className="text-sm text-gray-500">{ch.channel}</div>
+              <div className="text-xl font-semibold text-[#253847] mt-1">{ch.downtime}</div>
+            </div>
+          ))}
         </div>
+
       </div>
     </PageWrapper>
   );
