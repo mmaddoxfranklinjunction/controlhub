@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // Simulated login status
 const isLoggedIn = false;
 
-const Header = () => (
+const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
   <>
     <header
       style={{
@@ -19,18 +19,20 @@ const Header = () => (
         position: 'relative',
       }}
     >
-<button
-  onClick={() => setIsSidebarOpen(prev => !prev)}
-  className="absolute top-4 left-4 z-50 bg-white p-2 rounded shadow"
->
-  {isSidebarOpen ? '←' : '→'}
-</button>
+      {/* Sidebar Toggle Button */}
+      <button
+        onClick={() => setIsSidebarOpen(prev => !prev)}
+        className="absolute left-3 top-[10px] z-50 p-1 rounded-md hover:bg-gray-100 transition"
+        aria-label="Toggle Sidebar"
+      >
+        <span style={{ fontSize: '1.25rem' }}>{isSidebarOpen ? '←' : '→'}</span>
+      </button>
 
       {/* Left Links */}
       <nav
         style={{
           position: 'absolute',
-          left: 16,
+          left: 36,
           display: 'flex',
           gap: '1.5rem',
           alignItems: 'center',
@@ -101,21 +103,9 @@ const Header = () => (
               fontSize: '0.875rem'
             }}
           >
-            <svg
-              width={21}
-              height={21}
-              fill="none"
-              viewBox="0 0 24 24"
-            >
+            <svg width={21} height={21} fill="none" viewBox="0 0 24 24">
               <circle cx={12} cy={8} r={4} fill="#253847" />
-              <rect
-                x={4}
-                y={16}
-                width={16}
-                height={5}
-                rx={2.5}
-                fill="#253847"
-              />
+              <rect x={4} y={16} width={16} height={5} rx={2.5} fill="#253847" />
             </svg>
             Profile
           </Link>
@@ -130,21 +120,9 @@ const Header = () => (
               fontSize: '0.875rem'
             }}
           >
-            <svg
-              width={20}
-              height={20}
-              fill="none"
-              viewBox="0 0 24 24"
-            >
+            <svg width={20} height={20} fill="none" viewBox="0 0 24 24">
               <circle cx={12} cy={8} r={4} fill="#253847" />
-              <rect
-                x={4}
-                y={16}
-                width={16}
-                height={5}
-                rx={2.5}
-                fill="#253847"
-              />
+              <rect x={4} y={16} width={16} height={5} rx={2.5} fill="#253847" />
             </svg>
             Login
           </Link>
