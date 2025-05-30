@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import AccountSetup from './pages/account-setup';
 import Login from './pages/login';
 
-// Layout (wraps all dashboard pages)
+// The full sidebar+header layout
 import SidebarLayout from './components/shared/SidebarLayout';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,12 +16,12 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        {/* Public Home/Login/Signup pages */}
+        {/* Public pages, no sidebar/header */}
         <Route path="/" element={<Home />} />
         <Route path="/account-setup" element={<AccountSetup />} />
         <Route path="/login" element={<Login />} />
 
-        {/* All other dashboard pages are handled by SidebarLayout! */}
+        {/* All dashboard/analytics pages inside SidebarLayout */}
         <Route path="/*" element={<SidebarLayout />} />
       </Routes>
     </Router>
