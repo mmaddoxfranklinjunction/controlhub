@@ -13,7 +13,7 @@ const HostDropdown = () => {
   const [open, setOpen] = useState(false);
 
   // Set small font size (75% smaller)
-  const fontSize = "0.25rem"; // base is 1rem, so 25%
+  const fontSize = "0.50rem"; // base is 1rem, so 25%
 
   return (
     <div className="relative mb-3" style={{ fontFamily: "Futura, sans-serif" }}>
