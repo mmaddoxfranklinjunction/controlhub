@@ -1,91 +1,74 @@
 // src/pages/alerts/Alerts.js
-import React from "react";
+import React, { useState } from 'react';
+import PageWrapper from '../../components/shared/PageWrapper';
 
-// Sample data; replace with your real data import when ready
 const sampleAlerts = [
   {
     ticket: "You've a new MDM Alert",
     ticketId: "9244047644",
     date: "Tue, May 27, 2025",
-    description: "[https://business.mosyle.com/images/main.png]",
-    channel: "support@franklinjunction.com",
+    description: "MDM certificate expiring soon",
+    channel: "Email",
     locations: "-",
     status: "New",
     priority: "Low"
   },
   {
-    ticket: "Your Uber Eats report is ready...",
+    ticket: "Your Uber Eats report is ready",
     ticketId: "9245113846",
-    date: "Tue, May 27, 2025",
-    description: "[https://d1a3f4spazzrp4.cloudfront.net/eats.pdf]",
-    channel: "support@franklinjunction.com",
+    date: "Wed, May 28, 2025",
+    description: "Daily performance PDF available",
+    channel: "Email",
     locations: "-",
     status: "New",
     priority: "Low"
   },
-  // Add more rows as needed
-];
-
-const header = [
-  { key: "select", label: "" },
-  { key: "ticket", label: "Ticket" },
-  { key: "ticketId", label: "Ticket ID" },
-  { key: "date", label: "Submitted Date" },
-  { key: "description", label: "Description" },
-  { key: "channel", label: "Channel" },
-  { key: "locations", label: "LOCATIONS" },
-  { key: "status", label: "Status" },
-  { key: "priority", label: "Priority" }
+  // …more rows
 ];
 
 const Alerts = () => {
+  const [alerts] = useState(sampleAlerts);
+
   return (
-    <div className="w-full h-full bg-[#242942] text-white p-4 rounded-xl shadow-md overflow-x-auto" style={{ fontFamily: "Futura, sans-serif" }}>
-      <table className="min-w-full text-xs table-fixed">
-        <thead>
-          <tr className="bg-[#232742]">
-            {header.map(col => (
-              <th
-                key={col.key}
-                className={`py-2 px-3 border-b border-[#383e5a] font-semibold text-[#A6B9C7] text-left ${col.key === 'select' ? 'w-6' : ''}`}
-                style={{ whiteSpace: 'nowrap' }}
-              >
-                {col.label}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {sampleAlerts.map((alert, i) => (
-            <tr
-              key={i}
-              className={`border-b border-[#383e5a] hover:bg-[#26304c] transition`}
-            >
-              <td className="px-2 py-2"><input type="checkbox" /></td>
-              <td className="px-3 py-2 max-w-[250px] truncate">{alert.ticket}</td>
-              <td className="px-3 py-2">{alert.ticketId}</td>
-              <td className="px-3 py-2">{alert.date}</td>
-              <td className="px-3 py-2 max-w-[280px] truncate">{alert.description}</td>
-              <td className="px-3 py-2">{alert.channel}</td>
-              <td className="px-3 py-2 text-center">{alert.locations}</td>
-              <td className="px-3 py-2">{alert.status}</td>
-              <td className="px-3 py-2">{alert.priority}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {/* Scrollbar styling for overflow-x on table */}
-      <style>{`
-        .scrollbar-thin::-webkit-scrollbar {
-          height: 6px;
-          background: #383e5a;
-        }
-        .scrollbar-thin::-webkit-scrollbar-thumb {
-          background: #2e3754;
-          border-radius: 4px;
-        }
-      `}</style>
-    </div>
+    <PageWrapper>
+      <div className="px-4 py-6">
+        <h1 className="text-2xl font-bold text-[#253847] mb-4">
+          Alert Inbox
+        </h1>
+        <div className="bg-white rounded-xl shadow border overflow-auto">
+          <table className="min-w-full text-sm text-left">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="p-3 w-6"><input type="checkbox" /></th>
+                <th className="p-3">Ticket</th>
+                <th className="p-3">Ticket ID</th>
+                <th className="p-3">Submitted Date</th>
+                <th className="p-3">Description</th>
+                <th className="p-3">Channel</th>
+                <th className="p-3">Locations</th>
+                <th className="p-3">Status</th>
+                <th className="p-3">Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              {alerts.map((row, idx) => (
+                <tr key={idx} className="border-t hover:bg-gray-50">
+                  <td className="p-3"><input type="checkbox" /></td>
+                  <td className="p-3 truncate max-w-xs">{row.ticket}</td>
+                  <td className="p-3">{row.ticketId}</td>
+                  <td className="p-3">{row.date}</td>
+                  <td className="p-3 truncate max-w-sm">{row.description}</td>
+                  <td className="p-3">{row.channel}</td>
+                  <td className="p-3">{row.locations}</td>
+                  <td className="p-3">{row.status}</td>
+                  <td className="p-3">{row.priority}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </PageWrapper>
   );
 };
 
