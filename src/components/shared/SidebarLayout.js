@@ -47,7 +47,7 @@ const SidebarLayout = () => {
 
   return (
     <div className="flex h-screen">
-      <aside className="w-56 bg-[#253847] text-white p-4 space-y-1 overflow-y-scroll scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-gray-500 flex flex-col">
+      <aside className="w-64 bg-[#253847] text-white p-4 space-y-1 overflow-y-scroll scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-gray-500 flex flex-col">
         <HostDropdown />
 
         <nav className="flex-1 space-y-1">
