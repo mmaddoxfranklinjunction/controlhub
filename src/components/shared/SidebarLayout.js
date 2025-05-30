@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
-// --- Control Panel pages ---
+// --- Dashboard & analytics pages ---
 import ControlPanel from '../../pages/control-panel/ControlPanel';
 import MarketingPanel from '../../pages/control-panel/MarketingPanel';
 import OperationsPanel from '../../pages/control-panel/OperationsPanel';
 import LocationsPanel from '../../pages/control-panel/LocationsPanel';
 import MenuPanel from '../../pages/control-panel/MenuPanel';
 
-// --- Analytics pages ---
 import SalesOverview from '../../pages/analytics/SalesOverview';
 import RevenueRecovery from '../../pages/analytics/RevenueRecovery';
 import PromotionsReport from '../../pages/analytics/PromotionsReport';
@@ -16,13 +15,11 @@ import RatingsFeedback from '../../pages/analytics/RatingsFeedback';
 import SponsoredListingReport from '../../pages/analytics/SponsoredListingReport';
 import OperationsPerformance from '../../pages/analytics/OperationsPerformance';
 
-// --- Recommendations pages ---
 import RecommendationsMarketing from '../../pages/recommendations/RecommendationsMarketing';
 import RecommendationsOperations from '../../pages/recommendations/RecommendationsOperations';
 import RecommendationsLocations from '../../pages/recommendations/RecommendationsLocations';
 import RecommendationsMenu from '../../pages/recommendations/RecommendationsMenu';
 
-// --- Utility/Settings/Search ---
 import StoreSearch from '../../pages/store-search/StoreSearch';
 import Settings from '../../pages/settings/Settings';
 
