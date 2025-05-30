@@ -1,4 +1,6 @@
 import React from "react";
+import PageWrapper from '../../components/shared/PageWrapper';
+import FilterBar from '../../components/shared/FilterBar';
 
 // --- Sample Data ---
 const summary = {
@@ -30,6 +32,8 @@ const storeRankings = [
 
 // --- Component ---
 const Reviews = () => (
+
+  <PageWrapper>
   <div className="max-w-[1400px] mx-auto px-4 py-8">
     {/* Top Row */}
     <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -153,6 +157,7 @@ const Reviews = () => (
       </div>
     </div>
   </div>
+          </PageWrapper>
 );
 
 export default Reviews;
