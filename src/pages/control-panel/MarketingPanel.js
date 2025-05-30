@@ -64,7 +64,8 @@ const MarketingPanel = () => {
 
   return (
     <PageWrapper>
-      <div className="max-w-5xl mx-auto py-3 font-[Futura,sans-serif]">
+    <div className="w-full px-0 py-2 font-[Futura,sans-serif]">
+     
         {/* Header Row: Title left, toggle right */}
         <div className="flex items-center justify-between mb-1 mt-2">
           <h1 className="text-lg font-bold text-[#253847]">Marketing Panel</h1>
