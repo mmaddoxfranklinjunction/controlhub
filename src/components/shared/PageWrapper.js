@@ -10,7 +10,7 @@ const PageWrapper = ({ children }) => (
     <div className="flex flex-col flex-1 min-h-screen">
       {/* Header only over the main content, not above sidebar */}
       <Header />
-      <main className="flex-1 px-6 py-8 overflow-y-auto">
+      <main className="flex-1 px-6 py-2 overflow-y-auto">
         {children}
       </main>
     </div>
