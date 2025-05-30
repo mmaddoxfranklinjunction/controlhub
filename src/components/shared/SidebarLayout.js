@@ -27,7 +27,6 @@ import RecommendationsMenu from '../../pages/recommendations/RecommendationsMenu
 import StoreSearch from '../../pages/store-search/StoreSearch';
 import Settings from '../../pages/settings/Settings';
 
-const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
 const Icon = ({ children }) => (
   <span className="inline-block w-4 h-4 mr-2 align-text-bottom">
