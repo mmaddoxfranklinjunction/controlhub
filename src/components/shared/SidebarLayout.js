@@ -1,5 +1,7 @@
+// src/components/shared/SidebarLayout.js
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
+import { Bell, Sliders, Cog, Search as SearchIcon, BarChart2 } from 'lucide-react';
 import HostDropdown from './HostDropdown';
 
 import ControlPanel from '../../pages/control-panel/ControlPanel';
@@ -29,107 +31,100 @@ import Settings from '../../pages/settings/Settings';
 const SidebarLayout = () => {
   const [openSections, setOpenSections] = useState({
     control: true,
-    alerts: false,
+    alerts: true,
     analytics: true,
     storeSearch: false,
     settings: false,
   });
 
-  const toggleSection = (section) => {
-    setOpenSections(prev => ({
-      ...prev,
-      [section]: !prev[section]
-    }));
-  };
+  const toggleSection = (section) =>
+    setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
+
+  const iconProps = { className: "w-4 h-4 inline-block mr-2 align-text-bottom" };
 
   return (
     <div className="flex h-screen">
-      <aside className="w-56 bg-[#253847] text-white p-4 space-y-1 overflow-y-auto flex flex-col">
-        {/* Host Dropdown always at the very top */}
+      <aside className="w-64 bg-[#253847] text-white p-4 space-y-1 overflow-y-scroll scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-gray-500 flex flex-col">
         <HostDropdown />
 
-        <nav className="space-y-2 flex-1">
-          {/* Control Panel Section */}
+        <nav className="flex-1 space-y-1">
+          {/* Control Panel */}
           <button
             onClick={() => toggleSection('control')}
-            className="w-full text-left py-2 px-2 font-semibold text-base hover:bg-gray-700 rounded"
-            style={{ fontSize: "1.05rem" }}
+            className="w-full text-left py-2 font-semibold hover:bg-gray-700 rounded text-base"
           >
-            {`Control Panel${openSections.control ? ' ▼' : ' ▶'}`}
+            <Sliders {...iconProps}/>Control Panel {openSections.control ? '▼' : '▶'}
           </button>
           {openSections.control && (
-            <div className="pl-4 space-y-1 text-sm">
-              <Link to="/control-panel" className="block py-1 px-2 hover:bg-gray-700 rounded">Overview</Link>
-              <Link to="/control-panel/marketing" className="block py-1 px-2 hover:bg-gray-700 rounded">Marketing</Link>
-              <Link to="/control-panel/operations" className="block py-1 px-2 hover:bg-gray-700 rounded">Operations</Link>
-              <Link to="/control-panel/locations" className="block py-1 px-2 hover:bg-gray-700 rounded">Locations</Link>
-              <Link to="/control-panel/menu" className="block py-1 px-2 hover:bg-gray-700 rounded">Menu</Link>
+            <div className="pl-4 text-sm space-y-1">
+              <Link to="/control-panel" className="block py-1 hover:bg-gray-700 rounded">Overview</Link>
+              <Link to="/control-panel/marketing" className="block py-1 hover:bg-gray-700 rounded">Marketing</Link>
+              <Link to="/control-panel/operations" className="block py-1 hover:bg-gray-700 rounded">Operations</Link>
+              <Link to="/control-panel/locations" className="block py-1 hover:bg-gray-700 rounded">Locations</Link>
+              <Link to="/control-panel/menu" className="block py-1 hover:bg-gray-700 rounded">Menu</Link>
             </div>
           )}
 
-          {/* Alerts Section */}
+          {/* Alerts */}
           <button
             onClick={() => toggleSection('alerts')}
-            className="w-full text-left py-2 px-2 font-semibold text-base hover:bg-gray-700 rounded"
-            style={{ fontSize: "1.05rem" }}
+            className="w-full text-left py-2 font-semibold hover:bg-gray-700 rounded text-base"
           >
-            {`Alerts${openSections.alerts ? ' ▼' : ' ▶'}`}
+            <Bell {...iconProps}/>Alerts {openSections.alerts ? '▼' : '▶'}
           </button>
           {openSections.alerts && (
-            <div className="pl-4 space-y-1 text-sm">
-                <Link to="/alerts" className="block py-1 px-2 hover:bg-gray-700 rounded">Alerts</Link>
+            <div className="pl-4 text-sm space-y-1">
+              <Link to="/alerts" className="block py-1 hover:bg-gray-700 rounded">Alerts</Link>
             </div>
           )}
 
-          {/* Analytics Section */}
+          {/* Analytics */}
           <button
             onClick={() => toggleSection('analytics')}
-            className="w-full text-left py-2 px-2 font-semibold text-base hover:bg-gray-700 rounded"
-            style={{ fontSize: "1.05rem" }}
+            className="w-full text-left py-2 font-semibold hover:bg-gray-700 rounded text-base"
           >
-            {`Analytics${openSections.analytics ? ' ▼' : ' ▶'}`}
+            <BarChart2 {...iconProps}/>Analytics {openSections.analytics ? '▼' : '▶'}
           </button>
           {openSections.analytics && (
-            <div className="pl-4 space-y-1 text-sm">
-              <Link to="/analytics/sales" className="block py-1 px-2 hover:bg-gray-700 rounded">Sales Overview</Link>
-              <Link to="/analytics/operations" className="block py-1 px-2 hover:bg-gray-700 rounded">Operations Performance</Link>
-              <Link to="/analytics/ratings" className="block py-1 px-2 hover:bg-gray-700 rounded">Ratings & Feedback</Link>
-              <Link to="/analytics/reviews" className="block py-1 px-2 hover:bg-gray-700 rounded">Reviews</Link>
-              <Link to="/analytics/promotions" className="block py-1 px-2 hover:bg-gray-700 rounded">Promotions</Link>
-              <Link to="/analytics/sponsored" className="block py-1 px-2 hover:bg-gray-700 rounded">Sponsored Listing</Link>
-              <Link to="/analytics/recovery" className="block py-1 px-2 hover:bg-gray-700 rounded">Revenue Recovery</Link>
+            <div className="pl-4 text-sm space-y-1">
+              <Link to="/analytics/sales"      className="block py-1 hover:bg-gray-700 rounded">Sales Overview</Link>
+              <Link to="/analytics/operations" className="block py-1 hover:bg-gray-700 rounded">Operations Performance</Link>
+              <Link to="/analytics/ratings"    className="block py-1 hover:bg-gray-700 rounded">Ratings & Feedback</Link>
+              <Link to="/analytics/reviews"    className="block py-1 hover:bg-gray-700 rounded">Reviews</Link>
+              <Link to="/analytics/promotions" className="block py-1 hover:bg-gray-700 rounded">Promotions</Link>
+              <Link to="/analytics/sponsored"  className="block py-1 hover:bg-gray-700 rounded">Sponsored Listing</Link>
+              <Link to="/analytics/recovery"   className="block py-1 hover:bg-gray-700 rounded">Revenue Recovery</Link>
             </div>
           )}
 
-          {/* Store Search Section */}
+          {/* Store Search */}
           <button
             onClick={() => toggleSection('storeSearch')}
-            className="w-full text-left py-2 px-2 font-semibold text-base hover:bg-gray-700 rounded"
-            style={{ fontSize: "1.05rem" }}
+            className="w-full text-left py-2 font-semibold hover:bg-gray-700 rounded text-base"
           >
-            {`Store Search${openSections.storeSearch ? ' ▼' : ' ▶'}`}
+            <SearchIcon {...iconProps}/>Store Search {openSections.storeSearch ? '▼' : '▶'}
           </button>
           {openSections.storeSearch && (
-            <div className="pl-4 space-y-1 text-sm">
-              <Link to="/store-search" className="block py-1 px-2 hover:bg-gray-700 rounded">Search</Link>
+            <div className="pl-4 text-sm space-y-1">
+              <Link to="/store-search" className="block py-1 hover:bg-gray-700 rounded">Search</Link>
             </div>
           )}
 
-          {/* Settings Section */}
+          {/* Settings */}
           <button
             onClick={() => toggleSection('settings')}
-            className="w-full text-left py-2 px-2 font-semibold text-base hover:bg-gray-700 rounded"
-            style={{ fontSize: "1.05rem" }}
+            className="w-full text-left py-2 font-semibold hover:bg-gray-700 rounded text-base"
           >
-            {`Settings${openSections.settings ? ' ▼' : ' ▶'}`}
+            <Cog {...iconProps}/>Settings {openSections.settings ? '▼' : '▶'}
           </button>
           {openSections.settings && (
-            <div className="pl-4 space-y-1 text-sm">
-              <Link to="/settings" className="block py-1 px-2 hover:bg-gray-700 rounded">Settings</Link>
+            <div className="pl-4 text-sm space-y-1">
+              <Link to="/settings" className="block py-1 hover:bg-gray-700 rounded">Settings</Link>
             </div>
           )}
         </nav>
       </aside>
+
       <main className="flex-1 p-6 overflow-y-auto">
         <Routes>
           {/* Control Panel */}
@@ -138,6 +133,9 @@ const SidebarLayout = () => {
           <Route path="/control-panel/operations" element={<OperationsPanel />} />
           <Route path="/control-panel/locations" element={<LocationsPanel />} />
           <Route path="/control-panel/menu" element={<MenuPanel />} />
+
+          {/* Alerts */}
+          <Route path="/alerts" element={<Alerts />} />
 
           {/* Analytics */}
           <Route path="/analytics/sales" element={<SalesOverview />} />
