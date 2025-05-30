@@ -104,9 +104,10 @@
   height: 0;
 }
 .fj-header-link {
-  color: white;
+  color: #253847;
   font-family: Futura, sans-serif;
   font-size: 1.03rem;
+  font-weight: 600;
   text-decoration: none;
   transition: color 0.18s;
   padding: 4px 0;
@@ -114,7 +115,7 @@
 }
 
 .fj-header-link:hover {
-  color: #aebed6;
-  border-bottom: 2px solid #aebed6;
+  color: #b3282d;
+  border-bottom: 2px solid #b3282d;
   background: transparent;
 }
