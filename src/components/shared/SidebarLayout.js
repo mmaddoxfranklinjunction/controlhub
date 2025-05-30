@@ -1,7 +1,28 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
-// ...existing imports...
+// --- Control Panel pages ---
+import ControlPanel from '../../pages/control-panel/ControlPanel';
+import MarketingPanel from '../../pages/control-panel/MarketingPanel';
+import OperationsPanel from '../../pages/control-panel/OperationsPanel';
+import LocationsPanel from '../../pages/control-panel/LocationsPanel';
+import MenuPanel from '../../pages/control-panel/MenuPanel';
+
+// --- Analytics pages ---
+import SalesOverview from '../../pages/analytics/SalesOverview';
+import RevenueRecovery from '../../pages/analytics/RevenueRecovery';
+import PromotionsReport from '../../pages/analytics/PromotionsReport';
+import RatingsFeedback from '../../pages/analytics/RatingsFeedback';
+import SponsoredListingReport from '../../pages/analytics/SponsoredListingReport';
+import OperationsPerformance from '../../pages/analytics/OperationsPerformance';
+
+// --- Recommendations pages ---
+import RecommendationsMarketing from '../../pages/recommendations/RecommendationsMarketing';
+import RecommendationsOperations from '../../pages/recommendations/RecommendationsOperations';
+import RecommendationsLocations from '../../pages/recommendations/RecommendationsLocations';
+import RecommendationsMenu from '../../pages/recommendations/RecommendationsMenu';
+
+// --- Utility/Settings/Search ---
 import StoreSearch from '../../pages/store-search/StoreSearch';
 import Settings from '../../pages/settings/Settings';
 
@@ -25,7 +46,7 @@ const SidebarLayout = () => {
       <aside className="w-64 bg-gray-800 text-white p-4 space-y-2 overflow-y-auto">
         <nav className="space-y-2">
 
-          {/* Analytics Section (now at top) */}
+          {/* Analytics Section */}
           <button
             onClick={() => toggleSection('analytics')}
             className="w-full text-left py-2 px-2 font-semibold hover:bg-gray-700 rounded"
@@ -70,7 +91,6 @@ const SidebarLayout = () => {
           {openSections.storeSearch && (
             <div className="pl-4 space-y-1">
               <Link to="/store-search" className="block py-1 px-2 hover:bg-gray-700 rounded">Search</Link>
-              {/* Add more store search-related links here if needed */}
             </div>
           )}
 
@@ -84,7 +104,6 @@ const SidebarLayout = () => {
           {openSections.settings && (
             <div className="pl-4 space-y-1">
               <Link to="/settings" className="block py-1 px-2 hover:bg-gray-700 rounded">Settings</Link>
-              {/* Add more settings-related links here if needed */}
             </div>
           )}
 
@@ -113,7 +132,7 @@ const SidebarLayout = () => {
           {/* Settings */}
           <Route path="/settings" element={<Settings />} />
 
-          {/* Recommendations (keep these at the end if still needed) */}
+          {/* Recommendations */}
           <Route path="/recommendations/marketing" element={<RecommendationsMarketing />} />
           <Route path="/recommendations/operations" element={<RecommendationsOperations />} />
           <Route path="/recommendations/menu" element={<RecommendationsMenu />} />
