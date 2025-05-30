@@ -23,6 +23,9 @@ import RecommendationsMenu from './pages/recommendations/RecommendationsMenu';
 import StoreSearch from './pages/store-search/StoreSearch';
 import Settings from './pages/settings/Settings';
 import Reviews from './pages/analytics/Reviews';
+import Login from './pages/Login';
+import AccountSetup from './pages/account-setup/AccountSetup';
+
 // ...other imports
 
 
@@ -52,7 +55,9 @@ root.render(
         <Route path="/recommendations/menu" element={<RecommendationsMenu />} />
         <Route path="/store-search" element={<StoreSearch />} />
         <Route path="/settings" element={<Settings />} />
- 
+ <Route path="/login" element={<Login />} />
+<Route path="/account-setup" element={<AccountSetup />} />
+
         <Route path="/analytics/reviews" element={<Reviews />} />
       
       </Routes>
