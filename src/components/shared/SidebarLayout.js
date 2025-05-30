@@ -77,7 +77,7 @@ const SidebarLayout = () => {
           </button>
           {openSections.alerts && (
             <div className="pl-4 space-y-1 text-sm">
-                <Link to="/Alerts/alerts" className="block py-1 px-2 hover:bg-gray-700 rounded">Alerts</Link>
+                <Link to="/alerts/alerts" className="block py-1 px-2 hover:bg-gray-700 rounded">Alerts</Link>
             </div>
           )}
 
