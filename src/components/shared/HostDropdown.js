@@ -13,7 +13,7 @@ const HostDropdown = () => {
   const [open, setOpen] = useState(false);
 
   // Set small font size (75% smaller)
-  const fontSize = "0.50rem"; // base is 1rem, so 25%
+  const fontSize = "0.70rem"; // base is 1rem, so 25%
 
   return (
     <div className="relative mb-3" style={{ fontFamily: "Futura, sans-serif" }}>
@@ -22,7 +22,7 @@ const HostDropdown = () => {
         htmlFor="host-dropdown"
         className="block text-[#A5BAC9] font-semibold mb-1"
         style={{
-          fontSize: "0.58rem",
+          fontSize: "0.80rem",
           letterSpacing: "0.04em",
         }}
       >
