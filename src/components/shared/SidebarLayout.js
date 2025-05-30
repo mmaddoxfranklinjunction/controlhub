@@ -43,8 +43,8 @@ const SidebarLayout = () => {
   };
 
   return (
-    <div className="flex flex-1">
-      <aside className="w-64 bg-[#253847] text-white p-4 space-y-2 overflow-y-auto flex flex-col">
+    <div className="flex h-screen">
+      <aside className="w-56 bg-[#253847] text-white p-4 space-y-1 overflow-y-auto flex flex-col">
         {/* Host Dropdown always at the very top */}
         <HostDropdown />
 
