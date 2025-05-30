@@ -23,8 +23,8 @@ import RecommendationsMenu from './pages/recommendations/RecommendationsMenu';
 import StoreSearch from './pages/store-search/StoreSearch';
 import Settings from './pages/settings/Settings';
 import Reviews from './pages/analytics/Reviews';
-import Login from './pages/Login';
-import AccountSetup from './pages/account-setup/AccountSetup';
+import Login from './pages/login';
+import AccountSetup from './pages/account-setup';
 
 // ...other imports
 
