@@ -21,8 +21,8 @@ const SalesOverview = () => {
 
   return (
     <PageWrapper>
-      <div className="px-4 py-6">
-        <h1 className="text-2xl font-bold mb-2">Sales Overview Analytics</h1>
+      <div className="w-full px-0 py-2 font-[Futura,sans-serif]">
+        <h1 className="text-2xl font-bold mb-2">Sales Overview</h1>
         <FilterBar
           data={summaryByLocation.map(row => ({ location: row.location }))}
           onFilterChange={setFilters}
