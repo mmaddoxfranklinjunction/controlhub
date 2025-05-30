@@ -1,5 +1,3 @@
-// src/components/shared/SidebarLayout.js
-
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import HostDropdown from './HostDropdown';
@@ -28,8 +26,9 @@ import Settings from '../../pages/settings/Settings';
 
 const SidebarLayout = () => {
   const [openSections, setOpenSections] = useState({
-    analytics: true,
     control: true,
+    alerts: false,
+    analytics: true,
     storeSearch: false,
     settings: false,
   });
@@ -42,12 +41,44 @@ const SidebarLayout = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen">
       <aside className="w-64 bg-[#253847] text-white p-4 space-y-2 overflow-y-auto flex flex-col">
-        {/* Host Dropdown at top */}
+        {/* Host Dropdown always at the very top */}
         <HostDropdown />
 
         <nav className="space-y-2 flex-1">
+          {/* Control Panel Section */}
+          <button
+            onClick={() => toggleSection('control')}
+            className="w-full text-left py-2 px-2 font-semibold text-base hover:bg-gray-700 rounded"
+            style={{ fontSize: "1.05rem" }}
+          >
+            {`Control Panel${openSections.control ? ' ▼' : ' ▶'}`}
+          </button>
+          {openSections.control && (
+            <div className="pl-4 space-y-1 text-sm">
+              <Link to="/control-panel" className="block py-1 px-2 hover:bg-gray-700 rounded">Overview</Link>
+              <Link to="/control-panel/marketing" className="block py-1 px-2 hover:bg-gray-700 rounded">Marketing</Link>
+              <Link to="/control-panel/operations" className="block py-1 px-2 hover:bg-gray-700 rounded">Operations</Link>
+              <Link to="/control-panel/locations" className="block py-1 px-2 hover:bg-gray-700 rounded">Locations</Link>
+              <Link to="/control-panel/menu" className="block py-1 px-2 hover:bg-gray-700 rounded">Menu</Link>
+            </div>
+          )}
+
+          {/* Alerts Section */}
+          <button
+            onClick={() => toggleSection('alerts')}
+            className="w-full text-left py-2 px-2 font-semibold text-base hover:bg-gray-700 rounded"
+            style={{ fontSize: "1.05rem" }}
+          >
+            {`Alerts${openSections.alerts ? ' ▼' : ' ▶'}`}
+          </button>
+          {openSections.alerts && (
+            <div className="pl-4 space-y-1 text-sm">
+              <span className="block py-1 px-2 text-gray-400">No active alerts</span>
+            </div>
+          )}
+
           {/* Analytics Section */}
           <button
             onClick={() => toggleSection('analytics')}
@@ -65,24 +96,6 @@ const SidebarLayout = () => {
               <Link to="/analytics/promotions" className="block py-1 px-2 hover:bg-gray-700 rounded">Promotions</Link>
               <Link to="/analytics/sponsored" className="block py-1 px-2 hover:bg-gray-700 rounded">Sponsored Listing</Link>
               <Link to="/analytics/recovery" className="block py-1 px-2 hover:bg-gray-700 rounded">Revenue Recovery</Link>
-            </div>
-          )}
-
-          {/* Control Panel Section */}
-          <button
-            onClick={() => toggleSection('control')}
-            className="w-full text-left py-2 px-2 font-semibold text-base hover:bg-gray-700 rounded"
-            style={{ fontSize: "1.05rem" }}
-          >
-            {`Control Panel${openSections.control ? ' ▼' : ' ▶'}`}
-          </button>
-          {openSections.control && (
-            <div className="pl-4 space-y-1 text-sm">
-              <Link to="/control-panel" className="block py-1 px-2 hover:bg-gray-700 rounded">Overview</Link>
-              <Link to="/control-panel/marketing" className="block py-1 px-2 hover:bg-gray-700 rounded">Marketing</Link>
-              <Link to="/control-panel/operations" className="block py-1 px-2 hover:bg-gray-700 rounded">Operations</Link>
-              <Link to="/control-panel/locations" className="block py-1 px-2 hover:bg-gray-700 rounded">Locations</Link>
-              <Link to="/control-panel/menu" className="block py-1 px-2 hover:bg-gray-700 rounded">Menu</Link>
             </div>
           )}
 
