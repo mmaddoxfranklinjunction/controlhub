@@ -6,6 +6,7 @@ const isLoggedIn = false;
 
 const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
   <>
+  
     <header
       style={{
         background: '#fff',
@@ -15,7 +16,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
         height: '54px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between', // changed from center
         position: 'relative',
       }}
     >
