@@ -21,7 +21,7 @@ import SponsoredListingReport from './pages/analytics/SponsoredListingReport';
 import OperationsPerformance from './pages/analytics/OperationsPerformance';
 import Reviews from './pages/analytics/Reviews';
 
-import Alerts from './pages/alerts/Alerts';
+import Alerts from './pages/Alerts/alerts';
 
 import StoreSearch from './pages/store-search/StoreSearch';
 import Settings from './pages/settings/Settings';
