@@ -19,6 +19,13 @@ const Header = () => (
         position: 'relative',
       }}
     >
+<button
+  onClick={() => setIsSidebarOpen(prev => !prev)}
+  className="absolute top-4 left-4 z-50 bg-white p-2 rounded shadow"
+>
+  {isSidebarOpen ? '←' : '→'}
+</button>
+
       {/* Left Links */}
       <nav
         style={{
