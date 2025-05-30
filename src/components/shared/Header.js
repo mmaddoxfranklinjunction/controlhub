@@ -69,7 +69,7 @@ const Header = () => (
         <img
           src="/logo.png"
           alt="Franklin Junction"
-          style={{ height: 42, margin: '0 12px' }}
+          style={{ height: 36, margin: '0 12px' }}
         />
       </div>
 
