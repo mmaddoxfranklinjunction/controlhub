@@ -36,7 +36,7 @@ const Icon = ({ children }) => (
 const SidebarLayout = () => {
   const [openSections, setOpenSections] = useState({
     control: true,
-    alerts: false,
+    alerts: true,
     analytics: true,
     storeSearch: false,
     settings: false,
