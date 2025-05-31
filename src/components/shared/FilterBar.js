@@ -14,47 +14,46 @@ const FilterBar = ({ filters = [], onApply }) => {
   };
 
   return (
-    <div className="relative mb-3">
-      {/* Filter Toggle Button */}
+    <div className="relative mb-4">
+      {/* Toggle Button */}
       <button
         onClick={() => setShowFilters((show) => !show)}
-        className="bg-[#A6B9C7] border border-[#A6B9C7] text-white px-4 py-1.5 rounded-[20px] font-semibold text-xs shadow-sm hover:bg-[#92a6b4] transition min-w-[110px]"
+        className="bg-[#A6B9C7] border border-[#A6B9C7] text-white px-3 py-1 rounded-md font-semibold text-xs shadow-sm hover:bg-[#92a6b4] transition min-w-[90px]"
         style={{
-          height: "38px",
+          height: "34px",
+          fontSize: "0.8rem",
           fontWeight: 600,
-          fontSize: "1rem",
-          letterSpacing: "0.01em",
         }}
       >
         {showFilters ? "Hide Filters" : "Show Filters"}
       </button>
 
-      {/* Dropdown Panel */}
+      {/* Filter Fields */}
       {showFilters && (
-        <div className="absolute left-0 mt-2 z-10 bg-white py-3 px-4 rounded-[18px] shadow border border-gray-100 flex flex-wrap gap-3 items-end min-h-[50px] w-max">
+        <div className="absolute left-0 mt-2 z-10 bg-white py-3 px-4 rounded-md shadow border border-gray-100 flex gap-4 items-end flex-wrap w-auto">
           {filters.map((filter) => (
-            <div key={filter.name} className="flex flex-col min-w-[120px]">
+            <div key={filter.name} className="flex flex-col">
               <label className="text-xs text-gray-500 mb-1">{filter.label}</label>
               <input
                 type={filter.type || "text"}
                 value={values[filter.name] || ""}
-                onChange={e => handleChange(filter.name, e.target.value)}
-                className="border border-[#A6B9C7] rounded-[16px] px-3 py-1.5 text-sm bg-[#f9fafb] focus:border-[#6e8598] outline-none transition"
+                onChange={(e) => handleChange(filter.name, e.target.value)}
+                className="border border-[#A6B9C7] rounded-md px-3 py-1 text-sm bg-[#f9fafb] focus:border-[#6e8598] outline-none transition"
                 placeholder={filter.placeholder}
                 style={{
-                  height: "38px",
-                  fontSize: "1rem",
+                  height: "34px",
+                  fontSize: "0.875rem",
                 }}
               />
             </div>
           ))}
           <button
             onClick={handleApply}
-            className="ml-2 px-5 py-1.5 rounded-[20px] bg-[#A6B9C7] text-white font-semibold text-xs hover:bg-[#92a6b4] transition"
+            className="ml-2 px-4 py-1 bg-[#A6B9C7] text-white rounded-md font-semibold text-xs hover:bg-[#92a6b4] transition"
             style={{
-              height: "38px",
-              fontWeight: 600,
-              fontSize: "1rem"
+              height: "34px",
+              fontSize: "0.875rem",
+              fontWeight: 600
             }}
           >
             Apply
