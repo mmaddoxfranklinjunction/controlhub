@@ -117,7 +117,7 @@ const SidebarLayout = ({ isSidebarOpen }) => {
             )}
           </nav>
         </aside>
-      )
+     
 
 
         <Routes>
