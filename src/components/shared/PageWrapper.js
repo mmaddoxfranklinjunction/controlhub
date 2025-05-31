@@ -11,7 +11,7 @@ const PageWrapper = ({ children }) => {
       <SidebarLayout isSidebarOpen={isSidebarOpen} />
       <div className="flex flex-col flex-1">
         <Header isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
-        <main className="flex-1 px-6 py-2 overflow-y-auto">
+        <main className="flex-1 px-1 py-1 overflow-y-auto">
           {children}
         </main>
       </div>
