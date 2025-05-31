@@ -16,7 +16,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
         height: '54px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         position: 'relative',
       }}
     >
