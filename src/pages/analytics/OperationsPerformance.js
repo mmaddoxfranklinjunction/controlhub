@@ -26,23 +26,7 @@ const OperationsPerformance = () => {
         <h1 className="text-2xl font-bold mb-2">Operations Performance Analytics</h1>
 
         {/* Filter Section */}
-        <FilterBar
-          data={[
-            ...avoidableCancellations.map(r => ({
-              location: r.location || '',
-              brand: r.brand || '',
-            })),
-            ...errorRateDetails.map(r => ({
-              location: r.location || '',
-              brand: r.brand || '',
-            })),
-            ...downtimeDetails.map(r => ({
-              location: r.location || '',
-              brand: r.brand || '',
-            })),
-          ]}
-          onFilterChange={setFilters}
-        />
+        <FilterBar /> 
 
         {/* Summary Bar */}
         <div className="grid grid-cols-5 gap-2 mb-6">
