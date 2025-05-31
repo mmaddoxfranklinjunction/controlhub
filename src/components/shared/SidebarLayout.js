@@ -119,7 +119,7 @@ const SidebarLayout = ({ isSidebarOpen }) => {
         </aside>
       )
 
-      <main className="flex-1 p-6 overflow-y-auto">
+
         <Routes>
           <Route path="/control-panel" element={<ControlPanel />} />
           <Route path="/control-panel/marketing" element={<MarketingPanel />} />
@@ -145,7 +145,7 @@ const SidebarLayout = ({ isSidebarOpen }) => {
           <Route path="/recommendations/menu" element={<RecommendationsMenu />} />
           <Route path="/recommendations/locations" element={<RecommendationsLocations />} />
         </Routes>
-      </main>
+     
     </div>
   );
 };
