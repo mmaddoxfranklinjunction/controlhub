@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import PageWrapper from '../../components/shared/PageWrapper';
+import FilterBar from '../../components/shared/FilterBar';
 
 export default function MenuPanel() {
   const [showMissing, setShowMissing] = useState(true);
