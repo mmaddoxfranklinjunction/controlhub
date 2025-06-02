@@ -1,3 +1,5 @@
+// src/pages/Home.js
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HostDropdown from '../components/shared/HostDropdown';
@@ -13,31 +15,27 @@ const userCount = 8;
 const Home = () => (
   <div className="flex flex-col min-h-screen bg-gray-100 px-4 relative">
     {/* Top nav buttons */}
-    <div className="w-full flex justify-end items-center py-6 max-w-7xl mx-auto">
-      <Link
-        to="/account-setup"
-        className="inline-block bg-[#B3282D] text-white px-6 py-2 rounded-full font-semibold text-md shadow hover:bg-[#8c1c24] transition-all mr-4 tracking-wide"
-      >
+    <div className="w-full flex justify-end items-center py-4 max-w-7xl mx-auto">
+      <Link to="/account-setup" className="inline-block bg-[#B3282D] text-white px-6 py-2 rounded-full font-semibold text-md shadow hover:bg-[#8c1c24] transition-all mr-4 tracking-wide">
         Get Started
       </Link>
-      <Link
-        to="/login"
-        className="inline-block bg-white text-[#B3282D] border border-[#B3282D] px-6 py-2 rounded-full font-semibold text-md shadow hover:bg-[#B3282D] hover:text-white transition-all tracking-wide"
-      >
+      <Link to="/login" className="inline-block bg-white text-[#B3282D] border border-[#B3282D] px-6 py-2 rounded-full font-semibold text-md shadow hover:bg-[#B3282D] hover:text-white transition-all tracking-wide">
         Login
       </Link>
     </div>
 
-    {/* Logo and Title */}
-    <div className="flex flex-col items-center justify-center text-center mb-4">
-      <img src="/homelogo.png" alt="Franklin Junction Logo" className="w-20 mb-6" />
-      <img src={`${process.env.PUBLIC_URL}/control_hub_logo.png`} alt="Control Hub Logo" className="w-100 mb-6" />
+    {/* Logos and Title */}
+    <div className="flex flex-col items-center justify-center text-center mt-2 mb-2">
+      <img src="/homelogo.png" alt="Franklin Junction Logo" className="w-16 mb-4" />
+      <img src={`${process.env.PUBLIC_URL}/control_hub_logo.png`} alt="Control Hub Logo" className="w-60 mb-4" />
       <h1 className="text-3xl font-bold text-[#002147] mb-2">The GM for your Digital Restaurant</h1>
     </div>
 
-    {/* Host selector */}
-    <div className="max-w-4xl w-full mx-auto mb-4">
-    <HostDropdown hosts={hostStoreList} />
+    {/* Host Selector Bar */}
+    <div className="max-w-3xl w-full mx-auto mb-6">
+      <div className="bg-white rounded-2xl shadow-md border border-gray-300 p-4 md:p-6 text-center text-[#002147] font-semibold text-lg">
+        <HostDropdown hosts={hostStoreList} />
+      </div>
     </div>
 
     {/* Grid of Cards */}
@@ -68,27 +66,7 @@ const Home = () => (
         <div className="text-sm text-[#b3282d] font-bold mt-2">View all alerts</div>
       </Link>
 
-      {/* Control Panel */}
-      <Link to="/control-panel" className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-xl transition flex flex-col items-center justify-center text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}><path d="M3 9.75V19a2 2 0 002 2h2a1 1 0 001-1v-4a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 001 1h2a2 2 0 002-2V9.75"/></svg>
-        <h2 className="font-semibold text-xl text-[#002147] mb-1">Control Panel</h2>
-        <p className="text-sm text-gray-600 mb-2">Adjust your online menu and settings</p>
-        <div className="mt-2 flex gap-4 justify-center text-sm">
-          <div className="text-gray-500 mb-1">Visibility Score</div>
-          <div className="flex gap-2 justify-center">
-            {Object.entries(visibilityScores).map(([grade, count]) => (
-              <span key={grade} className={`inline-block w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center ${
-                grade === 'A' ? 'bg-green-100 text-green-800' :
-                grade === 'B' ? 'bg-yellow-100 text-yellow-700' :
-                grade === 'C' ? 'bg-orange-100 text-orange-700' :
-                'bg-red-100 text-red-700'
-              }`}>{grade}:{count}</span>
-            ))}
-          </div>
-        </div>
-      </Link>
-
-      {/* Settings */}
+      {/* Settings (moved down) */}
       <Link to="/settings" className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-xl transition flex flex-col items-center justify-center text-center">
         <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}><path d="M12 15.5A3.5 3.5 0 1112 8.5a3.5 3.5 0 010 7z"/></svg>
         <h2 className="font-semibold text-xl text-[#002147] mb-1">Settings</h2>
@@ -110,6 +88,26 @@ const Home = () => (
             <span className="text-xs text-gray-400 mx-1">/</span>
             <span className="font-bold text-[#2679c8]">{training.assigned}</span>
             <span className="text-xs text-gray-400 ml-1">complete</span>
+          </div>
+        </div>
+      </Link>
+
+      {/* Control Panel (moved up) */}
+      <Link to="/control-panel" className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-xl transition flex flex-col items-center justify-center text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}><path d="M3 9.75V19a2 2 0 002 2h2a1 1 0 001-1v-4a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 001 1h2a2 2 0 002-2V9.75"/></svg>
+        <h2 className="font-semibold text-xl text-[#002147] mb-1">Control Panel</h2>
+        <p className="text-sm text-gray-600 mb-2">Adjust your online menu and settings</p>
+        <div className="mt-2 flex gap-4 justify-center text-sm">
+          <div className="text-gray-500 mb-1">Visibility Score</div>
+          <div className="flex gap-2 justify-center">
+            {Object.entries(visibilityScores).map(([grade, count]) => (
+              <span key={grade} className={`inline-block w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center ${
+                grade === 'A' ? 'bg-green-100 text-green-800' :
+                grade === 'B' ? 'bg-yellow-100 text-yellow-700' :
+                grade === 'C' ? 'bg-orange-100 text-orange-700' :
+                'bg-red-100 text-red-700'
+              }`}>{grade}:{count}</span>
+            ))}
           </div>
         </div>
       </Link>
