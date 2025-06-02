@@ -17,14 +17,13 @@ const CHANNEL_BREAKDOWN = [
   { channel: 'Grubhub', downtime: '58h' },
 ];
 
-  const [view, setView] = useState("insights");
-
+ 
   const handleApply = () => {
     console.log("Apply filters:", filters);
   };
 
 const LocationsPanel = () => {
- 
+   const [toggle, setToggle] = useState("insights");
   return (
     <PageWrapper>
       <div className="max-w-5xl mx-auto px-6 py-0">
