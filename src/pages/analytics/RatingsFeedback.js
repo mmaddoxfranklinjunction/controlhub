@@ -1,4 +1,6 @@
 import React from 'react';
+import PageWrapper from '../../components/shared/PageWrapper';
+import FilterBar from '../../components/shared/FilterBar';
 
 const RatingsFeedback = () => (
   <div className="p-6">
