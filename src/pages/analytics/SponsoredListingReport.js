@@ -2,6 +2,11 @@ import React from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
 import FilterBar from '../../components/shared/FilterBar';
 
+  const [view, setView] = useState("insights");
+
+  const handleApply = () => {
+    console.log("Apply filters:", filters);
+  };
 
 const SponsoredListingReport = () => (
     <div className="max-w-5xl mx-auto px-6 py-0">
