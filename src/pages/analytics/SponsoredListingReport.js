@@ -5,11 +5,10 @@ import FilterBar from '../../components/shared/FilterBar';
 
 
 const SponsoredListingReport = () => {
-  const [view, setView] = useState("insights"); // ✅ now it's inside the component
-
-  const handleApply = (filters) => {
+  const [view, setView] = useState("insights");
+ const handleApply = (filters) => {
     console.log("Apply filters:", filters);
-  };
+  
 
   return (
     <PageWrapper>
