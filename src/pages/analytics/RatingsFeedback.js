@@ -55,7 +55,7 @@ const RatingsFeedback = () => (
           <p className="text-xl font-bold text-[#B22234] mt-1">65.7%</p>
         </div>
     </div>
-  </div>
+
 );
 
 export default RatingsFeedback;
