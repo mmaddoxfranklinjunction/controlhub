@@ -1,6 +1,5 @@
 // src/data/hostStoreList.js
-
-const hostStoreList = [
+export const hostStoreList = [
   "All Hosts",
   "BDP",
   "CAT",
