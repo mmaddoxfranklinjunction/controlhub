@@ -28,38 +28,31 @@ const LocationsPanel = () => {
         {/* Title + Toggle */}
         <div className="flex items-center justify-between mt-0 mb-4">
           <h1 className="text-2xl font-bold text-[#253847]">Location Analytics</h1>
-          <div className="flex items-center bg-[rgba(179,40,45,0.1)] border border-[#b3282d] rounded-full h-8 text-xs">
+           <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
             <button
-              onClick={() => setView('insights')}
-              className={
-                `px-3 transition ${view === 'insights'
-                  ? 'bg-[#b3282d] text-white rounded-full'
-                  : 'text-[#b3282d]'}`
-              }
+              className={flex-1 px-3 py-1 rounded-full transition font-bold
+                ${toggle === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}}
+              style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
+              onClick={() => setToggle("insights")}
             >
               Insights
             </button>
             <button
-              onClick={() => setView('controls')}
-              className={
-                `px-3 transition ${view === 'controls'
-                  ? 'bg-[#b3282d] text-white rounded-full'
-                  : 'text-[#b3282d]'}`
-              }
+              className={flex-1 px-3 py-1 rounded-full transition font-bold
+                ${toggle === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}}
+              style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
+              onClick={() => setToggle("controls")}
             >
               Controls
             </button>
           </div>
         </div>
+        </div>
 
         {/* Filter Bar + Display */}
         <div className="mb-4">
-          <FilterBar
-            filters={[{ name: 'dateRange', placeholder: 'Select date range' }]}
-            onApply={handleApply}
-          />
-        </div>
-        <div className="text-sm text-gray-600 mb-6">{filters.dateRange}</div>
+         <FilterBar />
+          </div>
 
         {/* KPI Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
