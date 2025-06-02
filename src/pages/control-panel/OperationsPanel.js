@@ -7,7 +7,12 @@ import FilterBar from '../../components/shared/FilterBar';
 const OperationsPanel = () => {
   const [autoTraining, setAutoTraining] = useState(true);
   const [alertLevel, setAlertLevel] = useState("moderate");
+  const [view, setView] = useState("insights");
 
+  const handleApply = () => {
+    console.log("Apply filters:", filters);
+  };
+  
   return (
     <PageWrapper>
         <div className="max-w-5xl mx-auto px-6 py-0">
