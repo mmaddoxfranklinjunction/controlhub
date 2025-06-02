@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
 import FilterBar from '../../components/shared/FilterBar';
 
