@@ -6,6 +6,12 @@ import FilterBar from '../../components/shared/FilterBar';
 export default function MenuPanel() {
   const [showMissing, setShowMissing] = useState(true);
 
+  const [view, setView] = useState("insights");
+
+  const handleApply = () => {
+    console.log("Apply filters:", filters);
+  };
+  
   return (
     <PageWrapper>
          <div className="max-w-5xl mx-auto px-6 py-0">
