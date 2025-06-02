@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HostDropdown from '../components/shared/HostDropdown';
+import hostStoreList from '../data/hostStoreList';
 
 const visibilityScores = { A: 22, B: 14, C: 8, D: 2 };
 const storeRatings = { '2.5-3.0': 1, '3.0-3.5': 3, '3.5-4.0': 10 };
@@ -36,7 +37,7 @@ const Home = () => (
 
     {/* Host selector */}
     <div className="max-w-4xl w-full mx-auto mb-4">
-      <HostDropdown />
+    <HostDropdown hosts={hostStoreList} />
     </div>
 
     {/* Grid of Cards */}
