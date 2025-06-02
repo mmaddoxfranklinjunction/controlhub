@@ -17,6 +17,12 @@ const CHANNEL_BREAKDOWN = [
   { channel: 'Grubhub', downtime: '58h' },
 ];
 
+  const [view, setView] = useState("insights");
+
+  const handleApply = () => {
+    console.log("Apply filters:", filters);
+  };
+
 const LocationsPanel = () => {
  
   return (
