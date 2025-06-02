@@ -65,6 +65,7 @@ const SponsoredListingReport = () => {
     </div>
   </div>
   </PageWrapper>
-);
+  );
+};
 
 export default SponsoredListingReport;
