@@ -21,7 +21,11 @@ const OperationsPerformance = () => {
 
   // Filtering logic can be added here if your row data supports it
   // For now, tables show all data
+  const [view, setView] = useState("insights");
 
+  const handleApply = () => {
+    console.log("Apply filters:", filters);
+  };
   return (
     <PageWrapper>
          <div className="max-w-5xl mx-auto px-6 py-0">
