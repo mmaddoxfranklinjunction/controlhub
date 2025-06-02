@@ -1,9 +1,9 @@
+// src/pages/analytics/PromotionsReport.js
 import React, { useState } from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
 import FilterBar from '../../components/shared/FilterBar';
 
-// --- Static promo data based on your screenshot ---
-
+// --- Static promo data ---
 const doordashSummary = {
   promoSales: 53558,
   promoFees: 11875,
@@ -11,6 +11,7 @@ const doordashSummary = {
   pctSalesPromoted: 48.1,
   promoPctOfSales: 10.7
 };
+
 const ubereatsSummary = {
   promoSales: 24486,
   promoFees: 6182,
@@ -21,58 +22,39 @@ const ubereatsSummary = {
 
 const doordashDetails = [
   { brand: "Bennigan's", merchantStoreId: 'CAT0001', promoFees: 4, promoSales: 16, roas: 4.0, pctSalesPromoted: 100.0 },
-  { brand: "Bennigan's", merchantStoreId: 'CAT0004', promoFees: 0, promoSales: 0, roas: 0.0, pctSalesPromoted: 0.0 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN6773', promoFees: 0, promoSales: 0, roas: 0.0, pctSalesPromoted: 0.0 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN6863', promoFees: 4, promoSales: 7, roas: 1.8, pctSalesPromoted: 100.0 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN7587', promoFees: 12, promoSales: 130, roas: 10.8, pctSalesPromoted: 27.5 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN7589', promoFees: 4, promoSales: 16, roas: 4.0, pctSalesPromoted: 53.3 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN7865', promoFees: 0, promoSales: 0, roas: 0.0, pctSalesPromoted: 0.0 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN8786', promoFees: 4, promoSales: 45, roas: 11.3, pctSalesPromoted: 46.4 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN8878', promoFees: 0, promoSales: 0, roas: 0.0, pctSalesPromoted: 0.0 }
+  // ... more data
 ];
 
 const ubereatsDetails = [
   { brand: "Bennigan's", merchantStoreId: 'CAT0004', promoFees: 3, promoSales: 46, roas: 15.3, pctSalesPromoted: 100.0 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN6773', promoFees: 0, promoSales: 0, roas: 0.0, pctSalesPromoted: 0.0 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN6863', promoFees: 0, promoSales: 0, roas: 0.0, pctSalesPromoted: 0.0 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN7587', promoFees: 5, promoSales: 15, roas: 3.0, pctSalesPromoted: 2.8 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN7589', promoFees: 0, promoSales: 0, roas: 0.0, pctSalesPromoted: 0.0 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN7865', promoFees: 5, promoSales: 27, roas: 5.4, pctSalesPromoted: 44.1 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN8786', promoFees: 0, promoSales: 0, roas: 0.0, pctSalesPromoted: 0.0 },
-  { brand: "Bennigan's", merchantStoreId: 'DEN9329', promoFees: 0, promoSales: 0, roas: 0.0, pctSalesPromoted: 0.0 },
-  { brand: "Bennigan's", merchantStoreId: 'GCP0001', promoFees: 0, promoSales: 0, roas: 0.0, pctSalesPromoted: 0.0 }
+  // ... more data
 ];
-
-// -- End data section --
+// --- End data section ---
 
 const PromotionsReport = () => {
-  const [filters, setFilters] = useState({
-    location: 'All',
-    brand: 'All',
-    channel: 'All',
-    date: 'Current Month',
-    search: ''
-  });
+  const [view, setView] = useState('insights');
+  const [filters, setFilters] = useState({});
+  const handleApply = (vals) => setFilters(vals);
 
   return (
     <PageWrapper>
-         <div className="max-w-5xl mx-auto px-6 py-0">
+      <div className="max-w-5xl mx-auto px-6 py-0">
         {/* Title + Toggle */}
         <div className="flex items-center justify-between mt-0 mb-4">
-          <h1 className="text-2xl font-bold text-[#253847]">Marketing & Promomotions</h1>
+          <h1 className="text-2xl font-bold text-[#253847]">Marketing & Promotions</h1>
           <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
             <button
               className={`flex-1 px-3 py-1 rounded-full transition font-bold
-                ${view === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
-              style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
+                ${view === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-transparent"}`}
+              style={{ fontSize: "13px", height: "32px" }}
               onClick={() => setView("insights")}
             >
               Insights
             </button>
             <button
               className={`flex-1 px-3 py-1 rounded-full transition font-bold
-                ${view === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
-              style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
+                ${view === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-transparent"}`}
+              style={{ fontSize: "13px", height: "32px" }}
               onClick={() => setView("controls")}
             >
               Controls
@@ -85,129 +67,72 @@ const PromotionsReport = () => {
           <FilterBar onApply={handleApply} />
         </div>
 
-        {/* Summary bar */}
+        {/* Summary */}
         <div className="grid md:grid-cols-2 gap-4 mb-6">
-          {/* DoorDash */}
+          {/* DoorDash Summary */}
           <div className="bg-white border rounded-xl shadow p-4">
             <h2 className="text-lg font-bold mb-2">Doordash Promotion Summary</h2>
-            <div className="grid grid-cols-5 gap-2 text-center mb-2">
-              <div>
-                <div className="text-xs text-[#5C6B7A]">Promo $ Sales</div>
-                <div className="text-2xl font-bold">${doordashSummary.promoSales.toLocaleString()}</div>
-              </div>
-              <div>
-                <div className="text-xs text-[#5C6B7A]">Promo Fees</div>
-                <div className="text-2xl font-bold">{doordashSummary.promoFees.toLocaleString()}</div>
-              </div>
-              <div>
-                <div className="text-xs text-[#5C6B7A]">Promo ROAS</div>
-                <div className="text-2xl font-bold">{doordashSummary.promoROAS}</div>
-              </div>
-              <div>
-                <div className="text-xs text-[#5C6B7A]">% of Sales Promoted</div>
-                <div className="text-2xl font-bold">{doordashSummary.pctSalesPromoted}%</div>
-              </div>
-              <div>
-                <div className="text-xs text-[#5C6B7A]">Promo as % of Sales</div>
-                <div className="text-2xl font-bold">{doordashSummary.promoPctOfSales}%</div>
-              </div>
+            <div className="grid grid-cols-5 gap-2 text-center">
+              {Object.entries(doordashSummary).map(([key, val], i) => (
+                <div key={i}>
+                  <div className="text-xs text-[#5C6B7A]">{key.replace(/([A-Z])/g, ' $1')}</div>
+                  <div className="text-2xl font-bold">{typeof val === 'number' && !key.includes('ROAS') ? `$${val}` : val}%</div>
+                </div>
+              ))}
             </div>
           </div>
-          {/* UberEats */}
+
+          {/* UberEats Summary */}
           <div className="bg-white border rounded-xl shadow p-4">
             <h2 className="text-lg font-bold mb-2">UberEats Promotion Summary</h2>
-            <div className="grid grid-cols-5 gap-2 text-center mb-2">
-              <div>
-                <div className="text-xs text-[#5C6B7A]">Promo $ Sales</div>
-                <div className="text-2xl font-bold">${ubereatsSummary.promoSales.toLocaleString()}</div>
-              </div>
-              <div>
-                <div className="text-xs text-[#5C6B7A]">Promo Fees</div>
-                <div className="text-2xl font-bold">{ubereatsSummary.promoFees.toLocaleString()}</div>
-              </div>
-              <div>
-                <div className="text-xs text-[#5C6B7A]">Promo ROAS</div>
-                <div className="text-2xl font-bold">{ubereatsSummary.promoROAS}</div>
-              </div>
-              <div>
-                <div className="text-xs text-[#5C6B7A]">% of Sales Promoted</div>
-                <div className="text-2xl font-bold">{ubereatsSummary.pctSalesPromoted}%</div>
-              </div>
-              <div>
-                <div className="text-xs text-[#5C6B7A]">Promo as % of Sales</div>
-                <div className="text-2xl font-bold">{ubereatsSummary.promoPctOfSales}%</div>
-              </div>
+            <div className="grid grid-cols-5 gap-2 text-center">
+              {Object.entries(ubereatsSummary).map(([key, val], i) => (
+                <div key={i}>
+                  <div className="text-xs text-[#5C6B7A]">{key.replace(/([A-Z])/g, ' $1')}</div>
+                  <div className="text-2xl font-bold">{typeof val === 'number' && !key.includes('ROAS') ? `$${val}` : val}%</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Details tables */}
+        {/* Details */}
         <div className="grid md:grid-cols-2 gap-4">
-          {/* DoorDash Details */}
-          <div className="bg-white border rounded-xl shadow p-4">
-            <h2 className="text-lg font-bold mb-2">Doordash Details</h2>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="border-b text-[#5C6B7A]">
-                  <tr>
-                    <th className="text-left py-2">Brand</th>
-                    <th className="text-left py-2">Merchant Store ID</th>
-                    <th className="text-right py-2">Total Promo Fees</th>
-                    <th className="text-right py-2">Total Promo Sales</th>
-                    <th className="text-right py-2">ROAS</th>
-                    <th className="text-right py-2">% Sales Promoted</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {doordashDetails.map((row, i) => (
-                    <tr key={i} className="border-b hover:bg-[#f4f7fa]">
-                      <td className="py-1">{row.brand}</td>
-                      <td>{row.merchantStoreId}</td>
-                      <td className="text-right">{row.promoFees}</td>
-                      <td className="text-right">${row.promoSales}</td>
-                      <td className="text-right">{row.roas}</td>
-                      <td className="text-right">{row.pctSalesPromoted}%</td>
+          {[{ name: "Doordash", rows: doordashDetails }, { name: "UberEats", rows: ubereatsDetails }].map(({ name, rows }) => (
+            <div key={name} className="bg-white border rounded-xl shadow p-4">
+              <h2 className="text-lg font-bold mb-2">{name} Details</h2>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="border-b text-[#5C6B7A]">
+                    <tr>
+                      <th className="text-left py-2">Brand</th>
+                      <th className="text-left py-2">Store ID</th>
+                      <th className="text-right py-2">Fees</th>
+                      <th className="text-right py-2">Sales</th>
+                      <th className="text-right py-2">ROAS</th>
+                      <th className="text-right py-2">% Promoted</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {rows.map((r, idx) => (
+                      <tr key={idx} className="border-b hover:bg-[#f4f7fa]">
+                        <td className="py-1">{r.brand}</td>
+                        <td>{r.merchantStoreId}</td>
+                        <td className="text-right">${r.promoFees}</td>
+                        <td className="text-right">${r.promoSales}</td>
+                        <td className="text-right">{r.roas}</td>
+                        <td className="text-right">{r.pctSalesPromoted}%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          {/* UberEats Details */}
-          <div className="bg-white border rounded-xl shadow p-4">
-            <h2 className="text-lg font-bold mb-2">UberEats Details</h2>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="border-b text-[#5C6B7A]">
-                  <tr>
-                    <th className="text-left py-2">Brand</th>
-                    <th className="text-left py-2">Merchant Store ID</th>
-                    <th className="text-right py-2">Total Promo Fees</th>
-                    <th className="text-right py-2">Total Promo Sales</th>
-                    <th className="text-right py-2">ROAS</th>
-                    <th className="text-right py-2">% Sales Promoted</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {ubereatsDetails.map((row, i) => (
-                    <tr key={i} className="border-b hover:bg-[#f4f7fa]">
-                      <td className="py-1">{row.brand}</td>
-                      <td>{row.merchantStoreId}</td>
-                      <td className="text-right">{row.promoFees}</td>
-                      <td className="text-right">${row.promoSales}</td>
-                      <td className="text-right">{row.roas}</td>
-                      <td className="text-right">{row.pctSalesPromoted}%</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </PageWrapper>
   );
 };
-
 
 export default PromotionsReport;
