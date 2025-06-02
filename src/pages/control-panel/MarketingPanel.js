@@ -64,17 +64,35 @@ const MarketingPanel = () => {
 
   return (
     <PageWrapper>
-    <div className="w-full px-0 py-2 font-[Futura,sans-serif]">
-     
-        {/* Header Row: Title left, toggle right */}
-        <div className="flex items-center justify-between mb-1 mt-2">
-          <h1 className="text-2xl font-bold mb-2 text-[#253847]">Marketing Panel</h1>
-         
+     <div className="max-w-5xl mx-auto px-6 py-0">
+        {/* Title + Toggle */}
+        <div className="flex items-center justify-between mt-0 mb-4">
+          <h1 className="text-2xl font-bold text-[#253847]">Marketing Conrol Panel</h1>
+          <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
+            <button
+              className={`flex-1 px-3 py-1 rounded-full transition font-bold
+                ${view === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
+              style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
+              onClick={() => setView("insights")}
+            >
+              Insights
+            </button>
+            <button
+              className={`flex-1 px-3 py-1 rounded-full transition font-bold
+                ${view === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
+              style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
+              onClick={() => setView("controls")}
+            >
+              Controls
+            </button>
+          </div>
         </div>
-        {/* FilterBar */}
-        <div className="flex items-left justify-between mb-1 mt-2">
-          <FilterBar />
+
+        {/* Filter Bar */}
+        <div className="mb-4">
+          <FilterBar onApply={handleApply} />
         </div>
+
         {/* Two-Column Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-0">
           {/* Ad Campaigns */}
