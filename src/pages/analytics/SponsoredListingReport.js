@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
 import FilterBar from '../../components/shared/FilterBar';
 
-  const [view, setView] = useState("insights");
+ 
 
+
+
+const SponsoredListingReport = () => (
+   const [view, setView] = useState("insights");
   const handleApply = () => {
     console.log("Apply filters:", filters);
   };
 
-const SponsoredListingReport = () => (
-    <div className="max-w-5xl mx-auto px-6 py-0">
+<div className="max-w-5xl mx-auto px-6 py-0">
         {/* Title + Toggle */}
         <div className="flex items-center justify-between mt-0 mb-4">
           <h1 className="text-2xl font-bold text-[#253847]">Sponsored Listings Analytics</h1>
