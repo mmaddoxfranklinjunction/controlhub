@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
 import FilterBar from '../../components/shared/FilterBar';
 
- 
 
 
+const SponsoredListingReport = () => {
+  const [view, setView] = useState("insights"); // ✅ now it's inside the component
 
-const SponsoredListingReport = () => (
-   const [view, setView] = useState("insights");
-  const handleApply = () => {
+  const handleApply = (filters) => {
     console.log("Apply filters:", filters);
   };
+
+  return (
+    <PageWrapper>
 
 <div className="max-w-5xl mx-auto px-6 py-0">
         {/* Title + Toggle */}
@@ -63,6 +65,7 @@ const SponsoredListingReport = () => (
         </div>
     </div>
   </div>
+  </PageWrapper>
 );
 
 export default SponsoredListingReport;
