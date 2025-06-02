@@ -1,4 +1,3 @@
-// src/pages/control-panel/LocationsPanel.js
 import React, { useState } from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
 import FilterBar from '../../components/shared/FilterBar';
@@ -28,31 +27,30 @@ const LocationsPanel = () => {
         {/* Title + Toggle */}
         <div className="flex items-center justify-between mt-0 mb-4">
           <h1 className="text-2xl font-bold text-[#253847]">Location Analytics</h1>
-           <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
+          <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
             <button
-              className={flex-1 px-3 py-1 rounded-full transition font-bold
-                ${toggle === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}}
+              className={`flex-1 px-3 py-1 rounded-full transition font-bold
+                ${view === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
               style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
-              onClick={() => setToggle("insights")}
+              onClick={() => setView("insights")}
             >
               Insights
             </button>
             <button
-              className={flex-1 px-3 py-1 rounded-full transition font-bold
-                ${toggle === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}}
+              className={`flex-1 px-3 py-1 rounded-full transition font-bold
+                ${view === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
               style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
-              onClick={() => setToggle("controls")}
+              onClick={() => setView("controls")}
             >
               Controls
             </button>
           </div>
         </div>
-        </div>
 
-        {/* Filter Bar + Display */}
+        {/* Filter Bar */}
         <div className="mb-4">
-         <FilterBar />
-          </div>
+          <FilterBar onApply={handleApply} />
+        </div>
 
         {/* KPI Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -68,7 +66,6 @@ const LocationsPanel = () => {
 
         {/* Trend Chart Placeholder */}
         <div className="bg-white rounded-xl shadow p-4 mb-6 h-48 flex items-center justify-center text-gray-400">
-          {/* insert your chart here */}
           Trend chart goes here
         </div>
 
