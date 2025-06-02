@@ -11,11 +11,6 @@ const totalSales = "$244,286";
 const recentErrorRate = "5.5%";
 const userCount = 8;
 
-  const [view, setView] = useState("insights");
-
-  const handleApply = () => {
-    console.log("Apply filters:", filters);
-  };
 
 // --- SVG icon components ---
 const IconStorefront = () => (
@@ -165,12 +160,7 @@ const Home = () => (
           </div>
         </Link>
       </div>
-      <Link
-        to="/control-panel"
-        className="bg-[#B3282D] text-white px-8 py-3 text-lg font-semibold rounded-full hover:bg-[#8c1c24] transition mt-2"
-      >
-        Get Started
-      </Link>
+  
     </div>
   </div>
 );
