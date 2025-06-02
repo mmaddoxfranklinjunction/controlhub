@@ -1,4 +1,7 @@
 import React from 'react';
+import PageWrapper from '../../components/shared/PageWrapper';
+import FilterBar from '../../components/shared/FilterBar';
+
 
 const SponsoredListingReport = () => (
   <div className="p-6">
