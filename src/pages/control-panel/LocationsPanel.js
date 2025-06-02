@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+
+import React from 'react';
+import { Link } from 'react-router-dom';
 import PageWrapper from '../../components/shared/PageWrapper';
 import FilterBar from '../../components/shared/FilterBar';
 
@@ -16,11 +18,7 @@ const CHANNEL_BREAKDOWN = [
 ];
 
 const LocationsPanel = () => {
-  const [view, setView] = useState('insights');
-  const [filters, setFilters] = useState({ dateRange: '5/22/2025 – 5/28/2025' });
-
-  const handleApply = (vals) => setFilters(vals);
-
+ 
   return (
     <PageWrapper>
       <div className="max-w-5xl mx-auto px-6 py-0">
