@@ -26,7 +26,7 @@ const LocationsPanel = () => {
       <div className="max-w-5xl mx-auto px-6 py-0">
         {/* Title + Toggle */}
         <div className="flex items-center justify-between mt-0 mb-4">
-          <h1 className="text-2xl font-bold text-[#253847]">Location Analytics</h1>
+          <h1 className="text-2xl font-bold text-[#253847]">Locations Controls Panel</h1>
           <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
             <button
               className={`flex-1 px-3 py-1 rounded-full transition font-bold
