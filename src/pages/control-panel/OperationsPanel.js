@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import PageWrapper from '../../components/shared/PageWrapper';
+import FilterBar from '../../components/shared/FilterBar';
+
 
 const OperationsPanel = () => {
   const [autoTraining, setAutoTraining] = useState(true);
