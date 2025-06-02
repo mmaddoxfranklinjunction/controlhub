@@ -11,6 +11,12 @@ const totalSales = "$244,286";
 const recentErrorRate = "5.5%";
 const userCount = 8;
 
+  const [view, setView] = useState("insights");
+
+  const handleApply = () => {
+    console.log("Apply filters:", filters);
+  };
+
 // --- SVG icon components ---
 const IconStorefront = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}>
