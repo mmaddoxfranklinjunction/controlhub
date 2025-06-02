@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { doordashData, uberData } from './data/RevenueRecoveryFullData';
 import PageWrapper from '../../components/shared/PageWrapper';
+import FilterBar from '../../components/shared/FilterBar';
 
 // Helper to extract unique sorted values from data
 const getUniqueSorted = (data, key) => {
