@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import PageWrapper from '../../components/shared/PageWrapper';
 import HostDropdown from '../../components/shared/HostDropdown';
 import hostStoreList from '../../data/hostStoreList';
@@ -25,6 +24,15 @@ const ControlPanel = () => {
   ];
 
   const activeCampaigns = ["BOGO Tuesday", "Summer Deals", "Free Delivery Week"];
+
+  const maxValue = Math.max(...chartData.map(d => Math.max(d.cost, d.revenue)));
+  const height = 100;
+  const width = 280;
+  const pointGap = width / (chartData.length - 1);
+  const scaleY = value => height - (value / maxValue) * height;
+  const getPath = (key) => {
+    return chartData.map((d, i) => `${i === 0 ? 'M' : 'L'} ${i * pointGap},${scaleY(d[key])}`).join(' ');
+  };
 
   return (
     <PageWrapper>
@@ -65,17 +73,11 @@ const ControlPanel = () => {
                       ))}
                     </ul>
                   </div>
-                  <div className="h-28">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={chartData}>
-                        <XAxis dataKey="month" tick={{ fontSize: 10 }} />
-                        <YAxis yAxisId="left" orientation="left" tick={{ fontSize: 10 }} />
-                        <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10 }} />
-                        <Tooltip />
-                        <Line yAxisId="left" type="monotone" dataKey="cost" stroke="#2B7A78" strokeWidth={2} dot={{ r: 3 }} />
-                        <Line yAxisId="right" type="monotone" dataKey="revenue" stroke="#B3282D" strokeWidth={2} dot={{ r: 3 }} />
-                      </LineChart>
-                    </ResponsiveContainer>
+                  <div className="h-28 w-full">
+                    <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full">
+                      <path d={getPath('cost')} fill="none" stroke="#2B7A78" strokeWidth="2" />
+                      <path d={getPath('revenue')} fill="none" stroke="#B3282D" strokeWidth="2" />
+                    </svg>
                   </div>
                 </>
               )
