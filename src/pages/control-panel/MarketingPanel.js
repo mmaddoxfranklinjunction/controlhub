@@ -1,203 +1,161 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import PageWrapper from "../../components/shared/PageWrapper";
-import FilterBar from "../../components/shared/FilterBar";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import PageWrapper from '../../components/shared/PageWrapper';
+import HostDropdown from '../../components/shared/HostDropdown';
+import hostStoreList from '../../data/hostStoreList';
+import FilterBar from '../../components/shared/FilterBar';
 
-// Sample ad campaigns and promo data
-const adCampaigns = [
-  { name: "Search Boost", type: "Sponsored", spend: "$1,200/week", trend: [8, 12, 11, 14, 17, 18], color: "#2679c8", active: true },
-  { name: "Banner Ad: Summer BBQ", type: "Display", spend: "$750/week", trend: [3, 5, 8, 7, 11, 13], color: "#B3282D", active: true },
-  { name: "Instagram Awareness", type: "Social", spend: "$400/week", trend: [6, 5, 6, 7, 6, 8], color: "#A5BAC9", active: false },
-];
+const ControlPanel = () => {
+  const [selectedHost, setSelectedHost] = useState("All Locations");
 
-const promos = [
-  { name: "BOGO Burgers", type: "BOGO", spend: "$520/week", trend: [10, 11, 9, 10, 13, 15], color: "#2679c8", active: true },
-  { name: "Spend $20, Get $5", type: "Spend X Get Y", spend: "$360/week", trend: [6, 8, 7, 8, 7, 9], color: "#B3282D", active: true },
-  { name: "Free Delivery", type: "Delivery", spend: "$610/week", trend: [7, 8, 7, 8, 10, 13], color: "#F9A602", active: false },
-];
+  const chartData = [
+    { month: 'Feb', cost: 5000, revenue: 30000 },
+    { month: 'Mar', cost: 11000, revenue: 32000 },
+    { month: 'Apr', cost: 10500, revenue: 34000 },
+    { month: 'May', cost: 15000, revenue: 35000 },
+    { month: 'Jun', cost: 14000, revenue: 20000 },
+    { month: 'Jul', cost: 13000, revenue: 25000 },
+    { month: 'Aug', cost: 12500, revenue: 28000 },
+    { month: 'Sep', cost: 13500, revenue: 40000 },
+    { month: 'Oct', cost: 17000, revenue: 95000 },
+    { month: 'Nov', cost: 15000, revenue: 50000 },
+    { month: 'Dec', cost: 12000, revenue: 48000 },
+    { month: 'Jan', cost: 16000, revenue: 47000 },
+  ];
 
-function MiniTrend({ trends, label }) {
-  return (
-    <div className="w-full">
-      <div className="flex justify-between px-1 pb-1 text-[11px] text-gray-400">
-        <span>{label || "Trends"}</span>
-        <span>Weeks</span>
-      </div>
-      <svg viewBox="0 0 410 90" width="100%" height="90" className="mb-1">
-        <text x="0" y="20" fontSize="10" fill="#B3282D" fontWeight="bold">$1500</text>
-        <text x="0" y="85" fontSize="10" fill="#253847">$0</text>
-        <line x1="28" y1="8" x2="28" y2="82" stroke="#E5E7EB" strokeWidth="1"/>
-        {[0,1,2,3,4,5].map(i =>
-          <text key={i} x={32 + i*74} y="88" fontSize="10" fill="#A5BAC9">{`W${i+1}`}</text>
-        )}
-        {trends.map((item, idx) => {
-          const points = item.trend.map((v, i) => [
-            28 + (i / 5) * 372,
-            80 - ((v - 3) / 15) * 65,
-          ]);
-          const path = points.map((pt, i) => `${i === 0 ? "M" : "L"}${pt[0]},${pt[1]}`).join(" ");
-          return (
-            <path
-              key={item.name}
-              d={path}
-              stroke={item.color}
-              strokeWidth={3}
-              fill="none"
-              style={{ opacity: 0.93, filter: "drop-shadow(0 1px 3px #b6c6da44)" }}
-            />
-          );
-        })}
-      </svg>
-    </div>
-  );
-}
+  const uptimeData = [
+    { date: '5/27', avg: 100, best: 100, worst: 100 },
+    { date: '5/28', avg: 100, best: 100, worst: 98 },
+    { date: '5/29', avg: 100, best: 100, worst: 97 },
+    { date: '5/30', avg: 100, best: 100, worst: 95 },
+    { date: '5/31', avg: 99, best: 100, worst: 93 },
+    { date: '6/1', avg: 96, best: 99, worst: 85 },
+    { date: '6/2', avg: 55, best: 90, worst: 45 },
+  ];
 
-const MarketingPanel = () => {
-  const [toggle, setToggle] = useState("insights");
-  const [spend, setSpend] = useState(60);
-  const aiRecommended = 70;
+  const maxValue = Math.max(...chartData.map(d => Math.max(d.cost, d.revenue)));
+  const height = 100;
+  const width = 280;
+  const pointGap = width / (chartData.length - 1);
+  const scaleY = value => height - (value / maxValue) * height;
+  const getPath = (key) => chartData.map((d, i) => `${i === 0 ? 'M' : 'L'} ${i * pointGap},${scaleY(d[key])}`).join(' ');
 
-  const handleApply = (filters) => {
-    console.log("Apply filters:", filters);
-  };
+  const uptimeHeight = 100;
+  const uptimeWidth = 280;
+  const uptimePointGap = uptimeWidth / (uptimeData.length - 1);
+  const scaleUptime = val => uptimeHeight - (val / 100) * uptimeHeight;
+  const getUptimePath = key => uptimeData.map((d, i) => `${i === 0 ? 'M' : 'L'} ${i * uptimePointGap},${scaleUptime(d[key])}`).join(' ');
+  const getUptimeArea = () => uptimeData.map((d, i) => `${i === 0 ? 'M' : 'L'} ${i * uptimePointGap},${scaleUptime(d.avg)}`).join(' ') + ` L ${uptimeWidth},${uptimeHeight} L 0,${uptimeHeight} Z`;
 
   return (
     <PageWrapper>
-      <div className="max-w-5xl mx-auto px-6 py-0">
-        {/* Title + Toggle */}
-        <div className="flex items-center justify-between mt-0 mb-4">
-          <h1 className="text-2xl font-bold text-[#253847]">Marketing Control Panel</h1>
-          <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
-            <button
-              className={`flex-1 px-3 py-1 rounded-full transition font-bold
-                ${toggle === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
-              style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
-              onClick={() => setToggle("insights")}
-            >
-              Insights
-            </button>
-            <button
-              className={`flex-1 px-3 py-1 rounded-full transition font-bold
-                ${toggle === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
-              style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
-              onClick={() => setToggle("controls")}
-            >
-              Controls
-            </button>
+      <div className="px-4 py-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+          <div className="flex items-center gap-4 mb-4 md:mb-0">
+            <img src="/fj-circle-logo.png" alt="Franklin Junction" className="w-12 h-12" />
+            <div>
+              <h1 className="text-xl font-bold text-[#253847] font-sans">Control Panel</h1>
+              <div className="text-sm text-[#5C6B7A] mt-1">Location: <span className="font-semibold text-[#B3282D]">{selectedHost}</span></div>
+            </div>
+          </div>
+          <div className="w-full md:w-72">
+            <HostDropdown hosts={hostStoreList} onChange={setSelectedHost} />
           </div>
         </div>
 
-        {/* Filter Bar */}
         <div className="mb-4">
-          <FilterBar onApply={handleApply} />
+          <FilterBar onApply={() => {}} />
         </div>
 
-        {/* Two-Column Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-0">
-          {/* Ad Campaigns */}
-          <div className="bg-white p-5 rounded-2xl shadow border flex flex-col">
-            <h2 className="text-base font-semibold mb-1 text-[#253847] text-center">Ad Campaigns</h2>
-            {toggle === "insights" ? (
-              <>
-                <ul className="space-y-2 mb-2">
-                  {adCampaigns.map((ad, i) => (
-                    <li key={i} className="flex justify-between items-center">
-                      <div>
-                        <span className="font-medium">{ad.name}</span>
-                        <span className="text-xs text-gray-400 ml-2">{ad.type}</span>
-                        <span className={`ml-2 text-xs font-bold ${ad.active ? "text-green-600" : "text-gray-400"}`}>
-                          ● {ad.active ? "Active" : "Inactive"}
-                        </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            {
+              title: "Marketing",
+              dataLink: "/analytics/promotions",
+              controlsLink: "/control-panel/marketing",
+              customContent: (
+                <div className="h-full w-full">
+                  <div className="text-xs text-[#5C6B7A] mb-1">COST VS REVENUE</div>
+                  <svg viewBox={`0 0 ${width} ${height + 20}`} className="w-full h-full">
+                    <text x="0" y="10" fontSize="10" fill="#5C6B7A">$</text>
+                    <text x={width - 20} y={height + 15} fontSize="10" fill="#5C6B7A">Date</text>
+                    <path d={getPath('cost')} fill="none" stroke="#2B7A78" strokeWidth="2" />
+                    <path d={getPath('revenue')} fill="none" stroke="#B3282D" strokeWidth="2" />
+                  </svg>
+                  <div className="flex justify-between text-[10px] text-[#5C6B7A] mt-1">
+                    <span>Spend</span>
+                    <span>Revenue</span>
+                  </div>
+                </div>
+              )
+            },
+            {
+              title: "Operations",
+              dataLink: "/analytics/operations",
+              controlsLink: "/control-panel/operations"
+            },
+            {
+              title: "Locations",
+              dataLink: "/analytics/recovery",
+              controlsLink: "/control-panel/locations",
+              customContent: (
+                <div className="h-full w-full">
+                  <div className="text-xs text-[#5C6B7A] mb-1">UPTIME RATE</div>
+                  <svg viewBox={`0 0 ${uptimeWidth} ${uptimeHeight + 20}`} className="w-full h-full">
+                    <text x="0" y="10" fontSize="10" fill="#5C6B7A">%</text>
+                    <text x={uptimeWidth - 28} y={uptimeHeight + 15} fontSize="10" fill="#5C6B7A">Date</text>
+                    <path d={getUptimeArea()} fill="#2B7A7833" />
+                    <path d={getUptimePath('avg')} stroke="#2B7A78" strokeWidth="2" fill="none" />
+                    <path d={getUptimePath('best')} stroke="#7FB77E" strokeWidth="1.5" fill="none" strokeDasharray="4 2" />
+                    <path d={getUptimePath('worst')} stroke="#B3282D" strokeWidth="1.5" fill="none" strokeDasharray="2 3" />
+                  </svg>
+                  <div className="flex justify-between text-[10px] text-[#5C6B7A] mt-1">
+                    <span>Best Store</span>
+                    <span>Worst Store</span>
+                  </div>
+                  <div className="mt-2">
+                    <div className="text-sm font-semibold text-[#2B7A78]">Health Score</div>
+                    <div className="flex items-center mt-1 relative h-3 bg-[#F0F4F8] rounded-xl overflow-hidden">
+                      <div className="h-3 bg-[#C6D9CE]" style={{ width: '85%' }}></div>
+                      <div className="absolute left-[85%] -top-2">
+                        <span className="text-xs">▲</span>
                       </div>
-                      <span className="text-sm font-bold text-[#2679c8]">{ad.spend}</span>
-                    </li>
-                  ))}
-                </ul>
-                <MiniTrend trends={adCampaigns} label="Trends" />
-              </>
-            ) : (
-              <div>
-                <div className="mb-6 p-2 rounded-2xl bg-white">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-medium">Promotional Spend</span>
-                    <span className="text-xs text-gray-500">Adjust spend strategy</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span>None</span>
-                    <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      value={spend}
-                      onChange={e => setSpend(Number(e.target.value))}
-                      className="w-full accent-blue-500"
-                    />
-                    <span className="font-bold">Aggressive</span>
-                  </div>
-                  <div className="relative h-2 w-full bg-gray-100 rounded-full mt-2">
-                    <div className="absolute top-0 h-2 bg-blue-400 rounded-full" style={{ width: `${spend}%` }} />
-                    <div className="absolute top-0 h-4 w-1 bg-green-500 left-0 -translate-y-1" style={{ left: `calc(${aiRecommended}% - 1px)` }} title="AI Recommended" />
-                  </div>
-                  <div className="mt-2 text-xs text-green-500">AI Recommended Spend: {aiRecommended}%</div>
-                </div>
-                <div className="mb-6 p-2 rounded-2xl bg-white">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-medium">Spend to Result (12w trend)</span>
-                  </div>
-                  <div className="flex gap-6">
-                    <div className="flex flex-col items-center flex-1">
-                      <span className="text-2xl font-bold text-blue-600">+22%</span>
-                      <span className="text-xs text-gray-500">Order Uplift</span>
-                    </div>
-                    <div className="flex flex-col items-center flex-1">
-                      <span className="text-2xl font-bold text-green-600">$1,250</span>
-                      <span className="text-xs text-gray-500">Avg Weekly Promo Spend</span>
-                    </div>
-                    <div className="flex flex-col items-center flex-1">
-                      <span className="text-2xl font-bold text-orange-500">8.5</span>
-                      <span className="text-xs text-gray-500">Promo ROI</span>
+                      <div className="absolute left-[72%] -top-2 text-[#B3282D]">
+                        <span className="text-xs">▲</span>
+                      </div>
                     </div>
                   </div>
                 </div>
+              )
+            },
+            {
+              title: "Menu",
+              dataLink: "/analytics/sales",
+              controlsLink: "/control-panel/menu"
+            }
+          ].map(({ title, dataLink, controlsLink, customContent }) => (
+            <div
+              key={title}
+              className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 flex flex-col justify-between h-64"
+            >
+              <h2 className="text-base font-semibold text-[#253847] font-sans mb-2">
+                {title}
+              </h2>
+              {customContent ? (
+                customContent
+              ) : (
+                <div className="text-center text-[#5C6B7A] text-sm">Metrics coming soon...</div>
+              )}
+              <div className="flex justify-between text-sm text-[#B3282D] font-medium mt-3">
+                <Link to={dataLink} className="hover:underline">📊 Data</Link>
+                <Link to={controlsLink} className="hover:underline">🎛️ Controls</Link>
               </div>
-            )}
-          </div>
-
-          {/* Promotions */}
-          <div className="bg-white p-5 rounded-2xl shadow border flex flex-col">
-            <h2 className="text-base font-semibold mb-1 text-[#253847] text-center">Promotions</h2>
-            {toggle === "insights" ? (
-              <>
-                <ul className="space-y-2 mb-2">
-                  {promos.map((promo, i) => (
-                    <li key={i} className="flex justify-between items-center">
-                      <div>
-                        <span className="font-medium">{promo.name}</span>
-                        <span className="text-xs text-gray-400 ml-2">{promo.type}</span>
-                        <span className={`ml-2 text-xs font-bold ${promo.active ? "text-green-600" : "text-gray-400"}`}>
-                          ● {promo.active ? "Active" : "Inactive"}
-                        </span>
-                      </div>
-                      <span className="text-sm font-bold text-[#B3282D]">{promo.spend}</span>
-                    </li>
-                  ))}
-                </ul>
-                <MiniTrend trends={promos} label="Trends" />
-              </>
-            ) : (
-              <div className="text-center mt-2 text-xs text-gray-500">Promo controls coming soon…</div>
-            )}
-          </div>
-        </div>
-
-        {/* Carousel Nav */}
-        <div className="flex justify-between mt-8 text-sm">
-          <Link to="/control-panel/operations" className="text-[#2679c8] hover:underline">← Operations</Link>
-          <Link to="/control-panel/menu" className="text-[#2679c8] hover:underline">Menu →</Link>
+            </div>
+          ))}
         </div>
       </div>
     </PageWrapper>
   );
 };
 
-export default MarketingPanel;
+export default ControlPanel;
