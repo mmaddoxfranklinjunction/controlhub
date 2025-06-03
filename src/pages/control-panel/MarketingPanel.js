@@ -17,25 +17,20 @@ const promos = [
 ];
 
 function MiniTrend({ trends, label }) {
-  // X: 0..5, Y: 3..18
   return (
     <div className="w-full">
       <div className="flex justify-between px-1 pb-1 text-[11px] text-gray-400">
-        <span className="">{label || "Trends"}</span>
+        <span>{label || "Trends"}</span>
         <span>Weeks</span>
       </div>
       <svg viewBox="0 0 410 90" width="100%" height="90" className="mb-1">
-        {/* Y axis (Spend) */}
         <text x="0" y="20" fontSize="10" fill="#B3282D" fontWeight="bold">$1500</text>
         <text x="0" y="85" fontSize="10" fill="#253847">$0</text>
         <line x1="28" y1="8" x2="28" y2="82" stroke="#E5E7EB" strokeWidth="1"/>
-        {/* X axis (weeks) */}
         {[0,1,2,3,4,5].map(i =>
           <text key={i} x={32 + i*74} y="88" fontSize="10" fill="#A5BAC9">{`W${i+1}`}</text>
         )}
-        {/* Trend Lines */}
         {trends.map((item, idx) => {
-          // Normalize points
           const points = item.trend.map((v, i) => [
             28 + (i / 5) * 372,
             80 - ((v - 3) / 15) * 65,
@@ -62,26 +57,30 @@ const MarketingPanel = () => {
   const [spend, setSpend] = useState(60);
   const aiRecommended = 70;
 
+  const handleApply = (filters) => {
+    console.log("Apply filters:", filters);
+  };
+
   return (
     <PageWrapper>
-     <div className="max-w-5xl mx-auto px-6 py-0">
+      <div className="max-w-5xl mx-auto px-6 py-0">
         {/* Title + Toggle */}
         <div className="flex items-center justify-between mt-0 mb-4">
-          <h1 className="text-2xl font-bold text-[#253847]">Marketing Conrol Panel</h1>
+          <h1 className="text-2xl font-bold text-[#253847]">Marketing Control Panel</h1>
           <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
             <button
               className={`flex-1 px-3 py-1 rounded-full transition font-bold
-                ${view === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
+                ${toggle === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
               style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
-              onClick={() => setView("insights")}
+              onClick={() => setToggle("insights")}
             >
               Insights
             </button>
             <button
               className={`flex-1 px-3 py-1 rounded-full transition font-bold
-                ${view === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
+                ${toggle === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
               style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
-              onClick={() => setView("controls")}
+              onClick={() => setToggle("controls")}
             >
               Controls
             </button>
@@ -118,7 +117,6 @@ const MarketingPanel = () => {
               </>
             ) : (
               <div>
-                {/* Controls content (original) */}
                 <div className="mb-6 p-2 rounded-2xl bg-white">
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-medium">Promotional Spend</span>
@@ -137,19 +135,10 @@ const MarketingPanel = () => {
                     <span className="font-bold">Aggressive</span>
                   </div>
                   <div className="relative h-2 w-full bg-gray-100 rounded-full mt-2">
-                    <div
-                      className="absolute top-0 h-2 bg-blue-400 rounded-full"
-                      style={{ width: `${spend}%` }}
-                    />
-                    <div
-                      className="absolute top-0 h-4 w-1 bg-green-500 left-0 -translate-y-1"
-                      style={{ left: `calc(${aiRecommended}% - 1px)` }}
-                      title="AI Recommended"
-                    />
+                    <div className="absolute top-0 h-2 bg-blue-400 rounded-full" style={{ width: `${spend}%` }} />
+                    <div className="absolute top-0 h-4 w-1 bg-green-500 left-0 -translate-y-1" style={{ left: `calc(${aiRecommended}% - 1px)` }} title="AI Recommended" />
                   </div>
-                  <div className="mt-2 text-xs text-green-500">
-                    AI Recommended Spend: {aiRecommended}%
-                  </div>
+                  <div className="mt-2 text-xs text-green-500">AI Recommended Spend: {aiRecommended}%</div>
                 </div>
                 <div className="mb-6 p-2 rounded-2xl bg-white">
                   <div className="flex justify-between items-center mb-2">
@@ -173,6 +162,7 @@ const MarketingPanel = () => {
               </div>
             )}
           </div>
+
           {/* Promotions */}
           <div className="bg-white p-5 rounded-2xl shadow border flex flex-col">
             <h2 className="text-base font-semibold mb-1 text-[#253847] text-center">Promotions</h2>
@@ -199,6 +189,7 @@ const MarketingPanel = () => {
             )}
           </div>
         </div>
+
         {/* Carousel Nav */}
         <div className="flex justify-between mt-8 text-sm">
           <Link to="/control-panel/operations" className="text-[#2679c8] hover:underline">← Operations</Link>
