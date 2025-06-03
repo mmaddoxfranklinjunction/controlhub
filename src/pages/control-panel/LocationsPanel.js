@@ -18,12 +18,13 @@ const CHANNEL_BREAKDOWN = [
 ];
 
  
-  const handleApply = () => {
-    console.log("Apply filters:", filters);
-  };
 
 const LocationsPanel = () => {
    const [toggle, setToggle] = useState("insights");
+    const handleApply = () => {
+    console.log("Apply filters:", filters);
+  };
+
   return (
     <PageWrapper>
       <div className="max-w-5xl mx-auto px-6 py-0">
