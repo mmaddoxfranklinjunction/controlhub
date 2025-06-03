@@ -9,7 +9,7 @@ const ControlPanel = () => {
 
   return (
     <PageWrapper>
-      <div className="px-6 py-10">
+      <div className="px-5 py-5">
         {/* Header Row */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
           <div className="flex items-center gap-4 mb-4 md:mb-0">
