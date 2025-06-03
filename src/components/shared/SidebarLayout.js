@@ -1,4 +1,4 @@
-// Updated SidebarLayout.js with icons and dropdown repositioning
+// Updated SidebarLayout.js with icon spacing, typography, and layout refinements
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import HostDropdown from './HostDropdown';
@@ -40,9 +40,9 @@ const SidebarLayout = ({ isSidebarOpen }) => {
     setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen font-[Futura,Arial,sans-serif]">
       <aside className="w-48 bg-[#253847] text-white py-4 px-3 space-y-1 flex flex-col items-center">
-        <div className="w-full px-2 mb-4">
+        <div className="w-full px-1.5 mb-4">
           <HostDropdown />
         </div>
 
@@ -50,16 +50,16 @@ const SidebarLayout = ({ isSidebarOpen }) => {
           {/* Control Panel */}
           <div className="text-center">
             <img src="/controls_icon.png" alt="Control Icon" className="h-6 mx-auto mb-1" />
-            <button onClick={() => toggleSection('control')} className="w-full text-white font-semibold hover:bg-gray-700 rounded text-sm">
-              Control Panel {openSections.control ? '▼' : '▶'}
+            <button onClick={() => toggleSection('control')} className="w-full text-white font-semibold hover:bg-gray-700 rounded text-base">
+              Control Panel <span className="text-xs">{openSections.control ? '▼' : '▶'}</span>
             </button>
             {openSections.control && (
-              <div className="mt-1 pl-4 space-y-1 text-left">
-                <Link to="/control-panel" className="block py-1 hover:bg-gray-700 rounded">Overview</Link>
-                <Link to="/control-panel/marketing" className="block py-1 hover:bg-gray-700 rounded">Marketing</Link>
-                <Link to="/control-panel/operations" className="block py-1 hover:bg-gray-700 rounded">Operations</Link>
-                <Link to="/control-panel/locations" className="block py-1 hover:bg-gray-700 rounded">Locations</Link>
-                <Link to="/control-panel/menu" className="block py-1 hover:bg-gray-700 rounded">Menu</Link>
+              <div className="mt-1 pl-4 space-y-0.5 text-left text-sm">
+                <Link to="/control-panel" className="block py-0.5 hover:bg-gray-700 rounded">Overview</Link>
+                <Link to="/control-panel/marketing" className="block py-0.5 hover:bg-gray-700 rounded">Marketing</Link>
+                <Link to="/control-panel/operations" className="block py-0.5 hover:bg-gray-700 rounded">Operations</Link>
+                <Link to="/control-panel/locations" className="block py-0.5 hover:bg-gray-700 rounded">Locations</Link>
+                <Link to="/control-panel/menu" className="block py-0.5 hover:bg-gray-700 rounded">Menu</Link>
               </div>
             )}
           </div>
@@ -67,12 +67,12 @@ const SidebarLayout = ({ isSidebarOpen }) => {
           {/* Alerts */}
           <div className="text-center">
             <img src="/alerts_icon.png" alt="Alerts Icon" className="h-6 mx-auto mb-1" />
-            <button onClick={() => toggleSection('alerts')} className="w-full text-white font-semibold hover:bg-gray-700 rounded text-sm">
-              Alerts {openSections.alerts ? '▼' : '▶'}
+            <button onClick={() => toggleSection('alerts')} className="w-full text-white font-semibold hover:bg-gray-700 rounded text-base">
+              Alerts <span className="text-xs">{openSections.alerts ? '▼' : '▶'}</span>
             </button>
             {openSections.alerts && (
-              <div className="mt-1 pl-4 text-left">
-                <Link to="/alerts" className="block py-1 hover:bg-gray-700 rounded">Alerts Inbox</Link>
+              <div className="mt-1 pl-4 space-y-0.5 text-left text-sm">
+                <Link to="/alerts" className="block py-0.5 hover:bg-gray-700 rounded">Alerts Inbox</Link>
               </div>
             )}
           </div>
@@ -80,23 +80,23 @@ const SidebarLayout = ({ isSidebarOpen }) => {
           {/* Analytics */}
           <div className="text-center">
             <img src="/analytics_icon.png" alt="Analytics Icon" className="h-6 mx-auto mb-1" />
-            <button onClick={() => toggleSection('analytics')} className="w-full text-white font-semibold hover:bg-gray-700 rounded text-sm">
-              Analytics {openSections.analytics ? '▼' : '▶'}
+            <button onClick={() => toggleSection('analytics')} className="w-full text-white font-semibold hover:bg-gray-700 rounded text-base">
+              Analytics <span className="text-xs">{openSections.analytics ? '▼' : '▶'}</span>
             </button>
             {openSections.analytics && (
-              <div className="mt-1 pl-4 space-y-1 text-left">
-                <Link to="/analytics/sales" className="block py-1 hover:bg-gray-700 rounded">Sales Overview</Link>
-                <Link to="/analytics/operations" className="block py-1 hover:bg-gray-700 rounded">Operations Performance</Link>
-                <Link to="/analytics/ratings" className="block py-1 hover:bg-gray-700 rounded">Ratings & Feedback</Link>
-                <Link to="/analytics/reviews" className="block py-1 hover:bg-gray-700 rounded">Reviews</Link>
-                <Link to="/analytics/promotions" className="block py-1 hover:bg-gray-700 rounded">Promotions</Link>
-                <Link to="/analytics/sponsored" className="block py-1 hover:bg-gray-700 rounded">Sponsored Listing</Link>
-                <Link to="/analytics/recovery" className="block py-1 hover:bg-gray-700 rounded">Revenue Recovery</Link>
+              <div className="mt-1 pl-4 space-y-0.5 text-left text-sm">
+                <Link to="/analytics/sales" className="block py-0.5 hover:bg-gray-700 rounded">Sales Overview</Link>
+                <Link to="/analytics/operations" className="block py-0.5 hover:bg-gray-700 rounded">Operations Performance</Link>
+                <Link to="/analytics/ratings" className="block py-0.5 hover:bg-gray-700 rounded">Ratings & Feedback</Link>
+                <Link to="/analytics/reviews" className="block py-0.5 hover:bg-gray-700 rounded">Reviews</Link>
+                <Link to="/analytics/promotions" className="block py-0.5 hover:bg-gray-700 rounded">Promotions</Link>
+                <Link to="/analytics/sponsored" className="block py-0.5 hover:bg-gray-700 rounded">Sponsored Listing</Link>
+                <Link to="/analytics/recovery" className="block py-0.5 hover:bg-gray-700 rounded">Revenue Recovery</Link>
               </div>
             )}
           </div>
 
-          {/* Other sections remain similar structure */}
+          {/* Additional sections would follow the same pattern */}
         </nav>
       </aside>
 
