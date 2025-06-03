@@ -1,52 +1,88 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageWrapper from '../../components/shared/PageWrapper';
+import HostDropdown from '../../components/shared/HostDropdown';
+import hostStoreList from '../../data/hostStoreList';
 
 const ControlPanel = () => {
+  const [selectedHost, setSelectedHost] = useState("All Locations");
+
   return (
     <PageWrapper>
       <div className="px-6 py-10">
-        <div className="flex flex-col items-center">
-          <div className="flex items-center gap-4 mb-2">
+        {/* Header Row */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+          <div className="flex items-center gap-4 mb-4 md:mb-0">
             <img src="/fj-circle-logo.png" alt="Franklin Junction" className="w-12 h-12" />
-            <h1 className="text-xl font-bold text-[#253847] font-sans">Control Panel</h1>
+            <div>
+              <h1 className="text-xl font-bold text-[#253847] font-sans">Control Panel</h1>
+              <div className="text-sm text-[#5C6B7A] mt-1">Location: <span className="font-semibold text-[#B3282D]">{selectedHost}</span></div>
+            </div>
           </div>
-          <p className="text-[#A5BAC9] text-base font-sans text-center">Control your digital restaurant</p>
+          <div className="w-full md:w-72">
+            <HostDropdown hosts={hostStoreList} onChange={setSelectedHost} />
+          </div>
         </div>
-        <hr className="mt-6 border-t border-gray-300" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        {/* Card Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Card Template */}
           {[
             {
               title: "Marketing Promos",
-              text: "Adjust ad spend, campaign timing, and promotional tags by platform.",
-              reportLink: "/analytics/promotions"
+              dataLink: "/analytics/promotions",
+              controlsLink: "/control-panel#marketing",
+              metrics: [
+                { label: "Sponsored ROAS", value: "5.1x" },
+                { label: "Promo Spend", value: "$3,091" }
+              ]
             },
             {
               title: "Operations",
-              text: "Throttle order flow, override prep times, and track training schedules.",
-              reportLink: "/analytics/operations"
+              dataLink: "/analytics/operations",
+              controlsLink: "/control-panel#operations",
+              metrics: [
+                { label: "Error Rate", value: "5.5%" },
+                { label: "Downtime", value: "1.4 hrs" }
+              ]
             },
             {
               title: "Locations",
-              text: "Manage hours, rank visibility, and sync store settings across channels.",
-              reportLink: "/analytics/recovery"
+              dataLink: "/analytics/recovery",
+              controlsLink: "/control-panel#locations",
+              metrics: [
+                { label: "Active Stores", value: "28" },
+                { label: "Visibility A+", value: "76%" }
+              ]
             },
             {
               title: "Menu",
-              text: "Toggle availability, adjust pricing, and test new combinations.",
-              reportLink: "/analytics/sales"
+              dataLink: "/analytics/sales",
+              controlsLink: "/control-panel#menu",
+              metrics: [
+                { label: "Top Seller", value: "BBQ Combo" },
+                { label: "Menu Items", value: "134" }
+              ]
             }
-          ].map(({ title, text, reportLink }) => (
-            <div key={title} className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 flex flex-col justify-between min-h-[240px]">
-              <div>
-                <h2 className="text-lg font-semibold text-[#253847] font-sans mb-2">{title}</h2>
-                <p className="text-sm text-[#5C6B7A]">{text}</p>
+          ].map(({ title, dataLink, controlsLink, metrics }) => (
+            <div
+              key={title}
+              className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 flex flex-col justify-between h-64"
+            >
+              <h2 className="text-lg font-semibold text-center text-[#253847] font-sans mb-4">
+                {title}
+              </h2>
+              <div className="flex flex-col gap-2 text-center text-[#5C6B7A] text-sm">
+                {metrics.map(({ label, value }) => (
+                  <div key={label}>
+                    <div className="text-xs">{label}</div>
+                    <div className="text-base font-bold text-[#002147]">{value}</div>
+                  </div>
+                ))}
               </div>
-              <div className="flex justify-between items-center mt-4 text-sm text-[#B3282D] font-medium">
-                <Link to={reportLink} className="hover:underline">📊 View Report</Link>
-                <Link to="/control-panel" className="hover:underline">⚙️ Controls</Link>
+              <div className="flex justify-between text-sm text-[#B3282D] font-medium mt-4">
+                <Link to={dataLink} className="hover:underline">📊 Data</Link>
+                <Link to={controlsLink} className="hover:underline">🎛️ Controls</Link>
               </div>
             </div>
           ))}
