@@ -25,7 +25,7 @@ const LocationsPanel = () => {
 
   return (
     <PageWrapper>
-      <div className="max-w-5xl mx-auto px-6 py-0">
+      <div className="px-5 py-5">
         {/* Title + Toggle */}
         <div className="flex items-center justify-between mt-0 mb-4">
           <h1 className="text-2xl font-bold text-[#253847]">Locations Controls Panel</h1>
