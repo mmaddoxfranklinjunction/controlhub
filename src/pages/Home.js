@@ -46,7 +46,8 @@ const Home = () => (
 
       {/* Analytics */}
       <Link to="/analytics/sales" className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-xl transition flex flex-col items-center justify-center text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 12h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2zm10 0H7V7h10v14zm-4-8h2v2h-2v-2zm0-4h2v2h-2V9z"/></svg>
+         <img src="/analytics.png" alt="Franklin Junction Logo" className="w-20 mb-6"  />
+      //<svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 12h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2zm10 0H7V7h10v14zm-4-8h2v2h-2v-2zm0-4h2v2h-2V9z"/></svg>
         <h2 className="font-semibold text-xl text-[#002147] mb-1">Analytics</h2>
         <p className="text-sm text-gray-600 mb-2">View your sales and operational data</p>
         <div className="flex gap-8 justify-center mt-2 text-sm w-full">
@@ -63,7 +64,8 @@ const Home = () => (
 
       {/* Alerts */}
       <Link to="/alerts" className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-xl transition flex flex-col items-center justify-center text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+         <img src="/alerts.png" alt="Franklin Junction Logo" className="w-20 mb-6"  />
+        // <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
         <h2 className="font-semibold text-xl text-[#002147] mb-1">Alerts</h2>
         <p className="text-sm text-gray-600 mb-2">Review flagged issues across your stores</p>
         <div className="text-sm text-[#b3282d] font-bold mt-2">View all alerts</div>
@@ -71,7 +73,8 @@ const Home = () => (
 
       {/* Control Panel */}
       <Link to="/control-panel" className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-xl transition flex flex-col items-center justify-center text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}><path d="M3 9.75V19a2 2 0 002 2h2a1 1 0 001-1v-4a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 001 1h2a2 2 0 002-2V9.75"/></svg>
+         <img src="/controls.png" alt="Franklin Junction Logo" className="w-20 mb-6"  />
+        // <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-2" fill="#B3282D" viewBox="0 0 24 24" width={40} height={40}><path d="M3 9.75V19a2 2 0 002 2h2a1 1 0 001-1v-4a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 001 1h2a2 2 0 002-2V9.75"/></svg>
         <h2 className="font-semibold text-xl text-[#002147] mb-1">Control Panel</h2>
         <p className="text-sm text-gray-600 mb-2">Adjust your online menu and settings</p>
         <div className="mt-2 flex gap-4 justify-center text-sm">
