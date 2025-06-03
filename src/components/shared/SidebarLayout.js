@@ -1,6 +1,6 @@
-// Updated SidebarLayout.js with typography refinements and layout polish
+// Updated SidebarLayout.js with settings icon, persistent active links, spacing tweaks
 import React, { useState } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import HostDropdown from './HostDropdown';
 
 import ControlPanel from '../../pages/control-panel/ControlPanel';
@@ -33,20 +33,24 @@ const SidebarLayout = ({ isSidebarOpen }) => {
     alerts: true,
     analytics: true,
     storeSearch: false,
-    settings: false,
+    settings: true,
   });
+  const location = useLocation();
 
   const toggleSection = (section) =>
     setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
 
+  const linkClass = (path) =>
+    `block py-0.5 px-2 rounded-xl ${location.pathname === path ? 'bg-gray-600' : 'hover:bg-gray-700'} text-left`;
+
   return (
     <div className="flex h-screen font-[Futura,Arial,sans-serif] font-light">
-      <aside className="w-48 bg-[#253847] text-white py-2 px-2 space-y-1 flex flex-col items-center">
-        <div className="w-full px-1 mb-3">
+      <aside className="w-48 bg-[#253847] text-white py-2 px-1 space-y-6 flex flex-col items-center">
+        <div className="w-full px-1 mb-2">
           <HostDropdown />
         </div>
 
-        <nav className="flex-1 w-full space-y-4 text-sm">
+        <nav className="flex-1 w-full space-y-6 text-sm">
           {/* Control Panel */}
           <div className="text-center">
             <img src="/controls_icon.png" alt="Control Icon" className="h-6 mx-auto mb-1" />
@@ -54,12 +58,12 @@ const SidebarLayout = ({ isSidebarOpen }) => {
               Control Panel <span className="text-[10px]">{openSections.control ? '▼' : '▶'}</span>
             </button>
             {openSections.control && (
-              <div className="mt-1 pl-5 space-y-0.5 text-left text-sm">
-                <Link to="/control-panel" className="block py-0.5 hover:bg-gray-700 rounded">Overview</Link>
-                <Link to="/control-panel/marketing" className="block py-0.5 hover:bg-gray-700 rounded">Marketing</Link>
-                <Link to="/control-panel/operations" className="block py-0.5 hover:bg-gray-700 rounded">Operations</Link>
-                <Link to="/control-panel/locations" className="block py-0.5 hover:bg-gray-700 rounded">Locations</Link>
-                <Link to="/control-panel/menu" className="block py-0.5 hover:bg-gray-700 rounded">Menu</Link>
+              <div className="mt-1 space-y-0.5">
+                <Link to="/control-panel" className={linkClass('/control-panel')}>Overview</Link>
+                <Link to="/control-panel/marketing" className={linkClass('/control-panel/marketing')}>Marketing</Link>
+                <Link to="/control-panel/operations" className={linkClass('/control-panel/operations')}>Operations</Link>
+                <Link to="/control-panel/locations" className={linkClass('/control-panel/locations')}>Locations</Link>
+                <Link to="/control-panel/menu" className={linkClass('/control-panel/menu')}>Menu</Link>
               </div>
             )}
           </div>
@@ -71,8 +75,8 @@ const SidebarLayout = ({ isSidebarOpen }) => {
               Alerts <span className="text-[10px]">{openSections.alerts ? '▼' : '▶'}</span>
             </button>
             {openSections.alerts && (
-              <div className="mt-1 pl-5 space-y-0.5 text-left text-sm">
-                <Link to="/alerts" className="block py-0.5 hover:bg-gray-700 rounded">Alerts Inbox</Link>
+              <div className="mt-1 space-y-0.5">
+                <Link to="/alerts" className={linkClass('/alerts')}>Alerts Inbox</Link>
               </div>
             )}
           </div>
@@ -84,19 +88,30 @@ const SidebarLayout = ({ isSidebarOpen }) => {
               Analytics <span className="text-[10px]">{openSections.analytics ? '▼' : '▶'}</span>
             </button>
             {openSections.analytics && (
-              <div className="mt-1 pl-5 space-y-0.5 text-left text-sm">
-                <Link to="/analytics/sales" className="block py-0.5 hover:bg-gray-700 rounded">Sales Overview</Link>
-                <Link to="/analytics/operations" className="block py-0.5 hover:bg-gray-700 rounded">Operations</Link>
-                <Link to="/analytics/ratings" className="block py-0.5 hover:bg-gray-700 rounded">Ratings & Feedback</Link>
-                <Link to="/analytics/reviews" className="block py-0.5 hover:bg-gray-700 rounded">Reviews</Link>
-                <Link to="/analytics/promotions" className="block py-0.5 hover:bg-gray-700 rounded">Promotions</Link>
-                <Link to="/analytics/sponsored" className="block py-0.5 hover:bg-gray-700 rounded">Sponsored Listing</Link>
-                <Link to="/analytics/recovery" className="block py-0.5 hover:bg-gray-700 rounded">Revenue Recovery</Link>
+              <div className="mt-1 space-y-0.5">
+                <Link to="/analytics/sales" className={linkClass('/analytics/sales')}>Sales Overview</Link>
+                <Link to="/analytics/operations" className={linkClass('/analytics/operations')}>Operations</Link>
+                <Link to="/analytics/ratings" className={linkClass('/analytics/ratings')}>Ratings & Feedback</Link>
+                <Link to="/analytics/reviews" className={linkClass('/analytics/reviews')}>Reviews</Link>
+                <Link to="/analytics/promotions" className={linkClass('/analytics/promotions')}>Promotions</Link>
+                <Link to="/analytics/sponsored" className={linkClass('/analytics/sponsored')}>Sponsored Listing</Link>
+                <Link to="/analytics/recovery" className={linkClass('/analytics/recovery')}>Revenue Recovery</Link>
               </div>
             )}
           </div>
 
-          {/* Additional sections would follow the same pattern */}
+          {/* Settings */}
+          <div className="text-center">
+            <img src="/settings_icon.png" alt="Settings Icon" className="h-6 mx-auto mb-1" />
+            <button onClick={() => toggleSection('settings')} className="w-full text-white font-medium hover:bg-gray-700 rounded text-sm">
+              Settings <span className="text-[10px]">{openSections.settings ? '▼' : '▶'}</span>
+            </button>
+            {openSections.settings && (
+              <div className="mt-1 space-y-0.5">
+                <Link to="/settings" className={linkClass('/settings')}>Settings</Link>
+              </div>
+            )}
+          </div>
         </nav>
       </aside>
 
