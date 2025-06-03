@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PageWrapper from '../../components/shared/PageWrapper';
 import HostDropdown from '../../components/shared/HostDropdown';
 import hostStoreList from '../../data/hostStoreList';
+import FilterBar from '../../components/shared/FilterBar';
 
 const ControlPanel = () => {
   const [selectedHost, setSelectedHost] = useState("All Locations");
@@ -24,14 +25,18 @@ const ControlPanel = () => {
           </div>
         </div>
 
+        {/* Filter Bar */}
+        <div className="mb-6">
+          <FilterBar onApply={() => {}} />
+        </div>
+
         {/* Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Card Template */}
           {[
             {
               title: "Marketing Promos",
               dataLink: "/analytics/promotions",
-              controlsLink: "/control-panel#marketing",
+              controlsLink: "/control-panel/marketing",
               metrics: [
                 { label: "Sponsored ROAS", value: "5.1x" },
                 { label: "Promo Spend", value: "$3,091" }
@@ -40,7 +45,7 @@ const ControlPanel = () => {
             {
               title: "Operations",
               dataLink: "/analytics/operations",
-              controlsLink: "/control-panel#operations",
+              controlsLink: "/control-panel/operations",
               metrics: [
                 { label: "Error Rate", value: "5.5%" },
                 { label: "Downtime", value: "1.4 hrs" }
@@ -49,7 +54,7 @@ const ControlPanel = () => {
             {
               title: "Locations",
               dataLink: "/analytics/recovery",
-              controlsLink: "/control-panel#locations",
+              controlsLink: "/control-panel/locations",
               metrics: [
                 { label: "Active Stores", value: "28" },
                 { label: "Visibility A+", value: "76%" }
@@ -58,7 +63,7 @@ const ControlPanel = () => {
             {
               title: "Menu",
               dataLink: "/analytics/sales",
-              controlsLink: "/control-panel#menu",
+              controlsLink: "/control-panel/menu",
               metrics: [
                 { label: "Top Seller", value: "BBQ Combo" },
                 { label: "Menu Items", value: "134" }
@@ -72,9 +77,9 @@ const ControlPanel = () => {
               <h2 className="text-lg font-semibold text-center text-[#253847] font-sans mb-4">
                 {title}
               </h2>
-              <div className="flex flex-col gap-2 text-center text-[#5C6B7A] text-sm">
+              <div className="flex flex-col gap-3 text-center text-[#5C6B7A] text-sm">
                 {metrics.map(({ label, value }) => (
-                  <div key={label}>
+                  <div key={label} className="flex flex-col items-center">
                     <div className="text-xs">{label}</div>
                     <div className="text-base font-bold text-[#002147]">{value}</div>
                   </div>
