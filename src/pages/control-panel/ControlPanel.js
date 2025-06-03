@@ -26,7 +26,7 @@ const ControlPanel = () => {
         </div>
 
         {/* Filter Bar */}
-        <div className="mb-6">
+        <div className="mb-2">
           <FilterBar onApply={() => {}} />
         </div>
 
@@ -38,8 +38,8 @@ const ControlPanel = () => {
               dataLink: "/analytics/promotions",
               controlsLink: "/control-panel/marketing",
               metrics: [
-                { label: "Sponsored ROAS", value: "5.1x" },
-                { label: "Promo Spend", value: "$3,091" }
+                { label: "Sponsored ROAS", value: "5.1x", badge: "medium" },
+                { label: "Promo Spend", value: "$3,091", badge: "low" }
               ]
             },
             {
@@ -47,8 +47,8 @@ const ControlPanel = () => {
               dataLink: "/analytics/operations",
               controlsLink: "/control-panel/operations",
               metrics: [
-                { label: "Error Rate", value: "5.5%" },
-                { label: "Downtime", value: "1.4 hrs" }
+                { label: "Error Rate", value: "5.5%", badge: "high" },
+                { label: "Downtime", value: "1.4 hrs", badge: "medium" }
               ]
             },
             {
@@ -56,8 +56,8 @@ const ControlPanel = () => {
               dataLink: "/analytics/recovery",
               controlsLink: "/control-panel/locations",
               metrics: [
-                { label: "Active Stores", value: "28" },
-                { label: "Visibility A+", value: "76%" }
+                { label: "Active Stores", value: "28", badge: "low" },
+                { label: "Visibility A+", value: "76%", badge: "medium" }
               ]
             },
             {
@@ -65,8 +65,8 @@ const ControlPanel = () => {
               dataLink: "/analytics/sales",
               controlsLink: "/control-panel/menu",
               metrics: [
-                { label: "Top Seller", value: "BBQ Combo" },
-                { label: "Menu Items", value: "134" }
+                { label: "Top Seller", value: "BBQ Combo", badge: null },
+                { label: "Menu Items", value: "134", badge: "low" }
               ]
             }
           ].map(({ title, dataLink, controlsLink, metrics }) => (
@@ -78,10 +78,21 @@ const ControlPanel = () => {
                 {title}
               </h2>
               <div className="flex flex-col gap-3 text-center text-[#5C6B7A] text-sm">
-                {metrics.map(({ label, value }) => (
+                {metrics.map(({ label, value, badge }) => (
                   <div key={label} className="flex flex-col items-center">
-                    <div className="text-xs">{label}</div>
+                    <div className="text-xs mb-1">{label}</div>
                     <div className="text-base font-bold text-[#002147]">{value}</div>
+                    {badge && (
+                      <div
+                        className={`mt-1 text-[10px] px-2 py-0.5 rounded-full font-semibold ${
+                          badge === 'low' ? 'bg-blue-100 text-blue-700' :
+                          badge === 'medium' ? 'bg-yellow-100 text-yellow-700' :
+                          'bg-red-100 text-red-700'
+                        }`}
+                      >
+                        {badge} priority
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
