@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
-// Simulated login status
 const isLoggedIn = false;
 
 const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
@@ -20,7 +19,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
         position: 'relative',
       }}
     >
-      {/* Sidebar Toggle Button */}
+      {/* Sidebar Toggle */}
       <button
         onClick={() => setIsSidebarOpen(prev => !prev)}
         className="absolute left-3 top-[10px] z-50 p-1 rounded-md hover:bg-gray-100 transition"
@@ -29,7 +28,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
         <span style={{ fontSize: '1.25rem' }}>{isSidebarOpen ? '←' : '→'}</span>
       </button>
 
-      {/* Left Links */}
+      {/* Left Nav */}
       <nav
         style={{
           position: 'absolute',
@@ -40,11 +39,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
           height: '100%',
         }}
       >
-        <Link
-          to="/"
-          className="fj-header-link"
-          style={{ fontSize: '0.875rem' }}
-        >
+        <Link to="/" className="fj-header-link" style={{ fontSize: '0.875rem', fontWeight: 400 }}>
           Home
         </Link>
         <a
@@ -52,7 +47,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
           target="_blank"
           rel="noopener noreferrer"
           className="fj-header-link"
-          style={{ fontSize: '0.875rem' }}
+          style={{ fontSize: '0.875rem', fontWeight: 400 }}
         >
           Website
         </a>
@@ -61,29 +56,37 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
           target="_blank"
           rel="noopener noreferrer"
           className="fj-header-link"
-          style={{ fontSize: '0.875rem' }}
+          style={{ fontSize: '0.875rem', fontWeight: 400 }}
         >
           Storefronts
         </a>
       </nav>
 
-      {/* Centered Logo */}
+      {/* Center Logo + Search */}
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           height: '100%',
+          gap: '1.5rem',
         }}
       >
         <img
           src="/logo.png"
           alt="Franklin Junction"
-          style={{ height: 36, margin: '0 12px' }}
+          style={{ height: 36 }}
+        />
+        {/* Search Bar */}
+        <input
+          type="text"
+          placeholder="Search..."
+          className="rounded-full px-3 py-1 text-sm border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#b3282d]"
+          style={{ width: 200 }}
         />
       </div>
 
-      {/* Right Profile/Login */}
+      {/* Right Side */}
       <div
         style={{
           position: 'absolute',
@@ -94,16 +97,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
         }}
       >
         {isLoggedIn ? (
-          <Link
-            to="/settings"
-            className="fj-header-link"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              fontSize: '0.875rem'
-            }}
-          >
+          <Link to="/settings" className="fj-header-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.875rem' }}>
             <svg width={21} height={21} fill="none" viewBox="0 0 24 24">
               <circle cx={12} cy={8} r={4} fill="#253847" />
               <rect x={4} y={16} width={16} height={5} rx={2.5} fill="#253847" />
@@ -111,16 +105,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
             Profile
           </Link>
         ) : (
-          <Link
-            to="/login"
-            className="fj-header-link"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              fontSize: '0.875rem'
-            }}
-          >
+          <Link to="/login" className="fj-header-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.875rem' }}>
             <svg width={20} height={20} fill="none" viewBox="0 0 24 24">
               <circle cx={12} cy={8} r={4} fill="#253847" />
               <rect x={4} y={16} width={16} height={5} rx={2.5} fill="#253847" />
@@ -134,7 +119,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
       style={{
         border: 0,
         borderBottom: '1px solid #e4e7ee',
-        margin: 0
+        margin: 0,
       }}
     />
   </>
