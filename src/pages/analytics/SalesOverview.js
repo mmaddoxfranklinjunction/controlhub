@@ -17,12 +17,11 @@ const SalesOverview = () => {
     search: ''
   });
 
-  // Optional: filter table data here if your row data supports it
-
   return (
     <PageWrapper>
       <div className="w-full px-0 py-2 font-[Futura,sans-serif]">
         <h1 className="text-2xl font-bold mb-2">Sales Overview</h1>
+
         <FilterBar
           data={summaryByLocation.map(row => ({ location: row.location }))}
           onFilterChange={setFilters}
@@ -30,53 +29,56 @@ const SalesOverview = () => {
           showDate={true}
         />
 
-        {/* Sales Performance Current Period */}
-        <div className="bg-white border rounded-xl shadow p-4 mb-6">
-          <h2 className="text-lg font-bold mb-2">Sales Performance - Current Period (01 May - 31 May)</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="border-b text-[#5C6B7A]">
-                <tr>
-                  <th className="text-left py-2">Date</th>
-                  <th className="text-right py-2">Sales</th>
-                </tr>
-              </thead>
-              <tbody>
-                {salesCurrent.map((row, i) => (
-                  <tr key={i} className="border-b hover:bg-[#f4f7fa]">
-                    <td className="py-1">{row.date}</td>
-                    <td className="text-right">${row.sales.toLocaleString()}</td>
+        {/* Side-by-side current & previous */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          {/* Current Period */}
+          <div className="bg-white border rounded-xl shadow p-4">
+            <h2 className="text-lg font-bold mb-2">Current Period (01 May - 31 May)</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="border-b text-[#5C6B7A]">
+                  <tr>
+                    <th className="text-left py-2">Date</th>
+                    <th className="text-right py-2">Sales</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {salesCurrent.map((row, i) => (
+                    <tr key={i} className="border-b hover:bg-[#f4f7fa]">
+                      <td className="py-1">{row.date}</td>
+                      <td className="text-right">${row.sales.toLocaleString()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Previous Month */}
+          <div className="bg-white border rounded-xl shadow p-4">
+            <h2 className="text-lg font-bold mb-2">Previous Month (01 Apr - 30 Apr)</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="border-b text-[#5C6B7A]">
+                  <tr>
+                    <th className="text-left py-2">Date</th>
+                    <th className="text-right py-2">Sales</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {salesPrevious.map((row, i) => (
+                    <tr key={i} className="border-b hover:bg-[#f4f7fa]">
+                      <td className="py-1">{row.date}</td>
+                      <td className="text-right">${row.sales.toLocaleString()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
-        {/* Sales Performance Previous Month */}
-        <div className="bg-white border rounded-xl shadow p-4 mb-6">
-          <h2 className="text-lg font-bold mb-2">Sales Performance - Previous Month (01 Apr - 30 Apr)</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="border-b text-[#5C6B7A]">
-                <tr>
-                  <th className="text-left py-2">Date</th>
-                  <th className="text-right py-2">Sales</th>
-                </tr>
-              </thead>
-              <tbody>
-                {salesPrevious.map((row, i) => (
-                  <tr key={i} className="border-b hover:bg-[#f4f7fa]">
-                    <td className="py-1">{row.date}</td>
-                    <td className="text-right">${row.sales.toLocaleString()}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Summary by Location Table */}
+        {/* Summary by Location */}
         <div className="bg-white border rounded-xl shadow p-4 mb-6">
           <h2 className="text-lg font-bold mb-2">Summary by Location</h2>
           <div className="overflow-x-auto">
@@ -118,4 +120,4 @@ const SalesOverview = () => {
   );
 };
 
-export default SalesOverview;
+export default SalesOverview
