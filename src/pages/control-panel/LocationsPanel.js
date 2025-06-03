@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageWrapper from '../../components/shared/PageWrapper';
 import FilterBar from '../../components/shared/FilterBar';
@@ -17,11 +16,10 @@ const CHANNEL_BREAKDOWN = [
   { channel: 'Grubhub', downtime: '58h' },
 ];
 
- 
-
 const LocationsPanel = () => {
-   const [toggle, setToggle] = useState("insights");
-    const handleApply = () => {
+  const [toggle, setToggle] = useState("insights");
+
+  const handleApply = (filters) => {
     console.log("Apply filters:", filters);
   };
 
@@ -34,17 +32,17 @@ const LocationsPanel = () => {
           <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
             <button
               className={`flex-1 px-3 py-1 rounded-full transition font-bold
-                ${view === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
+                ${toggle === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
               style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
-              onClick={() => setView("insights")}
+              onClick={() => setToggle("insights")}
             >
               Insights
             </button>
             <button
               className={`flex-1 px-3 py-1 rounded-full transition font-bold
-                ${view === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
+                ${toggle === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
               style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
-              onClick={() => setView("controls")}
+              onClick={() => setToggle("controls")}
             >
               Controls
             </button>
