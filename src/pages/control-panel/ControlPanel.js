@@ -23,6 +23,16 @@ const ControlPanel = () => {
     { month: 'Jan', cost: 16000, revenue: 47000 },
   ];
 
+  const uptimeData = [
+    { date: '5/27', avg: 100, best: 100, worst: 100 },
+    { date: '5/28', avg: 100, best: 100, worst: 98 },
+    { date: '5/29', avg: 100, best: 100, worst: 97 },
+    { date: '5/30', avg: 100, best: 100, worst: 95 },
+    { date: '5/31', avg: 99, best: 100, worst: 93 },
+    { date: '6/1', avg: 96, best: 99, worst: 85 },
+    { date: '6/2', avg: 55, best: 90, worst: 45 },
+  ];
+
   const activeCampaigns = ["BOGO Tuesday", "Summer Deals", "Free Delivery Week"];
 
   const maxValue = Math.max(...chartData.map(d => Math.max(d.cost, d.revenue)));
@@ -30,9 +40,14 @@ const ControlPanel = () => {
   const width = 280;
   const pointGap = width / (chartData.length - 1);
   const scaleY = value => height - (value / maxValue) * height;
-  const getPath = (key) => {
-    return chartData.map((d, i) => `${i === 0 ? 'M' : 'L'} ${i * pointGap},${scaleY(d[key])}`).join(' ');
-  };
+  const getPath = (key) => chartData.map((d, i) => `${i === 0 ? 'M' : 'L'} ${i * pointGap},${scaleY(d[key])}`).join(' ');
+
+  const uptimeHeight = 100;
+  const uptimeWidth = 280;
+  const uptimePointGap = uptimeWidth / (uptimeData.length - 1);
+  const scaleUptime = val => uptimeHeight - (val / 100) * uptimeHeight;
+  const getUptimePath = key => uptimeData.map((d, i) => `${i === 0 ? 'M' : 'L'} ${i * uptimePointGap},${scaleUptime(d[key])}`).join(' ');
+  const getUptimeArea = () => uptimeData.map((d, i) => `${i === 0 ? 'M' : 'L'} ${i * uptimePointGap},${scaleUptime(d.avg)}`).join(' ') + ` L ${uptimeWidth},${uptimeHeight} L 0,${uptimeHeight} Z`;
 
   return (
     <PageWrapper>
@@ -90,7 +105,17 @@ const ControlPanel = () => {
             {
               title: "Locations",
               dataLink: "/analytics/recovery",
-              controlsLink: "/control-panel/locations"
+              controlsLink: "/control-panel/locations",
+              customContent: (
+                <div className="h-28 w-full">
+                  <svg viewBox={`0 0 ${uptimeWidth} ${uptimeHeight}`} className="w-full h-full">
+                    <path d={getUptimeArea()} fill="#2B7A7833" />
+                    <path d={getUptimePath('avg')} stroke="#2B7A78" strokeWidth="2" fill="none" />
+                    <path d={getUptimePath('best')} stroke="#7FB77E" strokeWidth="1.5" fill="none" strokeDasharray="4 2" />
+                    <path d={getUptimePath('worst')} stroke="#B3282D" strokeWidth="1.5" fill="none" strokeDasharray="2 3" />
+                  </svg>
+                </div>
+              )
             },
             {
               title: "Menu",
