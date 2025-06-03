@@ -1,3 +1,4 @@
+// Locations Panel with Health Score and Uptime Rate chart
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageWrapper from '../../components/shared/PageWrapper';
@@ -15,6 +16,23 @@ const CHANNEL_BREAKDOWN = [
   { channel: 'UberEats', downtime: '47h' },
   { channel: 'Grubhub', downtime: '58h' },
 ];
+
+const uptimeData = [
+  { date: '5/27', avg: 100, best: 100, worst: 100 },
+  { date: '5/28', avg: 100, best: 100, worst: 98 },
+  { date: '5/29', avg: 100, best: 100, worst: 97 },
+  { date: '5/30', avg: 100, best: 100, worst: 95 },
+  { date: '5/31', avg: 99, best: 100, worst: 93 },
+  { date: '6/1', avg: 96, best: 99, worst: 85 },
+  { date: '6/2', avg: 55, best: 90, worst: 45 },
+];
+
+const width = 320;
+const height = 80;
+const pointGap = width / (uptimeData.length - 1);
+const scaleY = val => height - (val / 100) * height;
+const getPath = key => uptimeData.map((d, i) => `${i === 0 ? 'M' : 'L'} ${i * pointGap},${scaleY(d[key])}`).join(' ');
+const getArea = () => uptimeData.map((d, i) => `${i === 0 ? 'M' : 'L'} ${i * pointGap},${scaleY(d.avg)}`).join(' ') + ` L ${width},${height} L 0,${height} Z`;
 
 const LocationsPanel = () => {
   const [toggle, setToggle] = useState("insights");
@@ -54,6 +72,20 @@ const LocationsPanel = () => {
           <FilterBar onApply={handleApply} />
         </div>
 
+        {/* Health Score Meter */}
+        <div className="mb-6">
+          <div className="text-sm font-semibold text-[#2B7A78] mb-1">Health Score</div>
+          <div className="flex items-center relative h-3 bg-[#F0F4F8] rounded-xl overflow-hidden">
+            <div className="h-3 bg-[#C6D9CE]" style={{ width: '85%' }}></div>
+            <div className="absolute left-[85%] -top-2">
+              <span className="text-xs">▲</span>
+            </div>
+            <div className="absolute left-[72%] -top-2 text-[#B3282D]">
+              <span className="text-xs">▲</span>
+            </div>
+          </div>
+        </div>
+
         {/* KPI Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           {KPI_CARDS.map((c) => (
@@ -66,9 +98,21 @@ const LocationsPanel = () => {
           ))}
         </div>
 
-        {/* Trend Chart Placeholder */}
-        <div className="bg-white rounded-xl shadow p-4 mb-6 h-48 flex items-center justify-center text-gray-400">
-          Trend chart goes here
+        {/* Uptime Rate Graph */}
+        <div className="bg-white rounded-xl shadow p-4 mb-6">
+          <div className="text-sm font-semibold text-[#253847] mb-2">UPTIME RATE</div>
+          <svg viewBox={`0 0 ${width} ${height + 20}`} className="w-full h-20">
+            <text x="0" y="10" fontSize="10" fill="#5C6B7A">%</text>
+            <text x={width - 28} y={height + 15} fontSize="10" fill="#5C6B7A">Date</text>
+            <path d={getArea()} fill="#2B7A7833" />
+            <path d={getPath('avg')} stroke="#2B7A78" strokeWidth="2" fill="none" />
+            <path d={getPath('best')} stroke="#7FB77E" strokeWidth="1.5" fill="none" strokeDasharray="4 2" />
+            <path d={getPath('worst')} stroke="#B3282D" strokeWidth="1.5" fill="none" strokeDasharray="2 3" />
+          </svg>
+          <div className="flex justify-between text-[10px] text-[#5C6B7A] mt-1">
+            <span>Best Store</span>
+            <span>Worst Store</span>
+          </div>
         </div>
 
         {/* Breakdown by Channel */}
