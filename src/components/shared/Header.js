@@ -1,4 +1,4 @@
-// Enhanced Header with toggle styled to appear like part of the sidebar
+// Enhanced Header: Centered logo, right-aligned search bar
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
@@ -21,7 +21,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
         zIndex: 40
       }}
     >
-      {/* Sidebar Toggle - Styled to overlap and appear part of sidebar */}
+      {/* Sidebar Toggle */}
       <button
         onClick={() => setIsSidebarOpen(prev => !prev)}
         className="absolute -left-3 top-[9px] w-[28px] h-[28px] rounded-full flex items-center justify-center shadow-md border border-white bg-[#253847] hover:bg-[#b3282d] transition"
@@ -48,19 +48,34 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
         <a href="https://franklinjunction.streamorders.com/" target="_blank" rel="noopener noreferrer" className="fj-header-link text-sm text-gray-700 font-light">Storefronts</a>
       </nav>
 
-      {/* Center Logo + Search */}
-      <div className="flex items-center justify-center h-full gap-6">
+      {/* Centered Logo */}
+      <div style={{
+        position: 'absolute',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex',
+        alignItems: 'center',
+        height: '100%',
+        zIndex: 10,
+      }}>
         <img src="/logo.png" alt="Franklin Junction" style={{ height: 36 }} />
+      </div>
+
+      {/* Right Side: Search and Login/Profile */}
+      <div style={{
+        position: 'absolute',
+        right: 16,
+        display: 'flex',
+        alignItems: 'center',
+        gap: '1rem',
+        height: '100%',
+      }}>
         <input
           type="text"
           placeholder="Search..."
           className="rounded-full px-3 py-1 text-sm border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#b3282d]"
           style={{ width: 200 }}
         />
-      </div>
-
-      {/* Right Side */}
-      <div style={{ position: 'absolute', right: 16, display: 'flex', alignItems: 'center', height: '100%' }}>
         {isLoggedIn ? (
           <Link to="/settings" className="fj-header-link flex items-center gap-2 text-sm">
             <svg width={21} height={21} fill="none" viewBox="0 0 24 24">
