@@ -47,7 +47,7 @@ const SidebarLayout = ({ isSidebarOpen }) => {
     <div className="flex h-screen font-[Futura,Arial,sans-serif] font-light">
       <aside className="w-48 bg-[#253847] text-white py-2 px-1 space-y-6 flex flex-col items-center">
         <div className="w-full px-1 mb-1">
-    <hr>
+  
           <HostDropdown />
         </div>
 
