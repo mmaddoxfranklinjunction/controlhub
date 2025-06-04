@@ -71,7 +71,7 @@ const FlowSettings = () => {
 
         {/* Subway Stop Progress Bar */}
         <div className="w-full flex items-center justify-center my-8">
-          <div className="absolute left-0 right-0 h-2 bg-gray-200 rounded-full z-0 mx-12" style={{top: '50%'}} />
+       
           <div className="flex w-full max-w-2xl mx-auto justify-between items-center relative z-10">
             <div className="flex flex-col items-center flex-1">
               <div className="w-7 h-7 rounded-full bg-[#253847] border-4 border-white flex items-center justify-center z-10" />
@@ -80,7 +80,7 @@ const FlowSettings = () => {
             <div className="flex-1 h-2 -mx-2 bg-gray-200 z-0" />
             <div className="flex flex-col items-center flex-1">
               <div className="w-7 h-7 rounded-full bg-[#253847] border-4 border-white flex items-center justify-center z-10" />
-              <span className="mt-2 text-sm font-medium text-[#253847]">Insights</span>
+              <span className="mt-2 text-sm font-medium text-[#253847]">Analyze</span>
             </div>
             <div className="flex-1 h-2 -mx-2 bg-gray-200 z-0" />
             <div className="flex flex-col items-center flex-1">
