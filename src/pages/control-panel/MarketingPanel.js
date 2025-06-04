@@ -65,14 +65,33 @@ export default function MarketingPanel() {
 
   return (
     <PageWrapper>
-       <div className="px-4 py-2">
-        {/* Logo + Title + FilterBar Row */}
-        <div className="flex items-center gap-3 mb-4">
-         
-          <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Marketing Control</h1>
-          <div className="flex-1">
-            <FilterBar onApply={() => {}} />
+             <div className="px-5 py-5">
+        {/* Title + Toggle */}
+        <div className="flex items-center justify-between mt-0 mb-4">
+          <h1 className="text-xl font-bold text-[#253847]">Marketing Controls</h1>
+          <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
+            <button
+              className={`flex-1 px-3 py-1 rounded-full transition font-bold
+                ${toggle === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
+              style={{ fontSize: "12px", height: "25px", transition: "all 0.25s" }}
+              onClick={() => setToggle("insights")}
+            >
+              Insights
+            </button>
+            <button
+              className={`flex-1 px-3 py-1 rounded-full transition font-bold
+                ${toggle === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
+              style={{ fontSize: "12px", height: "25px", transition: "all 0.25s" }}
+              onClick={() => setToggle("controls")}
+            >
+              Controls
+            </button>
           </div>
+        </div>
+
+        {/* Filter Bar */}
+        <div className="mb-4">
+          <FilterBar onApply={handleApply} />
         </div>
 
         {/* Cost vs Revenue Graph */}
