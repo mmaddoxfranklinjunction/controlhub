@@ -1,4 +1,3 @@
-// SidebarLayout.js – icons left of section titles, left-justified
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import HostDropdown from './HostDropdown';
@@ -27,11 +26,17 @@ import RecommendationsMenu from '../../pages/recommendations/RecommendationsMenu
 import StoreSearch from '../../pages/store-search/StoreSearch';
 import Settings from '../../pages/settings/Settings';
 
+// ---- Auto Flows imports ----
+import WorkflowPanel from '../../pages/autoflows/WorkflowPanel';
+import Trended from '../../pages/autoflows/Trended';
+import FlowSettings from '../../pages/autoflows/FlowSettings';
+
 const SidebarLayout = ({ isSidebarOpen }) => {
   const [openSections, setOpenSections] = useState({
     control: true,
     alerts: true,
     analytics: true,
+    autoflows: false,     // <-- NEW SECTION
     storeSearch: false,
     settings: true,
   });
@@ -116,6 +121,26 @@ const SidebarLayout = ({ isSidebarOpen }) => {
             )}
           </div>
 
+          {/* --- Auto Flows --- */}
+          <div>
+            <button
+              onClick={() => toggleSection('autoflows')}
+              className="w-full flex items-center gap-2 text-white font-medium hover:bg-gray-700 rounded text-sm text-left px-2"
+            >
+              {/* Optional: Replace with your own icon */}
+              <img src="/autoflows_icon.png" alt="Auto Flows Icon" className="h-5 w-5 mr-1" />
+              <span>Auto Flows</span>
+              <span className="text-[10px] ml-auto">{openSections.autoflows ? '▼' : '▶'}</span>
+            </button>
+            {openSections.autoflows && (
+              <div className="mt-1 space-y-0.5 pl-7">
+                <Link to="/autoflows/workflow" className={linkClass('/autoflows/workflow')}>Workflow Panel</Link>
+                <Link to="/autoflows/trended" className={linkClass('/autoflows/trended')}>Trended</Link>
+                <Link to="/autoflows/flowsettings" className={linkClass('/autoflows/flowsettings')}>Flow Settings</Link>
+              </div>
+            )}
+          </div>
+
           {/* Settings */}
           <div>
             <button
@@ -151,6 +176,11 @@ const SidebarLayout = ({ isSidebarOpen }) => {
         <Route path="/analytics/promotions" element={<PromotionsReport />} />
         <Route path="/analytics/sponsored" element={<SponsoredListingReport />} />
         <Route path="/analytics/recovery" element={<RevenueRecovery />} />
+
+        {/* Auto Flows Routes */}
+        <Route path="/autoflows/workflow" element={<WorkflowPanel />} />
+        <Route path="/autoflows/trended" element={<Trended />} />
+        <Route path="/autoflows/flowsettings" element={<FlowSettings />} />
 
         <Route path="/store-search" element={<StoreSearch />} />
         <Route path="/settings" element={<Settings />} />
