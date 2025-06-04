@@ -17,7 +17,7 @@ export default function MenuPanel() {
                <div className="px-5 py-5">
         {/* Title + Toggle */}
         <div className="flex items-center justify-between mt-0 mb-4">
-          <h1 className="text-xl font-bold text-[#253847]">Locations Control</h1>
+          <h1 className="text-xl font-bold text-[#253847]">Menu Control</h1>
           <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
             <button
               className={`flex-1 px-3 py-1 rounded-full transition font-bold
