@@ -52,9 +52,9 @@ const SidebarLayout = ({ isSidebarOpen }) => {
     <div className="flex h-screen font-[Futura,Arial,sans-serif] font-light">
       <aside
         className={`bg-gradient-to-b from-[#253847] via-[#2d4359] to-[#3a536e] text-white py-2 px-1 space-y-6 flex flex-col items-center transition-all duration-300 ease-in-out
-          ${isSidebarOpen ? 'w-48' : 'w-0 overflow-hidden'}`}
+          ${isSidebarOpen ? 'w-50' : 'w-0 overflow-hidden'}`}
       >
-        <div className="w-full px-1 mb-1">
+        <div className="w-full px-1 mb-0">
           <HostDropdown />
         </div>
         <hr className="border-t border-[#e4e7ee] mx-auto w-full" />
@@ -64,14 +64,14 @@ const SidebarLayout = ({ isSidebarOpen }) => {
           <div>
             <button
               onClick={() => toggleSection('control')}
-              className="w-full flex items-center gap-2 text-white font-medium hover:bg-gray-700 rounded text-sm text-left px-2"
+              className="w-full flex items-center gap-2 text-white font-medium hover:bg-gray-700 rounded text-sm text-left px-0"
             >
-              <img src="/controls_icon.png" alt="Control Icon" className="h-5 w-5 mr-1" />
+              <img src="/controls_icon.png" alt="Control Icon" className="h-5 w-5 mr-0" />
               <span>Control Panel</span>
               <span className="text-[10px] ml-auto">{openSections.control ? '▼' : '▶'}</span>
             </button>
             {openSections.control && (
-              <div className="mt-1 space-y-0.5 pl-7">
+              <div className="mt-0 space-y-0.3 pl-7">
                 <Link to="/control-panel" className={linkClass('/control-panel')}>Overview</Link>
                 <Link to="/control-panel/marketing" className={linkClass('/control-panel/marketing')}>Marketing</Link>
                 <Link to="/control-panel/operations" className={linkClass('/control-panel/operations')}>Operations</Link>
