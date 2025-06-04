@@ -92,14 +92,14 @@ const Home = () => (
         </div>
       </Link>
 
-      {/* Settings */}
-      <Link to="/settings" className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-xl transition flex flex-col items-center justify-center text-center">
+      {/* AI WorkFlows */}
+      <Link to="/autoflows" className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-xl transition flex flex-col items-center justify-center text-center">
         <img src="/settings.png" alt="Franklin Junction Logo" className="w-30 mb-4"  />
-        <h2 className="font-semibold text-xl text-[#002147] mb-1">Settings</h2>
-        <p className="text-sm text-gray-600 mb-2">Manage your account and preferences</p>
+        <h2 className="font-semibold text-xl text-[#002147] mb-1">AI Workflows</h2>
+        <p className="text-sm text-gray-600 mb-2">Manage your Autonomous Flows and Preferences</p>
         <div className="flex flex-col gap-1 items-center mt-2 text-sm">
-          <div><span className="text-gray-500">Users</span><span className="font-bold text-[#2679c8] ml-2">{userCount}</span></div>
-          <div className="text-gray-500">Store Ratings</div>
+          <div><span className="text-gray-500">Connected Flows</span><span className="font-bold text-[#2679c8] ml-2">{userCount}</span></div>
+          <div className="text-gray-500">Autonomous Triggers</div>
           <div>
             {Object.entries(storeRatings).map(([band, num]) => (
               <span key={band} className="mr-2">
@@ -109,7 +109,7 @@ const Home = () => (
             ))}
           </div>
           <div>
-            <span className="text-gray-500">Training</span>
+            <span className="text-gray-500">Trigger Runs</span>
             <span className="ml-2 text-[#b3282d] font-bold">{training.complete}</span>
             <span className="text-xs text-gray-400 mx-1">/</span>
             <span className="font-bold text-[#2679c8]">{training.assigned}</span>
