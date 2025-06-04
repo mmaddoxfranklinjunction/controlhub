@@ -1,4 +1,4 @@
-// Updated SidebarLayout.js with settings icon, persistent active links, spacing tweaks
+// Updated SidebarLayout.js with slide-in animation, cleaner layout, and responsiveness
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import HostDropdown from './HostDropdown';
@@ -45,18 +45,15 @@ const SidebarLayout = ({ isSidebarOpen }) => {
 
   return (
     <div className="flex h-screen font-[Futura,Arial,sans-serif] font-light">
-      <aside className="w-48 bg-[#253847] text-white py-2 px-1 space-y-6 flex flex-col items-center">
+      <aside
+        className={`bg-[#253847] text-white py-2 px-1 space-y-6 flex flex-col items-center transition-all duration-300 ease-in-out
+          ${isSidebarOpen ? 'w-48' : 'w-0 overflow-hidden'}`}
+      >
         <div className="w-full px-1 mb-1">
-  
           <HostDropdown />
         </div>
- <hr
-      style={{
-        border: 0,
-        borderBottom: '1px solid #e4e7ee',
-        margin: 0,
-      }}
-    />
+        <hr className="border-t border-[#e4e7ee] mx-auto w-full" />
+
         <nav className="flex-1 w-full space-y-6 text-sm">
           {/* Control Panel */}
           <div className="text-center">
