@@ -7,9 +7,9 @@ import FilterBar from '../../components/shared/FilterBar';
 const OperationsPanel = () => {
   const [autoTraining, setAutoTraining] = useState(true);
   const [alertLevel, setAlertLevel] = useState("moderate");
-  const [view, setView] = useState("insights");
+  const [toggle, setToggle] = useState("insights");
 
-  const handleApply = () => {
+  const handleApply = (filters) => {
     console.log("Apply filters:", filters);
   };
   
