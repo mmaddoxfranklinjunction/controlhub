@@ -46,7 +46,7 @@ const SidebarLayout = ({ isSidebarOpen }) => {
   return (
     <div className="flex h-screen font-[Futura,Arial,sans-serif] font-light">
       <aside
-        className={`bg-[#253847] text-white py-2 px-1 space-y-6 flex flex-col items-center transition-all duration-300 ease-in-out
+        className={`bg-gradient-to-b from-[#253847] via-[#2d4359] to-[#3a536e] text-white py-2 px-1 space-y-6 flex flex-col items-center transition-all duration-300 ease-in-out
           ${isSidebarOpen ? 'w-48' : 'w-0 overflow-hidden'}`}
       >
         <div className="w-full px-1 mb-1">
