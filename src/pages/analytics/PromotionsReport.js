@@ -113,6 +113,7 @@ const PromotionsReport = () => {
             </div>
           ))}
         </div>
+             </div>
       </div>
     </PageWrapper>
   );
