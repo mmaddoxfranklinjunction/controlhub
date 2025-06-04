@@ -1,4 +1,4 @@
-// Updated SidebarLayout.js with slide-in animation, cleaner layout, and responsiveness
+// SidebarLayout.js – icons left of section titles, left-justified
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import HostDropdown from './HostDropdown';
@@ -56,13 +56,17 @@ const SidebarLayout = ({ isSidebarOpen }) => {
 
         <nav className="flex-1 w-full space-y-6 text-sm">
           {/* Control Panel */}
-          <div className="text-center">
-            <img src="/controls_icon.png" alt="Control Icon" className="h-6 mx-auto mb-1" />
-            <button onClick={() => toggleSection('control')} className="w-full text-white font-medium hover:bg-gray-700 rounded text-sm">
-              Control Panel <span className="text-[10px]">{openSections.control ? '▼' : '▶'}</span>
+          <div>
+            <button
+              onClick={() => toggleSection('control')}
+              className="w-full flex items-center gap-2 text-white font-medium hover:bg-gray-700 rounded text-sm text-left px-2"
+            >
+              <img src="/controls_icon.png" alt="Control Icon" className="h-5 w-5 mr-1" />
+              <span>Control Panel</span>
+              <span className="text-[10px] ml-auto">{openSections.control ? '▼' : '▶'}</span>
             </button>
             {openSections.control && (
-              <div className="mt-1 space-y-0.5">
+              <div className="mt-1 space-y-0.5 pl-7">
                 <Link to="/control-panel" className={linkClass('/control-panel')}>Overview</Link>
                 <Link to="/control-panel/marketing" className={linkClass('/control-panel/marketing')}>Marketing</Link>
                 <Link to="/control-panel/operations" className={linkClass('/control-panel/operations')}>Operations</Link>
@@ -73,26 +77,34 @@ const SidebarLayout = ({ isSidebarOpen }) => {
           </div>
 
           {/* Alerts */}
-          <div className="text-center">
-            <img src="/alerts_icon.png" alt="Alerts Icon" className="h-6 mx-auto mb-1" />
-            <button onClick={() => toggleSection('alerts')} className="w-full text-white font-medium hover:bg-gray-700 rounded text-sm">
-              Alerts <span className="text-[10px]">{openSections.alerts ? '▼' : '▶'}</span>
+          <div>
+            <button
+              onClick={() => toggleSection('alerts')}
+              className="w-full flex items-center gap-2 text-white font-medium hover:bg-gray-700 rounded text-sm text-left px-2"
+            >
+              <img src="/alerts_icon.png" alt="Alerts Icon" className="h-5 w-5 mr-1" />
+              <span>Alerts</span>
+              <span className="text-[10px] ml-auto">{openSections.alerts ? '▼' : '▶'}</span>
             </button>
             {openSections.alerts && (
-              <div className="mt-1 space-y-0.5">
+              <div className="mt-1 space-y-0.5 pl-7">
                 <Link to="/alerts" className={linkClass('/alerts')}>Alerts Inbox</Link>
               </div>
             )}
           </div>
 
           {/* Analytics */}
-          <div className="text-center">
-            <img src="/analytics_icon.png" alt="Analytics Icon" className="h-6 mx-auto mb-1" />
-            <button onClick={() => toggleSection('analytics')} className="w-full text-white font-medium hover:bg-gray-700 rounded text-sm">
-              Analytics <span className="text-[10px]">{openSections.analytics ? '▼' : '▶'}</span>
+          <div>
+            <button
+              onClick={() => toggleSection('analytics')}
+              className="w-full flex items-center gap-2 text-white font-medium hover:bg-gray-700 rounded text-sm text-left px-2"
+            >
+              <img src="/analytics_icon.png" alt="Analytics Icon" className="h-5 w-5 mr-1" />
+              <span>Analytics</span>
+              <span className="text-[10px] ml-auto">{openSections.analytics ? '▼' : '▶'}</span>
             </button>
             {openSections.analytics && (
-              <div className="mt-1 space-y-0.5">
+              <div className="mt-1 space-y-0.5 pl-7">
                 <Link to="/analytics/sales" className={linkClass('/analytics/sales')}>Sales Overview</Link>
                 <Link to="/analytics/operations" className={linkClass('/analytics/operations')}>Operations</Link>
                 <Link to="/analytics/ratings" className={linkClass('/analytics/ratings')}>Ratings & Feedback</Link>
@@ -105,13 +117,17 @@ const SidebarLayout = ({ isSidebarOpen }) => {
           </div>
 
           {/* Settings */}
-          <div className="text-center">
-            <img src="/settings_icon.png" alt="Settings Icon" className="h-6 mx-auto mb-1" />
-            <button onClick={() => toggleSection('settings')} className="w-full text-white font-medium hover:bg-gray-700 rounded text-sm">
-              Settings <span className="text-[10px]">{openSections.settings ? '▼' : '▶'}</span>
+          <div>
+            <button
+              onClick={() => toggleSection('settings')}
+              className="w-full flex items-center gap-2 text-white font-medium hover:bg-gray-700 rounded text-sm text-left px-2"
+            >
+              <img src="/settings_icon.png" alt="Settings Icon" className="h-5 w-5 mr-1" />
+              <span>Settings</span>
+              <span className="text-[10px] ml-auto">{openSections.settings ? '▼' : '▶'}</span>
             </button>
             {openSections.settings && (
-              <div className="mt-1 space-y-0.5">
+              <div className="mt-1 space-y-0.5 pl-7">
                 <Link to="/settings" className={linkClass('/settings')}>Settings</Link>
               </div>
             )}
