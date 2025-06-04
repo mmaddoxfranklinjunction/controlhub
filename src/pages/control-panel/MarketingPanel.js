@@ -63,6 +63,12 @@ export default function MarketingPanel() {
   const sy = val => h - (val / max) * h;
   const line = key => chartData.map((d, i) => `${i === 0 ? 'M' : 'L'}${i * gap},${sy(d[key])}`).join(' ');
 
+const [toggle, setToggle] = useState("insights");
+
+  const handleApply = (filters) => {
+    console.log("Apply filters:", filters);
+  };
+  
   return (
     <PageWrapper>
              <div className="px-5 py-5">
