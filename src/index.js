@@ -31,6 +31,11 @@ import RecommendationsOperations from './pages/recommendations/RecommendationsOp
 import RecommendationsLocations from './pages/recommendations/RecommendationsLocations';
 import RecommendationsMenu from './pages/recommendations/RecommendationsMenu';
 
+// --- Auto Flows imports ---
+import WorkflowPanel from './pages/autoflows/WorkflowPanel';
+import Trended from './pages/autoflows/Trended';
+import FlowSettings from './pages/autoflows/FlowSettings';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -69,6 +74,11 @@ root.render(
         <Route path="/recommendations/operations" element={<RecommendationsOperations />} />
         <Route path="/recommendations/locations" element={<RecommendationsLocations />} />
         <Route path="/recommendations/menu" element={<RecommendationsMenu />} />
+
+        {/* --- Auto Flows --- */}
+        <Route path="/autoflows/workflow" element={<WorkflowPanel />} />
+        <Route path="/autoflows/trended" element={<Trended />} />
+        <Route path="/autoflows/flowsettings" element={<FlowSettings />} />
       </Routes>
     </Router>
   </React.StrictMode>
