@@ -6,9 +6,9 @@ import FilterBar from '../../components/shared/FilterBar';
 export default function MenuPanel() {
   const [showMissing, setShowMissing] = useState(true);
 
-  const [view, setView] = useState("insights");
+   const [toggle, setToggle] = useState("insights");
 
-  const handleApply = () => {
+  const handleApply = (filters) => {
     console.log("Apply filters:", filters);
   };
   
