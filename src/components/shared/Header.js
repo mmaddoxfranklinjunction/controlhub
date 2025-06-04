@@ -1,3 +1,4 @@
+// Updated Header.js with left-aligned toggle, lighter nav font, right-aligned search bar, and styled toggle button
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
@@ -22,24 +23,24 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
       {/* Sidebar Toggle */}
       <button
         onClick={() => setIsSidebarOpen(prev => !prev)}
-        className="absolute left-3 top-[10px] z-50 p-1 rounded-md hover:bg-gray-100 transition"
+        className="absolute left-0 top-[10px] z-50 p-2 pl-3 rounded-full border border-gray-300 hover:bg-gray-100 transition"
         aria-label="Toggle Sidebar"
       >
-        <span style={{ fontSize: '1.25rem' }}>{isSidebarOpen ? '←' : '→'}</span>
+        <span style={{ fontSize: '1.25rem', color: '#b3282d' }}>{isSidebarOpen ? '←' : '→'}</span>
       </button>
 
       {/* Left Nav */}
       <nav
         style={{
           position: 'absolute',
-          left: 36,
+          left: 48,
           display: 'flex',
           gap: '1.5rem',
           alignItems: 'center',
           height: '100%',
         }}
       >
-        <Link to="/" className="fj-header-link" style={{ fontSize: '0.875rem', fontWeight: 400 }}>
+        <Link to="/" className="fj-header-link" style={{ fontSize: '0.875rem', fontWeight: 300 }}>
           Home
         </Link>
         <a
@@ -47,7 +48,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
           target="_blank"
           rel="noopener noreferrer"
           className="fj-header-link"
-          style={{ fontSize: '0.875rem', fontWeight: 400 }}
+          style={{ fontSize: '0.875rem', fontWeight: 300 }}
         >
           Website
         </a>
@@ -56,13 +57,13 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
           target="_blank"
           rel="noopener noreferrer"
           className="fj-header-link"
-          style={{ fontSize: '0.875rem', fontWeight: 400 }}
+          style={{ fontSize: '0.875rem', fontWeight: 300 }}
         >
           Storefronts
         </a>
       </nav>
 
-      {/* Center Logo + Search */}
+      {/* Center Logo */}
       <div
         style={{
           display: 'flex',
@@ -77,13 +78,6 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
           alt="Franklin Junction"
           style={{ height: 36 }}
         />
-        {/* Search Bar */}
-        <input
-          type="text"
-          placeholder="Search..."
-          className="rounded-full px-3 py-1 text-sm border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#b3282d]"
-          style={{ width: 200 }}
-        />
       </div>
 
       {/* Right Side */}
@@ -94,8 +88,16 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
           display: 'flex',
           alignItems: 'center',
           height: '100%',
+          gap: '1rem',
         }}
       >
+        <input
+          type="text"
+          placeholder="Search..."
+          className="rounded-full px-3 py-1 text-sm border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#b3282d]"
+          style={{ width: 200 }}
+        />
+
         {isLoggedIn ? (
           <Link to="/settings" className="fj-header-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.875rem' }}>
             <svg width={21} height={21} fill="none" viewBox="0 0 24 24">
