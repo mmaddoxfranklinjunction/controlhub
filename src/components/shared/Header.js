@@ -1,4 +1,3 @@
-// Updated Header.js with left-aligned toggle, lighter nav font, right-aligned search bar, and styled toggle button
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
@@ -7,99 +6,37 @@ const isLoggedIn = false;
 
 const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
   <>
-    <header
-      style={{
-        background: '#fff',
-        fontFamily: 'Futura, sans-serif',
-        color: '#253847',
-        padding: '0 16px',
-        height: '54px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-      }}
-    >
+    <header className="fj-header">
       {/* Sidebar Toggle */}
       <button
         onClick={() => setIsSidebarOpen(prev => !prev)}
-        className="absolute left-0 top-[10px] z-50 p-2 pl-3 rounded-full border border-gray-300 hover:bg-gray-100 transition"
+        className="fj-toggle"
         aria-label="Toggle Sidebar"
       >
-        <span style={{ fontSize: '1.25rem', color: '#b3282d' }}>{isSidebarOpen ? '←' : '→'}</span>
+        {isSidebarOpen ? '←' : '→'}
       </button>
 
       {/* Left Nav */}
-      <nav
-        style={{
-          position: 'absolute',
-          left: 48,
-          display: 'flex',
-          gap: '1.5rem',
-          alignItems: 'center',
-          height: '100%',
-        }}
-      >
-        <Link to="/" className="fj-header-link" style={{ fontSize: '0.875rem', fontWeight: 300 }}>
-          Home
-        </Link>
-        <a
-          href="https://franklinjunction.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="fj-header-link"
-          style={{ fontSize: '0.875rem', fontWeight: 300 }}
-        >
-          Website
-        </a>
-        <a
-          href="https://franklinjunction.streamorders.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="fj-header-link"
-          style={{ fontSize: '0.875rem', fontWeight: 300 }}
-        >
-          Storefronts
-        </a>
+      <nav className="fj-left-nav">
+        <Link to="/" className="fj-header-link">Home</Link>
+        <a href="https://franklinjunction.com" target="_blank" rel="noopener noreferrer" className="fj-header-link">Website</a>
+        <a href="https://franklinjunction.streamorders.com/" target="_blank" rel="noopener noreferrer" className="fj-header-link">Storefronts</a>
       </nav>
 
       {/* Center Logo */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-          gap: '1.5rem',
-        }}
-      >
-        <img
-          src="/logo.png"
-          alt="Franklin Junction"
-          style={{ height: 36 }}
-        />
+      <div className="fj-center">
+        <img src="/logo.png" alt="Franklin Junction" className="fj-logo" />
       </div>
 
-      {/* Right Side */}
-      <div
-        style={{
-          position: 'absolute',
-          right: 16,
-          display: 'flex',
-          alignItems: 'center',
-          height: '100%',
-          gap: '1rem',
-        }}
-      >
+      {/* Right Side: Search + Login */}
+      <div className="fj-right-side">
         <input
           type="text"
           placeholder="Search..."
-          className="rounded-full px-3 py-1 text-sm border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#b3282d]"
-          style={{ width: 200 }}
+          className="fj-search"
         />
-
         {isLoggedIn ? (
-          <Link to="/settings" className="fj-header-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.875rem' }}>
+          <Link to="/settings" className="fj-header-link">
             <svg width={21} height={21} fill="none" viewBox="0 0 24 24">
               <circle cx={12} cy={8} r={4} fill="#253847" />
               <rect x={4} y={16} width={16} height={5} rx={2.5} fill="#253847" />
@@ -107,7 +44,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
             Profile
           </Link>
         ) : (
-          <Link to="/login" className="fj-header-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.875rem' }}>
+          <Link to="/login" className="fj-header-link">
             <svg width={20} height={20} fill="none" viewBox="0 0 24 24">
               <circle cx={12} cy={8} r={4} fill="#253847" />
               <rect x={4} y={16} width={16} height={5} rx={2.5} fill="#253847" />
@@ -117,13 +54,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => (
         )}
       </div>
     </header>
-    <hr
-      style={{
-        border: 0,
-        borderBottom: '1px solid #e4e7ee',
-        margin: 0,
-      }}
-    />
+    <hr className="fj-divider" />
   </>
 );
 
