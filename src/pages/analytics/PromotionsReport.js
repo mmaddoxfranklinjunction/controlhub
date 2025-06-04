@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
 import FilterBar from '../../components/shared/FilterBar';
+import FilterBar from '../../components/shared/FilterBar';
 
 // --- Static promo data ---
 const doordashSummary = {
@@ -29,6 +30,10 @@ const ubereatsDetails = [
   { brand: "Bennigan's", merchantStoreId: 'CAT0004', promoFees: 3, promoSales: 46, roas: 15.3, pctSalesPromoted: 100.0 },
   // ... more data
 ];
+
+ const handleApply = (filters) => {
+    console.log("Apply filters:", filters);
+  };
 // --- End data section ---
 
 const PromotionsReport = () => {
@@ -38,35 +43,16 @@ const PromotionsReport = () => {
 
   return (
     <PageWrapper>
-      <div className="max-w-5xl mx-auto px-6 py-0">
+      <div className="px-5 py-5">
         {/* Title + Toggle */}
         <div className="flex items-center justify-between mt-0 mb-4">
           <h1 className="text-2xl font-bold text-[#253847]">Marketing & Promotions</h1>
-          <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
-            <button
-              className={`flex-1 px-3 py-1 rounded-full transition font-bold
-                ${view === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-transparent"}`}
-              style={{ fontSize: "13px", height: "32px" }}
-              onClick={() => setView("insights")}
-            >
-              Insights
-            </button>
-            <button
-              className={`flex-1 px-3 py-1 rounded-full transition font-bold
-                ${view === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-transparent"}`}
-              style={{ fontSize: "13px", height: "32px" }}
-              onClick={() => setView("controls")}
-            >
-              Controls
-            </button>
-          </div>
+              {/* Filter Bar */}
+              <div className="flex">
+                  <FilterBar onApply={handleApply} />
+              </div>
+            </div>
         </div>
-
-        {/* Filter Bar */}
-        <div className="mb-4">
-          <FilterBar onApply={handleApply} />
-        </div>
-
         {/* Summary */}
         <div className="grid md:grid-cols-2 gap-4 mb-6">
           {/* DoorDash Summary */}
