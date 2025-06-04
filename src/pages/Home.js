@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HostDropdown from '../components/shared/HostDropdown';
@@ -12,43 +11,45 @@ const recentErrorRate = "5.5%";
 const userCount = 8;
 
 const Home = () => (
-  <div className="flex flex-col min-h-screen bg-gray-100 px-4 relative">
+  <div className="flex flex-col min-h-screen bg-gray-100 px-4 relative font-[Futura,Arial,sans-serif]">
     {/* Top nav buttons */}
-    <div className="w-full flex justify-end items-center py-6 max-w-7xl mx-auto">
+    <div className="w-full flex justify-end items-center py-4 max-w-7xl mx-auto">
       <Link
         to="/account-setup"
-        className="inline-block bg-[#B3282D] text-white px-6 py-2 rounded-full font-semibold text-md shadow hover:bg-[#8c1c24] transition-all mr-4 tracking-wide"
+        className="inline-block bg-[#B3282D] text-white px-4 py-1.5 rounded-full font-normal text-sm border border-[#B3282D] transition-all mr-3 tracking-wide font-[Futura,Arial,sans-serif] shadow-none hover:bg-[#8c1c24]"
+        style={{ borderWidth: 1 }}
       >
         Get Started
       </Link>
       <Link
         to="/login"
-        className="inline-block bg-white text-[#B3282D] border border-[#B3282D] px-6 py-2 rounded-full font-semibold text-md shadow hover:bg-[#B3282D] hover:text-white transition-all tracking-wide"
+        className="inline-block bg-white text-[#B3282D] border border-[#B3282D] px-4 py-1.5 rounded-full font-normal text-sm transition-all tracking-wide font-[Futura,Arial,sans-serif] shadow-none hover:bg-[#B3282D] hover:text-white"
+        style={{ borderWidth: 1 }}
       >
         Login
       </Link>
     </div>
 
     {/* Logo and Title */}
-    <div className="flex flex-col items-center justify-center text-center mb-4">
-      <img src="/homelogo.png" alt="Franklin Junction Logo" className="w-20 mb-4" />
-      <img src={`${process.env.PUBLIC_URL}/control_hub_logo.png`} alt="Control Hub Logo" className="w-100 mb-6" />
-      <h1 className="text-3xl font-bold text-[#002147] mb-2">The GM for your Digital Restaurant</h1>
+    <div className="flex flex-col items-center justify-center text-center mb-3">
+      <img src="/homelogo.png" alt="Franklin Junction Logo" className="w-20 mb-3" />
+      <img src={`${process.env.PUBLIC_URL}/control_hub_logo.png`} alt="Control Hub Logo" className="w-100 mb-3" />
+      <h1 className="text-3xl font-normal text-[#002147] mb-1 font-[Futura,Arial,sans-serif]">The GM for your Digital Restaurant</h1>
     </div>
 
-    {/* Host selector */}
-    <div className="max-w-xl w-full mx-auto mb-4">
-    <HostDropdown hosts={hostStoreList} />
+    {/* More space after tagline, before dropdown */}
+    <div className="max-w-xl w-full mx-auto mb-8 mt-0">
+      <HostDropdown hosts={hostStoreList} />
     </div>
 
     {/* Grid of Cards */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full mx-auto mb-12">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full mx-auto mb-12 font-[Futura,Arial,sans-serif]">
 
       {/* Analytics */}
       <Link to="/analytics/sales" className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-xl transition flex flex-col items-center justify-center text-center">
          <img src="/analytics.png" alt="Franklin Junction Logo" className="w-30 mb-4"  />
    
-        <h2 className="font-semibold text-xl text-[#002147] mb-1">Analytics</h2>
+        <h2 className="font-semibold text-xl text-[#002147] mb-1 font-[Futura,Arial,sans-serif]">Analytics</h2>
         <p className="text-sm text-gray-600 mb-2">View your sales and operational data</p>
         <div className="flex gap-8 justify-center mt-2 text-sm w-full">
           <div>
@@ -66,7 +67,7 @@ const Home = () => (
       <Link to="/alerts" className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-xl transition flex flex-col items-center justify-center text-center">
          <img src="/alerts.png" alt="Franklin Junction Logo" className="w-30 mb-4"  />
         
-        <h2 className="font-semibold text-xl text-[#002147] mb-1">Alerts</h2>
+        <h2 className="font-semibold text-xl text-[#002147] mb-1 font-[Futura,Arial,sans-serif]">Alerts</h2>
         <p className="text-sm text-gray-600 mb-2">Review flagged issues across your stores</p>
         <div className="text-sm text-[#b3282d] font-bold mt-2">View all alerts</div>
       </Link>
@@ -75,7 +76,7 @@ const Home = () => (
       <Link to="/control-panel" className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-xl transition flex flex-col items-center justify-center text-center">
          <img src="/controls.png" alt="Franklin Junction Logo" className="w-30 mb-4"  />
         
-        <h2 className="font-semibold text-xl text-[#002147] mb-1">Control Panel</h2>
+        <h2 className="font-semibold text-xl text-[#002147] mb-1 font-[Futura,Arial,sans-serif]">Control Panel</h2>
         <p className="text-sm text-gray-600 mb-2">Adjust your online menu and settings</p>
         <div className="mt-2 flex gap-4 justify-center text-sm">
           <div className="text-gray-500 mb-1">Visibility Score</div>
@@ -93,9 +94,9 @@ const Home = () => (
       </Link>
 
       {/* AI WorkFlows */}
-      <Link to="/autoflows" className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-xl transition flex flex-col items-center justify-center text-center">
-        <img src="/settings.png" alt="Franklin Junction Logo" className="w-30 mb-4"  />
-        <h2 className="font-semibold text-xl text-[#002147] mb-1">AI Workflows</h2>
+      <Link to="/autoflows/workflow" className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-xl transition flex flex-col items-center justify-center text-center">
+        <img src="/settings.png" alt="AI Workflows Icon" className="w-30 mb-4"  />
+        <h2 className="font-semibold text-xl text-[#002147] mb-1 font-[Futura,Arial,sans-serif]">AI Workflows</h2>
         <p className="text-sm text-gray-600 mb-2">Manage your Autonomous Flows and Preferences</p>
         <div className="flex flex-col gap-1 items-center mt-2 text-sm">
           <div><span className="text-gray-500">Connected Flows</span><span className="font-bold text-[#2679c8] ml-2">{userCount}</span></div>
