@@ -65,10 +65,14 @@ export default function MarketingPanel() {
 
   return (
     <PageWrapper>
-      <div className="max-w-5xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between mb-2">
-          <h1 className="text-2xl font-bold text-[#253847]">Marketing Control Panel</h1>
-          <div className="flex-1 ml-6"><FilterBar onApply={() => {}} /></div>
+       <div className="px-4 py-2">
+        {/* Logo + Title + FilterBar Row */}
+        <div className="flex items-center gap-3 mb-4">
+         
+          <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Marketing Control</h1>
+          <div className="flex-1">
+            <FilterBar onApply={() => {}} />
+          </div>
         </div>
 
         {/* Cost vs Revenue Graph */}
