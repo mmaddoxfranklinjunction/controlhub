@@ -37,8 +37,6 @@ const ubereatsDetails = [
 
 const PromotionsReport = () => {
   const [view, setView] = useState('insights');
-  const [filters, setFilters] = useState({});
-  const handleApply = (vals) => setFilters(vals);
 
   return (
     <PageWrapper>
