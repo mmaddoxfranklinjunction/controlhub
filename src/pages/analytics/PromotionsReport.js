@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
 import FilterBar from '../../components/shared/FilterBar';
-import FilterBar from '../../components/shared/FilterBar';
 
 // --- Static promo data ---
 const doordashSummary = {
