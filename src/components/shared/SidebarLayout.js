@@ -50,7 +50,13 @@ const SidebarLayout = ({ isSidebarOpen }) => {
   
           <HostDropdown />
         </div>
-
+ <hr
+      style={{
+        border: 0,
+        borderBottom: '1px solid #e4e7ee',
+        margin: 0,
+      }}
+    />
         <nav className="flex-1 w-full space-y-6 text-sm">
           {/* Control Panel */}
           <div className="text-center">
