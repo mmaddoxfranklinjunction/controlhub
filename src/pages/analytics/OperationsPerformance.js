@@ -11,13 +11,12 @@ import {
 } from './data/OperationsPerformanceFullData';
 
 const OperationsPerformance = () => {
-  const [filters, setFilters] = useState({
-    location: 'All',
-    brand: 'All',
-    channel: 'All',
-    date: 'Current Week',
-    search: ''
-  });
+  
+  const [view, setView] = useState('insights');
+  const [filters, setFilters] = useState({});
+
+  const handleApply = (vals) => setFilters(vals);
+ 
 
   // Filtering logic can be added here if your row data supports it
   // For now, tables show all data
