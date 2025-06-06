@@ -30,56 +30,48 @@ const ubereatsDetails = [
   // ... more data
 ];
 
- const handleApply = (filters) => {
-    console.log("Apply filters:", filters);
-  };
-// --- End data section ---
-
 const PromotionsReport = () => {
   const [view, setView] = useState('insights');
+
+  const handleApply = (filters) => {
+    console.log("Apply filters:", filters);
+  };
+
+  const formatMetric = (key, val) => {
+    if (key.toLowerCase().includes("roas")) return val;
+    if (key.toLowerCase().includes("pct")) return `${val}%`;
+    return `$${val.toLocaleString()}`;
+  };
 
   return (
     <PageWrapper>
       <div className="px-5 py-5">
-        {/* Title + Toggle */}
+        {/* Title + Filter */}
         <div className="flex items-center justify-between mt-0 mb-4">
           <h1 className="text-2xl font-bold text-[#253847]">Marketing & Promotions</h1>
-              {/* Filter Bar */}
-              <div className="flex">
-                  <FilterBar onApply={handleApply} />
-              </div>
-            </div>
+          <div className="flex">
+            <FilterBar onApply={handleApply} />
+          </div>
         </div>
+
         {/* Summary */}
         <div className="grid md:grid-cols-2 gap-4 mb-6">
-          {/* DoorDash Summary */}
-          <div className="bg-white border rounded-xl shadow p-4">
-            <h2 className="text-lg font-bold mb-2">Doordash Promotion Summary</h2>
-            <div className="grid grid-cols-5 gap-2 text-center">
-              {Object.entries(doordashSummary).map(([key, val], i) => (
-                <div key={i}>
-                  <div className="text-xs text-[#5C6B7A]">{key.replace(/([A-Z])/g, ' $1')}</div>
-                  <div className="text-2xl font-bold">{typeof val === 'number' && !key.includes('ROAS') ? `$${val}` : val}%</div>
-                </div>
-              ))}
+          {[{ label: "Doordash", data: doordashSummary }, { label: "UberEats", data: ubereatsSummary }].map(({ label, data }) => (
+            <div key={label} className="bg-white border rounded-xl shadow p-4">
+              <h2 className="text-lg font-bold mb-2">{label} Promotion Summary</h2>
+              <div className="grid grid-cols-5 gap-2 text-center">
+                {Object.entries(data).map(([key, val], i) => (
+                  <div key={i}>
+                    <div className="text-xs text-[#5C6B7A]">{key.replace(/([A-Z])/g, ' $1')}</div>
+                    <div className="text-2xl font-bold">{formatMetric(key, val)}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-
-          {/* UberEats Summary */}
-          <div className="bg-white border rounded-xl shadow p-4">
-            <h2 className="text-lg font-bold mb-2">UberEats Promotion Summary</h2>
-            <div className="grid grid-cols-5 gap-2 text-center">
-              {Object.entries(ubereatsSummary).map(([key, val], i) => (
-                <div key={i}>
-                  <div className="text-xs text-[#5C6B7A]">{key.replace(/([A-Z])/g, ' $1')}</div>
-                  <div className="text-2xl font-bold">{typeof val === 'number' && !key.includes('ROAS') ? `$${val}` : val}%</div>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
 
-        {/* Details */}
+        {/* Details Tables */}
         <div className="grid md:grid-cols-2 gap-4">
           {[{ name: "Doordash", rows: doordashDetails }, { name: "UberEats", rows: ubereatsDetails }].map(({ name, rows }) => (
             <div key={name} className="bg-white border rounded-xl shadow p-4">
@@ -114,7 +106,6 @@ const PromotionsReport = () => {
           ))}
         </div>
       </div>
-   
     </PageWrapper>
   );
 };
