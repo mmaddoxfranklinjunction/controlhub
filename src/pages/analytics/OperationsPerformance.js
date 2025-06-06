@@ -29,9 +29,9 @@ const OperationsPerformance = () => {
         <div className="flex items-center justify-between mt-0 mb-4">
           <h1 className="text-2xl font-bold text-[#253847]">Operations Performance</h1>
              {/* Filter Bar */}
-        <div className="mb-4">
-          <FilterBar onApply={handleApply} />
-        </div>
+        <div className="flex-1">
+            <FilterBar onApply={() => {}} />
+          </div>
         </div>
 
      
