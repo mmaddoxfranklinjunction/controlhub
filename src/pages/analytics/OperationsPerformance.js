@@ -28,30 +28,13 @@ const OperationsPerformance = () => {
         {/* Title + Toggle */}
         <div className="flex items-center justify-between mt-0 mb-4">
           <h1 className="text-2xl font-bold text-[#253847]">Operations Performance</h1>
-          <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
-            <button
-              className={`flex-1 px-3 py-1 rounded-full transition font-bold
-                ${view === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
-              style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
-              onClick={() => setView("insights")}
-            >
-              Insights
-            </button>
-            <button
-              className={`flex-1 px-3 py-1 rounded-full transition font-bold
-                ${view === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
-              style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
-              onClick={() => setView("controls")}
-            >
-              Controls
-            </button>
-          </div>
-        </div>
-
-        {/* Filter Bar */}
+             {/* Filter Bar */}
         <div className="mb-4">
           <FilterBar onApply={handleApply} />
         </div>
+        </div>
+
+     
 
         {/* Summary Bar */}
         <div className="grid grid-cols-5 gap-2 mb-6">
