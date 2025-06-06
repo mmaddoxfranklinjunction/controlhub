@@ -9,30 +9,49 @@ import {
   errorRateDetails,
   downtimeDetails
 } from './data/OperationsPerformanceFullData';
-  
-
-const [toggle, setToggle] = useState("insights");
-
-const handleApply = (filters) => {
-    console.log("Apply filters:", filters);
-  };
 
 const OperationsPerformance = () => {
+  const [filters, setFilters] = useState({
+    location: 'All',
+    brand: 'All',
+    channel: 'All',
+    date: 'Current Week',
+    search: ''
+  });
+
+  // Filtering logic can be added here if your row data supports it
+  // For now, tables show all data
+
   return (
     <PageWrapper>
-          <div className="px-5 py-5">
-            {/* Title + Toggle */}
-            <div className="flex items-center justify-between mt-0 mb-4">
-              <h1 className="text-xl font-bold text-[#253847]">Operations Performance</h1>
-               {/* Filter Bar */}
-              <div className="mb-4">
-                <FilterBar onApply={handleApply} />
-              </div>
+         <div className="max-w-5xl mx-auto px-6 py-0">
+        {/* Title + Toggle */}
+        <div className="flex items-center justify-between mt-0 mb-4">
+          <h1 className="text-2xl font-bold text-[#253847]">Operations Performance</h1>
+          <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
+            <button
+              className={`flex-1 px-3 py-1 rounded-full transition font-bold
+                ${view === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
+              style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
+              onClick={() => setView("insights")}
+            >
+              Insights
+            </button>
+            <button
+              className={`flex-1 px-3 py-1 rounded-full transition font-bold
+                ${view === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d] bg-[rgba(179,40,45,0.09)]"}`}
+              style={{ fontSize: "13px", height: "32px", transition: "all 0.15s" }}
+              onClick={() => setView("controls")}
+            >
+              Controls
+            </button>
+          </div>
+        </div>
 
-            </div>
-
-      
- 
+        {/* Filter Bar */}
+        <div className="mb-4">
+          <FilterBar onApply={handleApply} />
+        </div>
 
         {/* Summary Bar */}
         <div className="grid grid-cols-5 gap-2 mb-6">
