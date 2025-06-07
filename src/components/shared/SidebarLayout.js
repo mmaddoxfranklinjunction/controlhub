@@ -1,4 +1,3 @@
-// src/components/shared/SidebarLayout.js
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import HostDropdown from './HostDropdown';
@@ -61,18 +60,13 @@ const SidebarLayout = () => {
         <hr className="border-t border-[#e4e7ee] mx-auto w-full" />
 
         <nav className="flex-1 w-full space-y-6 text-sm">
-
           {/* Alerts */}
           <div>
             <button
               onClick={() => toggleSection('alerts')}
               className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
             >
-              <img
-                src="/alerts_icon.png"
-                alt="Alerts Icon"
-                className="h-5 w-5 mr-1"
-              />
+              <img src="/alerts_icon.png" alt="Alerts" className="h-5 w-5" />
               <span>Alerts</span>
               <span className="text-[10px] ml-auto">
                 {openSections.alerts ? '▼' : '▶'}
@@ -80,16 +74,10 @@ const SidebarLayout = () => {
             </button>
             {openSections.alerts && (
               <div className="mt-1 space-y-0.5 pl-7">
-                <Link
-                  to="/alerts/summary"
-                  className={linkClass('/alerts/summary')}
-                >
+                <Link to="/alerts/summary" className={linkClass('/alerts/summary')}>
                   Alerts Summary
                 </Link>
-                <Link
-                  to="/alerts"
-                  className={linkClass('/alerts')}
-                >
+                <Link to="/alerts" className={linkClass('/alerts')}>
                   Alerts Inbox
                 </Link>
               </div>
@@ -102,11 +90,7 @@ const SidebarLayout = () => {
               onClick={() => toggleSection('control')}
               className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
             >
-              <img
-                src="/controls_icon.png"
-                alt="Control Icon"
-                className="h-5 w-5 mr-1"
-              />
+              <img src="/controls_icon.png" alt="Control" className="h-5 w-5" />
               <span>Control Panel</span>
               <span className="text-[10px] ml-auto">
                 {openSections.control ? '▼' : '▶'}
@@ -139,11 +123,7 @@ const SidebarLayout = () => {
               onClick={() => toggleSection('analytics')}
               className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
             >
-              <img
-                src="/analytics_icon.png"
-                alt="Analytics Icon"
-                className="h-5 w-5 mr-1"
-              />
+              <img src="/analytics_icon.png" alt="Analytics" className="h-5 w-5" />
               <span>Analytics</span>
               <span className="text-[10px] ml-auto">
                 {openSections.analytics ? '▼' : '▶'}
@@ -182,11 +162,7 @@ const SidebarLayout = () => {
               onClick={() => toggleSection('autoflows')}
               className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
             >
-              <img
-                src="/flows_icon.png"
-                alt="Flows Icon"
-                className="h-5 w-5 mr-1"
-              />
+              <img src="/flows_icon.png" alt="Flows" className="h-5 w-5" />
               <span>Auto Flows</span>
               <span className="text-[10px] ml-auto">
                 {openSections.autoflows ? '▼' : '▶'}
@@ -213,11 +189,7 @@ const SidebarLayout = () => {
               onClick={() => toggleSection('storeSearch')}
               className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
             >
-              <img
-                src="/search_icon.png"
-                alt="Search Icon"
-                className="h-5 w-5 mr-1"
-              />
+              <img src="/search_icon.png" alt="Search" className="h-5 w-5" />
               <span>Store Search</span>
             </button>
             {openSections.storeSearch && (
@@ -235,11 +207,7 @@ const SidebarLayout = () => {
               onClick={() => toggleSection('settings')}
               className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
             >
-              <img
-                src="/settings_icon.png"
-                alt="Settings Icon"
-                className="h-5 w-5 mr-1"
-              />
+              <img src="/settings_icon.png" alt="Settings" className="h-5 w-5" />
               <span>Settings</span>
               <span className="text-[10px] ml-auto">
                 {openSections.settings ? '▼' : '▶'}
@@ -260,11 +228,7 @@ const SidebarLayout = () => {
               onClick={() => toggleSection('recommendations')}
               className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
             >
-              <img
-                src="/recommend_icon.png"
-                alt="Recommend Icon"
-                className="h-5 w-5 mr-1"
-              />
+              <img src="/recommend_icon.png" alt="Recommend" className="h-5 w-5" />
               <span>Recommendations</span>
               <span className="text-[10px] ml-auto">
                 {openSections.recommendations ? '▼' : '▶'}
@@ -313,4 +277,23 @@ const SidebarLayout = () => {
 
           {/* Auto Flows */}
           <Route path="/autoflows/workflow" element={<WorkflowPanel />} />
-          <Route path="/autoflows/trende
+          <Route path="/autoflows/trended" element={<Trended />} />
+          <Route path="/autoflows/flowsettings" element={<FlowSettings />} />
+
+          {/* Store Search */}
+          <Route path="/store-search" element={<StoreSearch />} />
+
+          {/* Settings */}
+          <Route path="/settings" element={<Settings />} />
+
+          {/* Recommendations */}
+          <Route path="/recommendations/marketing" element={<RecommendationsMarketing />} />
+          <Route path="/recommendations/operations" element={<RecommendationsOperations />} />
+          <Route path="/recommendations/locations" element={<RecommendationsLocations />} />
+          <Route path="/recommendations/menu" element={<RecommendationsMenu />} />
+        </Routes>
+      </div>
+    </div>
+);
+
+export default SidebarLayout;
