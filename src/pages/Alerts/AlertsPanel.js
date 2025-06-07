@@ -1,20 +1,15 @@
-// src/pages/Alerts/AlertsPanel.js
-
 import React from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
 import { alertsData } from '../../data/alertsData';
 
 const AlertsPanel = () => {
-  // total count
   const totalAlerts = alertsData.length;
 
-  // grouped by channel
   const alertsByChannel = alertsData.reduce((acc, a) => {
     acc[a.channel] = (acc[a.channel] || 0) + 1;
     return acc;
   }, {});
 
-  // grouped by type
   const alertsByType = alertsData.reduce((acc, a) => {
     acc[a.type] = (acc[a.type] || 0) + 1;
     return acc;
