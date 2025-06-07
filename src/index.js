@@ -22,6 +22,7 @@ import OperationsPerformance from './pages/analytics/OperationsPerformance';
 import Reviews from './pages/analytics/Reviews';
 
 import Alerts from './pages/Alerts/alerts';
+import AlertsPanel from './pages/Alerts/AlertsPanel';
 
 import StoreSearch from './pages/store-search/StoreSearch';
 import Settings from './pages/settings/Settings';
@@ -31,7 +32,6 @@ import RecommendationsOperations from './pages/recommendations/RecommendationsOp
 import RecommendationsLocations from './pages/recommendations/RecommendationsLocations';
 import RecommendationsMenu from './pages/recommendations/RecommendationsMenu';
 
-// --- Auto Flows imports ---
 import WorkflowPanel from './pages/autoflows/WorkflowPanel';
 import Trended from './pages/autoflows/Trended';
 import FlowSettings from './pages/autoflows/FlowSettings';
@@ -61,6 +61,7 @@ root.render(
         <Route path="/analytics/recovery" element={<RevenueRecovery />} />
 
         {/* Alerts */}
+        <Route path="/alerts/summary" element={<AlertsPanel />} />
         <Route path="/alerts" element={<Alerts />} />
 
         {/* Store Search */}
@@ -75,7 +76,7 @@ root.render(
         <Route path="/recommendations/locations" element={<RecommendationsLocations />} />
         <Route path="/recommendations/menu" element={<RecommendationsMenu />} />
 
-        {/* --- Auto Flows --- */}
+        {/* Auto Flows */}
         <Route path="/autoflows/workflow" element={<WorkflowPanel />} />
         <Route path="/autoflows/trended" element={<Trended />} />
         <Route path="/autoflows/flowsettings" element={<FlowSettings />} />
