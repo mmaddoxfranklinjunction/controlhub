@@ -1,3 +1,4 @@
+// src/components/shared/SidebarLayout.js
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import HostDropdown from './HostDropdown';
@@ -54,27 +55,30 @@ const SidebarLayout = () => {
   return (
     <div className="flex h-full">
       <aside className="w-64 bg-gray-800 text-white flex flex-col">
-        <div className="w-full px-1 mb-0">
+        <div className="px-1">
           <HostDropdown />
         </div>
         <hr className="border-t border-[#e4e7ee] mx-auto w-full" />
+        <nav className="flex-1 space-y-6 px-2 text-sm">
 
-        <nav className="flex-1 w-full space-y-6 text-sm">
           {/* Alerts */}
           <div>
             <button
               onClick={() => toggleSection('alerts')}
-              className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
+              className="w-full flex items-center px-2 py-1 rounded hover:bg-gray-700"
             >
-              <img src="/alerts_icon.png" alt="Alerts" className="h-5 w-5" />
+              <img src="/alerts_icon.png" alt="" className="h-5 w-5 mr-2" />
               <span>Alerts</span>
-              <span className="text-[10px] ml-auto">
+              <span className="ml-auto text-[10px]">
                 {openSections.alerts ? '▼' : '▶'}
               </span>
             </button>
             {openSections.alerts && (
-              <div className="mt-1 space-y-0.5 pl-7">
-                <Link to="/alerts/summary" className={linkClass('/alerts/summary')}>
+              <div className="mt-1 space-y-1 pl-7">
+                <Link
+                  to="/alerts/summary"
+                  className={linkClass('/alerts/summary')}
+                >
                   Alerts Summary
                 </Link>
                 <Link to="/alerts" className={linkClass('/alerts')}>
@@ -88,29 +92,41 @@ const SidebarLayout = () => {
           <div>
             <button
               onClick={() => toggleSection('control')}
-              className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
+              className="w-full flex items-center px-2 py-1 rounded hover:bg-gray-700"
             >
-              <img src="/controls_icon.png" alt="Control" className="h-5 w-5" />
+              <img src="/controls_icon.png" alt="" className="h-5 w-5 mr-2" />
               <span>Control Panel</span>
-              <span className="text-[10px] ml-auto">
+              <span className="ml-auto text-[10px]">
                 {openSections.control ? '▼' : '▶'}
               </span>
             </button>
             {openSections.control && (
-              <div className="mt-1 space-y-0.5 pl-7">
+              <div className="mt-1 space-y-1 pl-7">
                 <Link to="/control-panel" className={linkClass('/control-panel')}>
                   Overview
                 </Link>
-                <Link to="/control-panel/marketing" className={linkClass('/control-panel/marketing')}>
+                <Link
+                  to="/control-panel/marketing"
+                  className={linkClass('/control-panel/marketing')}
+                >
                   Marketing
                 </Link>
-                <Link to="/control-panel/operations" className={linkClass('/control-panel/operations')}>
+                <Link
+                  to="/control-panel/operations"
+                  className={linkClass('/control-panel/operations')}
+                >
                   Operations
                 </Link>
-                <Link to="/control-panel/locations" className={linkClass('/control-panel/locations')}>
+                <Link
+                  to="/control-panel/locations"
+                  className={linkClass('/control-panel/locations')}
+                >
                   Locations
                 </Link>
-                <Link to="/control-panel/menu" className={linkClass('/control-panel/menu')}>
+                <Link
+                  to="/control-panel/menu"
+                  className={linkClass('/control-panel/menu')}
+                >
                   Menu
                 </Link>
               </div>
@@ -121,145 +137,78 @@ const SidebarLayout = () => {
           <div>
             <button
               onClick={() => toggleSection('analytics')}
-              className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
+              className="w-full flex items-center px-2 py-1 rounded hover:bg-gray-700"
             >
-              <img src="/analytics_icon.png" alt="Analytics" className="h-5 w-5" />
+              <img src="/analytics_icon.png" alt="" className="h-5 w-5 mr-2" />
               <span>Analytics</span>
-              <span className="text-[10px] ml-auto">
+              <span className="ml-auto text-[10px]">
                 {openSections.analytics ? '▼' : '▶'}
               </span>
             </button>
             {openSections.analytics && (
-              <div className="mt-1 space-y-0.5 pl-7">
-                <Link to="/analytics/sales" className={linkClass('/analytics/sales')}>
+              <div className="mt-1 space-y-1 pl-7">
+                <Link
+                  to="/analytics/sales"
+                  className={linkClass('/analytics/sales')}
+                >
                   Sales Overview
                 </Link>
-                <Link to="/analytics/operations" className={linkClass('/analytics/operations')}>
+                <Link
+                  to="/analytics/operations"
+                  className={linkClass('/analytics/operations')}
+                >
                   Operations
                 </Link>
-                <Link to="/analytics/ratings" className={linkClass('/analytics/ratings')}>
+                <Link
+                  to="/analytics/ratings"
+                  className={linkClass('/analytics/ratings')}
+                >
                   Ratings & Feedback
                 </Link>
-                <Link to="/analytics/reviews" className={linkClass('/analytics/reviews')}>
+                <Link
+                  to="/analytics/reviews"
+                  className={linkClass('/analytics/reviews')}
+                >
                   Reviews
                 </Link>
-                <Link to="/analytics/promotions" className={linkClass('/analytics/promotions')}>
+                <Link
+                  to="/analytics/promotions"
+                  className={linkClass('/analytics/promotions')}
+                >
                   Promotions
                 </Link>
-                <Link to="/analytics/sponsored" className={linkClass('/analytics/sponsored')}>
+                <Link
+                  to="/analytics/sponsored"
+                  className={linkClass('/analytics/sponsored')}
+                >
                   Sponsored Listing
                 </Link>
-                <Link to="/analytics/recovery" className={linkClass('/analytics/recovery')}>
+                <Link
+                  to="/analytics/recovery"
+                  className={linkClass('/analytics/recovery')}
+                >
                   Revenue Recovery
                 </Link>
               </div>
             )}
-          </div>
-
-          {/* Auto Flows */}
-          <div>
-            <button
-              onClick={() => toggleSection('autoflows')}
-              className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
-            >
-              <img src="/flows_icon.png" alt="Flows" className="h-5 w-5" />
-              <span>Auto Flows</span>
-              <span className="text-[10px] ml-auto">
-                {openSections.autoflows ? '▼' : '▶'}
-              </span>
-            </button>
-            {openSections.autoflows && (
-              <div className="mt-1 space-y-0.5 pl-7">
-                <Link to="/autoflows/workflow" className={linkClass('/autoflows/workflow')}>
-                  Workflow
-                </Link>
-                <Link to="/autoflows/trended" className={linkClass('/autoflows/trended')}>
-                  Trended
-                </Link>
-                <Link to="/autoflows/flowsettings" className={linkClass('/autoflows/flowsettings')}>
-                  Flow Settings
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Store Search */}
-          <div>
-            <button
-              onClick={() => toggleSection('storeSearch')}
-              className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
-            >
-              <img src="/search_icon.png" alt="Search" className="h-5 w-5" />
-              <span>Store Search</span>
-            </button>
-            {openSections.storeSearch && (
-              <div className="mt-1 space-y-0.5 pl-7">
-                <Link to="/store-search" className={linkClass('/store-search')}>
-                  Search
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Settings */}
-          <div>
-            <button
-              onClick={() => toggleSection('settings')}
-              className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
-            >
-              <img src="/settings_icon.png" alt="Settings" className="h-5 w-5" />
-              <span>Settings</span>
-              <span className="text-[10px] ml-auto">
-                {openSections.settings ? '▼' : '▶'}
-              </span>
-            </button>
-            {openSections.settings && (
-              <div className="mt-1 space-y-0.5 pl-7">
-                <Link to="/settings" className={linkClass('/settings')}>
-                  Settings
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Recommendations */}
-          <div>
-            <button
-              onClick={() => toggleSection('recommendations')}
-              className="w-full flex items-center gap-2 font-medium hover:bg-gray-700 rounded text-sm text-left px-2 py-1"
-            >
-              <img src="/recommend_icon.png" alt="Recommend" className="h-5 w-5" />
-              <span>Recommendations</span>
-              <span className="text-[10px] ml-auto">
-                {openSections.recommendations ? '▼' : '▶'}
-              </span>
-            </button>
-            {openSections.recommendations && (
-              <div className="mt-1 space-y-0.5 pl-7">
-                <Link to="/recommendations/marketing" className={linkClass('/recommendations/marketing')}>
-                  Marketing
-                </Link>
-                <Link to="/recommendations/operations" className={linkClass('/recommendations/operations')}>
-                  Operations
-                </Link>
-                <Link to="/recommendations/locations" className={linkClass('/recommendations/locations')}>
-                  Locations
-                </Link>
-                <Link to="/recommendations/menu" className={linkClass('/recommendations/menu')}>
-                  Menu
-                </Link>
-              </div>
-            )}
-          </div>
-        </nav>
+          </nav>
       </aside>
 
-      <div className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-auto">
         <Routes>
           <Route path="/control-panel" element={<ControlPanel />} />
-          <Route path="/control-panel/marketing" element={<MarketingPanel />} />
-          <Route path="/control-panel/operations" element={<OperationsPanel />} />
-          <Route path="/control-panel/locations" element={<LocationsPanel />} />
+          <Route
+            path="/control-panel/marketing"
+            element={<MarketingPanel />}
+          />
+          <Route
+            path="/control-panel/operations"
+            element={<OperationsPanel />}
+          />
+          <Route
+            path="/control-panel/locations"
+            element={<LocationsPanel />}
+          />
           <Route path="/control-panel/menu" element={<MenuPanel />} />
 
           {/* Alerts */}
@@ -268,17 +217,38 @@ const SidebarLayout = () => {
 
           {/* Analytics */}
           <Route path="/analytics/sales" element={<SalesOverview />} />
-          <Route path="/analytics/operations" element={<OperationsPerformance />} />
-          <Route path="/analytics/ratings" element={<RatingsFeedback />} />
+          <Route
+            path="/analytics/operations"
+            element={<OperationsPerformance />}
+          />
+          <Route
+            path="/analytics/ratings"
+            element={<RatingsFeedback />}
+          />
           <Route path="/analytics/reviews" element={<Reviews />} />
-          <Route path="/analytics/promotions" element={<PromotionsReport />} />
-          <Route path="/analytics/sponsored" element={<SponsoredListingReport />} />
-          <Route path="/analytics/recovery" element={<RevenueRecovery />} />
+          <Route
+            path="/analytics/promotions"
+            element={<PromotionsReport />}
+          />
+          <Route
+            path="/analytics/sponsored"
+            element={<SponsoredListingReport />}
+          />
+          <Route
+            path="/analytics/recovery"
+            element={<RevenueRecovery />}
+          />
 
           {/* Auto Flows */}
-          <Route path="/autoflows/workflow" element={<WorkflowPanel />} />
+          <Route
+            path="/autoflows/workflow"
+            element={<WorkflowPanel />}
+          />
           <Route path="/autoflows/trended" element={<Trended />} />
-          <Route path="/autoflows/flowsettings" element={<FlowSettings />} />
+          <Route
+            path="/autoflows/flowsettings"
+            element={<FlowSettings />}
+          />
 
           {/* Store Search */}
           <Route path="/store-search" element={<StoreSearch />} />
@@ -287,13 +257,26 @@ const SidebarLayout = () => {
           <Route path="/settings" element={<Settings />} />
 
           {/* Recommendations */}
-          <Route path="/recommendations/marketing" element={<RecommendationsMarketing />} />
-          <Route path="/recommendations/operations" element={<RecommendationsOperations />} />
-          <Route path="/recommendations/locations" element={<RecommendationsLocations />} />
-          <Route path="/recommendations/menu" element={<RecommendationsMenu />} />
+          <Route
+            path="/recommendations/marketing"
+            element={<RecommendationsMarketing />}
+          />
+          <Route
+            path="/recommendations/operations"
+            element={<RecommendationsOperations />}
+          />
+          <Route
+            path="/recommendations/locations"
+            element={<RecommendationsLocations />}
+          />
+          <Route
+            path="/recommendations/menu"
+            element={<RecommendationsMenu />}
+          />
         </Routes>
-      </div>
+      </main>
     </div>
-);
+  );
+};
 
 export default SidebarLayout;
