@@ -32,7 +32,7 @@ const RatingsFeedback = () => {
         {/* Logo + Title + FilterBar Row */}
         <div className="flex items-center gap-3 mb-4">
         
-          <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Sales Overview</h1>
+          <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Ratings Feedback</h1>
           <div className="flex-1">
             <FilterBar onApply={() => {}} />
           </div>
