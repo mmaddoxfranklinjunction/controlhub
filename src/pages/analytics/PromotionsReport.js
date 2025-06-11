@@ -45,14 +45,16 @@ const PromotionsReport = () => {
 
   return (
     <PageWrapper>
-      <div className="px-5 py-5">
-        {/* Title + Filter */}
-        <div className="flex items-center justify-between mt-0 mb-4">
-          <h1 className="text-2xl font-bold text-[#253847]">Marketing & Promotions</h1>
-          <div className="flex">
-            <FilterBar onApply={handleApply} />
+      <div className="px-4 py-2">
+        {/* Logo + Title + FilterBar Row */}
+        <div className="flex items-center gap-3 mb-4">
+        
+          <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Promotions</h1>
+          <div className="flex-1">
+            <FilterBar onApply={() => {}} />
           </div>
         </div>
+
 
         {/* Summary */}
         <div className="grid md:grid-cols-2 gap-4 mb-6">
