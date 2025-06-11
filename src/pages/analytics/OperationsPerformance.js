@@ -22,12 +22,12 @@ const OperationsPerformance = () => {
 
   return (
     <PageWrapper>
-         <div className="max-w-5xl mx-auto px-6 py-0">
-        {/* Title + Toggle */}
-        <div className="flex items-center justify-between mt-0 mb-4">
-          <h1 className="text-2xl font-bold text-[#253847]">Operations Performance</h1>
-             {/* Filter Bar */}
-        <div className="flex-1">
+         <div className="px-4 py-2">
+        {/* Logo + Title + FilterBar Row */}
+        <div className="flex items-center gap-3 mb-4">
+        
+          <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Operations Performance</h1>
+          <div className="flex-1">
             <FilterBar onApply={() => {}} />
           </div>
         </div>
