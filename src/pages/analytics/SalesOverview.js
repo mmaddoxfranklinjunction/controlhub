@@ -19,15 +19,16 @@ const SalesOverview = () => {
 
   return (
     <PageWrapper>
-      <div className="w-full px-0 py-2 font-[Futura,sans-serif]">
-        <h1 className="text-2xl font-bold mb-2">Sales Overview</h1>
+      <div className="px-4 py-2">
+        {/* Logo + Title + FilterBar Row */}
+        <div className="flex items-center gap-3 mb-4">
+        
+          <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Sales Overview</h1>
+          <div className="flex-1">
+            <FilterBar onApply={() => {}} />
+          </div>
+        </div>
 
-        <FilterBar
-          data={summaryByLocation.map(row => ({ location: row.location }))}
-          onFilterChange={setFilters}
-          showChannel={false}
-          showDate={true}
-        />
 
         {/* Side-by-side current & previous */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
