@@ -28,29 +28,16 @@ const RatingsFeedback = () => {
 
   return (
     <PageWrapper>
-      <div className="max-w-6xl mx-auto px-6 py-0">
-        {/* Header */}
-        <div className="flex items-center justify-between mt-0 mb-4">
-          <h1 className="text-2xl font-bold text-[#253847]">Ratings & Feedback</h1>
-          <div className="flex bg-[rgba(179,40,45,0.09)] rounded-full w-52 h-8 shadow-inner cursor-pointer text-xs border border-[#b3282d]">
-            <button
-              className={`flex-1 px-3 py-1 rounded-full transition font-bold ${view === "insights" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d]"}`}
-              onClick={() => setView("insights")}
-            >
-              Insights
-            </button>
-            <button
-              className={`flex-1 px-3 py-1 rounded-full transition font-bold ${view === "controls" ? "bg-[#b3282d] text-white shadow" : "text-[#b3282d]"}`}
-              onClick={() => setView("controls")}
-            >
-              Controls
-            </button>
+      <div className="px-4 py-2">
+        {/* Logo + Title + FilterBar Row */}
+        <div className="flex items-center gap-3 mb-4">
+        
+          <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Sales Overview</h1>
+          <div className="flex-1">
+            <FilterBar onApply={() => {}} />
           </div>
         </div>
 
-        <div className="mb-4">
-          <FilterBar onApply={handleApply} />
-        </div>
 
         {/* Ratings Summary */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
