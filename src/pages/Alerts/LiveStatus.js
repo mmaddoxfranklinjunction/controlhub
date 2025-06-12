@@ -1,6 +1,7 @@
 // src/pages/Alerts/LiveStatus.js
 import React, { useState } from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
+import FilterBar from '../../components/shared/FilterBar';
 
 const LiveStatus = () => {
   const [search, setSearch] = useState('');
@@ -43,8 +44,15 @@ const LiveStatus = () => {
 
   return (
     <PageWrapper>
-      <div className="px-4 py-6">
-        <h1 className="text-2xl font-bold text-[#253847] mb-4">Live Status</h1>
+      <div className="px-4 py-2">
+        {/* Logo + Title + FilterBar Row */}
+        <div className="flex items-center gap-3 mb-4">
+        
+          <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Live Status</h1>
+          <div className="flex-1">
+            <FilterBar onApply={() => {}} />
+          </div>
+        </div>
 
         {/* Top Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
