@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageWrapper from '../../components/shared/PageWrapper';
-import FilterBar from '../../components/shared/FilterBar';
 
 const LiveStatus = () => {
   const navigate = useNavigate();
-  const [channelFilter, setChannelFilter] = useState('All');
-  const [statusFilter, setStatusFilter] = useState('All');
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [channelFilter, setChannelFilter] = useState(true);
+  const [statusFilter, setStatusFilter] = useState(true);
+  const [sortAsc, setSortAsc] = useState(true);
   const [modalInfo, setModalInfo] = useState(null);
 
   const listings = [
@@ -30,32 +29,21 @@ const LiveStatus = () => {
         { channel: 'DoorDash', status: 'Has Closed', color: 'gray', outage: 3.2 },
         { channel: 'Uber Eats', status: 'Orders Unavailable', color: 'red', outage: 7.1 }
       ]
-    },
-    {
-      brand: "Bennigan's On The Fly",
-      storeId: 'DEN6773',
-      address: '2511 North Ventura Road, Port Hueneme, CA 93041, USA',
-      hours: '12:00 am – 11:59 pm',
-      statusItems: [
-        { channel: 'DoorDash', status: 'Has Closed', color: 'gray', outage: 2.0 },
-        { channel: 'Uber Eats', status: 'Accepting Orders', color: 'green', outage: 0 }
-      ]
     }
   ];
 
-  const filteredListings = listings
-    .filter(l => channelFilter === 'All' || l.statusItems.some(i => i.channel === channelFilter))
-    .filter(l => statusFilter === 'All' || l.statusItems.some(i => i.status.includes(statusFilter)))
-    .sort((a, b) => {
-      const aOutage = a.statusItems.reduce((sum, i) => sum + i.outage, 0);
-      const bOutage = b.statusItems.reduce((sum, i) => sum + i.outage, 0);
-      return sortOrder === 'asc' ? aOutage - bOutage : bOutage - aOutage;
-    });
-
   const allStores = listings.length;
-  const totalOffline = listings.filter(l => l.statusItems.some(i => i.color === 'red' || i.color === 'gray')).length;
+  const totalOffline = listings.filter(l => l.statusItems.some(i => i.color === 'red')).length;
   const totalOnline = listings.filter(l => l.statusItems.every(i => i.color === 'green')).length;
   const totalDrift = listings.filter(l => l.statusItems.some(i => i.status === 'Has Closed')).length;
+
+  const filteredListings = listings
+    .filter(l => channelFilter || l.statusItems.some(i => i.channel))
+    .filter(l => statusFilter || l.statusItems.some(i => i.status))
+    .sort((a, b) => {
+      const getOutage = store => store.statusItems.reduce((sum, i) => sum + i.outage, 0);
+      return sortAsc ? getOutage(a) - getOutage(b) : getOutage(b) - getOutage(a);
+    });
 
   const handleDotClick = (listing, item) => {
     setModalInfo({ ...listing, ...item });
@@ -63,98 +51,74 @@ const LiveStatus = () => {
 
   const closeModal = () => setModalInfo(null);
 
-  const filters = [
-    {
-      label: 'Channel',
-      options: ['All', 'DoorDash', 'Uber Eats'],
-      value: channelFilter,
-      setter: setChannelFilter
-    },
-    {
-      label: 'Status',
-      options: ['All', 'Accepting Orders', 'Orders Unavailable', 'Has Closed'],
-      value: statusFilter,
-      setter: setStatusFilter
-    },
-    {
-      label: 'Sort',
-      options: ['asc', 'desc'],
-      value: sortOrder,
-      setter: setSortOrder
-    }
-  ];
-
   return (
     <PageWrapper>
-      <div className="px-6 py-4">
+      <div className="px-4 py-2">
         <h1 className="text-xl font-bold text-[#253847] font-sans mb-4">Live Status</h1>
 
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap gap-2 mb-6 text-sm font-medium">
-          {filters.map((group, i) => (
-            <div key={i} className="flex gap-1">
-              {group.options.map(opt => (
-                <button
-                  key={opt}
-                  onClick={() => group.setter(opt)}
-                  className={`px-4 py-1 rounded-full border ${group.value === opt ? 'bg-[#B3282D] text-white' : 'text-[#253847] border-gray-300'}`}
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-          ))}
+        {/* Toggle Filters */}
+        <div className="flex gap-6 items-center mb-4 text-sm">
+          <label className="flex items-center gap-2">
+            <input type="checkbox" checked={channelFilter} onChange={() => setChannelFilter(!channelFilter)} />
+            Channel
+          </label>
+          <label className="flex items-center gap-2">
+            <input type="checkbox" checked={statusFilter} onChange={() => setStatusFilter(!statusFilter)} />
+            Status
+          </label>
+          <label className="flex items-center gap-2">
+            <input type="checkbox" checked={sortAsc} onChange={() => setSortAsc(!sortAsc)} />
+            Outage Time {sortAsc ? '(asc)' : '(desc)'}
+          </label>
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 justify-items-center">
-          <div className="bg-[#f9fafb] border rounded-lg p-4 text-center">
-            <p className="text-sm text-gray-600">Offline</p>
-            <p className="text-2xl font-semibold text-red-600">{totalOffline}</p>
-          </div>
-          <div className="bg-[#f9fafb] border rounded-lg p-4 text-center">
-            <p className="text-sm text-gray-600">Online</p>
-            <p className="text-2xl font-semibold text-green-500">{totalOnline}</p>
-          </div>
-          <div className="bg-[#f9fafb] border rounded-lg p-4 text-center">
-            <p className="text-sm text-gray-600">Drift</p>
-            <p className="text-2xl font-semibold text-gray-800">{totalDrift}</p>
-          </div>
-          <div className="bg-[#f9fafb] border rounded-lg p-4 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4 text-center">
+          <div className="bg-[#f9fafb] border rounded-lg p-2">
             <p className="text-sm text-gray-600">Total Stores</p>
-            <p className="text-2xl font-semibold text-gray-800">{allStores}</p>
+            <p className="text-xl font-semibold text-gray-800">{allStores}</p>
+          </div>
+          <div className="bg-[#f9fafb] border rounded-lg p-2">
+            <p className="text-sm text-gray-600">Online</p>
+            <p className="text-xl font-semibold text-green-600">{totalOnline}</p>
+          </div>
+          <div className="bg-[#f9fafb] border rounded-lg p-2">
+            <p className="text-sm text-gray-600">Drift</p>
+            <p className="text-xl font-semibold text-yellow-500">{totalDrift}</p>
+          </div>
+          <div className="bg-[#f9fafb] border rounded-lg p-2">
+            <p className="text-sm text-gray-600">Offline</p>
+            <p className="text-xl font-semibold text-red-500">{totalOffline}</p>
+          </div>
+          <div className="bg-[#f9fafb] border rounded-lg p-2">
+            <p className="text-sm text-gray-600">Reserved</p>
+            <p className="text-xl font-semibold text-gray-600">—</p>
           </div>
         </div>
 
         {/* Listings */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           {filteredListings.map((listing, idx) => (
-            <div key={idx} className="bg-[#f9fafb] border border-gray-200 rounded-lg px-4 py-3">
-              <div className="flex items-start justify-between">
+            <div key={idx} className="bg-[#f9fafb] border border-gray-200 rounded-md px-3 py-2">
+              <div className="flex justify-between items-start">
                 <div>
-                  <div className="font-semibold text-[#253847]">
-                    {listing.brand} - {listing.storeId}
-                  </div>
+                  <div className="font-semibold text-[#253847]">{listing.brand} - {listing.storeId}</div>
                   <div className="text-xs text-gray-500">{listing.address}</div>
                 </div>
                 <button
                   onClick={() => navigate('/autoflows/flowsettings')}
-                  className="bg-blue-100 text-blue-700 font-semibold text-xs px-3 py-1 rounded hover:bg-blue-200"
-                >
-                  Auto Flows
-                </button>
+                  className="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded hover:bg-blue-200"
+                >Auto Flows</button>
               </div>
-              <div className="mt-3 space-y-2">
+              <div className="mt-2 space-y-1">
                 {listing.statusItems.map((item, subIdx) => (
                   <div key={subIdx} className="flex items-center text-sm">
                     <button
                       onClick={() => handleDotClick(listing, item)}
-                      className={`w-[10px] h-[10px] rounded-full mr-2 focus:outline-none ${
-                        item.color === 'red' ? 'bg-red-500' : item.color === 'green' ? 'bg-green-500' : 'bg-gray-400'
-                      }`}
+                      className={`w-[10px] h-[10px] rounded-full mr-2 focus:outline-none ${item.color === 'red' ? 'bg-red-500' : item.color === 'green' ? 'bg-green-500' : 'bg-gray-400'}`}
                     />
                     <span className="w-24">{item.channel}</span>
-                    <span className="text-gray-700 flex-1">{item.status}</span>
+                    <span className="flex-1 text-gray-700">{item.status}</span>
                     {(item.color === 'red' || item.color === 'gray') && (
                       <span className="text-xs text-red-500 w-28">Outage: {item.outage.toFixed(1)} hrs</span>
                     )}
