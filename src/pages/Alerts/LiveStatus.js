@@ -5,8 +5,9 @@ import FilterBar from '../../components/shared/FilterBar';
 
 const LiveStatus = () => {
   const navigate = useNavigate();
-  const [search, setSearch] = useState('');
-  const [sortKey, setSortKey] = useState('brand');
+  const [channelFilter, setChannelFilter] = useState('All');
+  const [statusFilter, setStatusFilter] = useState('All');
+  const [sortOrder, setSortOrder] = useState('asc');
   const [modalInfo, setModalInfo] = useState(null);
 
   const listings = [
@@ -16,8 +17,8 @@ const LiveStatus = () => {
       address: '8431 244th St SW, Edmonds, WA 98026, USA',
       hours: '12:00 am – 11:59 pm',
       statusItems: [
-        { channel: 'DoorDash', status: 'Accepting Orders', color: 'green' },
-        { channel: 'Uber Eats', status: 'Orders Unavailable', color: 'red' }
+        { channel: 'DoorDash', status: 'Accepting Orders', color: 'green', outage: 0 },
+        { channel: 'Uber Eats', status: 'Orders Unavailable', color: 'red', outage: 5.5 }
       ]
     },
     {
@@ -26,8 +27,8 @@ const LiveStatus = () => {
       address: '1201 N Palm Canyon Dr, Palm Springs, CA 92262, USA',
       hours: '12:00 am – 11:59 pm',
       statusItems: [
-        { channel: 'DoorDash', status: 'Has Closed', color: 'gray' },
-        { channel: 'Uber Eats', status: 'Orders Unavailable', color: 'red' }
+        { channel: 'DoorDash', status: 'Has Closed', color: 'gray', outage: 3.2 },
+        { channel: 'Uber Eats', status: 'Orders Unavailable', color: 'red', outage: 7.1 }
       ]
     },
     {
@@ -36,25 +37,25 @@ const LiveStatus = () => {
       address: '2511 North Ventura Road, Port Hueneme, CA 93041, USA',
       hours: '12:00 am – 11:59 pm',
       statusItems: [
-        { channel: 'DoorDash', status: 'Has Closed', color: 'gray' },
-        { channel: 'Uber Eats', status: 'Accepting Orders', color: 'green' }
+        { channel: 'DoorDash', status: 'Has Closed', color: 'gray', outage: 2.0 },
+        { channel: 'Uber Eats', status: 'Accepting Orders', color: 'green', outage: 0 }
       ]
     }
   ];
 
-  const lastUpdated = new Date().toLocaleTimeString();
-
   const filteredListings = listings
-    .filter(l =>
-      l.brand.toLowerCase().includes(search.toLowerCase()) ||
-      l.address.toLowerCase().includes(search.toLowerCase())
-    )
+    .filter(l => channelFilter === 'All' || l.statusItems.some(i => i.channel === channelFilter))
+    .filter(l => statusFilter === 'All' || l.statusItems.some(i => i.status.includes(statusFilter)))
     .sort((a, b) => {
-      if (sortKey === 'brand') return a.brand.localeCompare(b.brand);
-      if (sortKey === 'store') return a.storeId.localeCompare(b.storeId);
-      if (sortKey === 'channel') return (a.statusItems[0]?.channel || '').localeCompare(b.statusItems[0]?.channel || '');
-      return 0;
+      const aOutage = a.statusItems.reduce((sum, i) => sum + i.outage, 0);
+      const bOutage = b.statusItems.reduce((sum, i) => sum + i.outage, 0);
+      return sortOrder === 'asc' ? aOutage - bOutage : bOutage - aOutage;
     });
+
+  const allStores = listings.length;
+  const totalOffline = listings.filter(l => l.statusItems.some(i => i.color === 'red' || i.color === 'gray')).length;
+  const totalOnline = listings.filter(l => l.statusItems.every(i => i.color === 'green')).length;
+  const totalDrift = listings.filter(l => l.statusItems.some(i => i.status === 'Has Closed')).length;
 
   const handleDotClick = (listing, item) => {
     setModalInfo({ ...listing, ...item });
@@ -62,59 +63,73 @@ const LiveStatus = () => {
 
   const closeModal = () => setModalInfo(null);
 
+  const filters = [
+    {
+      label: 'Channel',
+      options: ['All', 'DoorDash', 'Uber Eats'],
+      value: channelFilter,
+      setter: setChannelFilter
+    },
+    {
+      label: 'Status',
+      options: ['All', 'Accepting Orders', 'Orders Unavailable', 'Has Closed'],
+      value: statusFilter,
+      setter: setStatusFilter
+    },
+    {
+      label: 'Sort',
+      options: ['asc', 'desc'],
+      value: sortOrder,
+      setter: setSortOrder
+    }
+  ];
+
   return (
     <PageWrapper>
       <div className="px-6 py-4">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-4">
-          <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Live Status</h1>
-          <div className="flex-1">
-            <FilterBar onApply={() => {}} />
-          </div>
+        <h1 className="text-xl font-bold text-[#253847] font-sans mb-4">Live Status</h1>
+
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap gap-2 mb-6 text-sm font-medium">
+          {filters.map((group, i) => (
+            <div key={i} className="flex gap-1">
+              {group.options.map(opt => (
+                <button
+                  key={opt}
+                  onClick={() => group.setter(opt)}
+                  className={`px-4 py-1 rounded-full border ${group.value === opt ? 'bg-[#B3282D] text-white' : 'text-[#253847] border-gray-300'}`}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          ))}
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-[#f9fafb] border rounded-lg p-4">
-            <p className="text-sm text-gray-600">Total Down</p>
-            <p className="text-2xl font-semibold text-red-600">2</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 justify-items-center">
+          <div className="bg-[#f9fafb] border rounded-lg p-4 text-center">
+            <p className="text-sm text-gray-600">Offline</p>
+            <p className="text-2xl font-semibold text-red-600">{totalOffline}</p>
           </div>
-          <div className="bg-[#f9fafb] border rounded-lg p-4">
-            <p className="text-sm text-gray-600">Total Open</p>
-            <p className="text-2xl font-semibold text-green-500">120</p>
+          <div className="bg-[#f9fafb] border rounded-lg p-4 text-center">
+            <p className="text-sm text-gray-600">Online</p>
+            <p className="text-2xl font-semibold text-green-500">{totalOnline}</p>
           </div>
-          <div className="bg-[#f9fafb] border rounded-lg p-4">
-            <p className="text-sm text-gray-600">Total Closed</p>
-            <p className="text-2xl font-semibold text-gray-800">19</p>
+          <div className="bg-[#f9fafb] border rounded-lg p-4 text-center">
+            <p className="text-sm text-gray-600">Drift</p>
+            <p className="text-2xl font-semibold text-gray-800">{totalDrift}</p>
           </div>
-        </div>
-
-        {/* Controls */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-3">
-          <input
-            type="text"
-            placeholder="Search places"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-md text-sm w-full md:w-1/3"
-          />
-          <select
-            value={sortKey}
-            onChange={e => setSortKey(e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded text-sm"
-          >
-            <option value="brand">Sort by Brand</option>
-            <option value="store">Sort by Store ID</option>
-            <option value="channel">Sort by Channel</option>
-          </select>
-          <span className="text-xs text-gray-400">Updated {lastUpdated}</span>
+          <div className="bg-[#f9fafb] border rounded-lg p-4 text-center">
+            <p className="text-sm text-gray-600">Total Stores</p>
+            <p className="text-2xl font-semibold text-gray-800">{allStores}</p>
+          </div>
         </div>
 
         {/* Listings */}
         <div className="space-y-4">
           {filteredListings.map((listing, idx) => (
             <div key={idx} className="bg-[#f9fafb] border border-gray-200 rounded-lg px-4 py-3">
-              {/* Top Row */}
               <div className="flex items-start justify-between">
                 <div>
                   <div className="font-semibold text-[#253847]">
@@ -129,30 +144,21 @@ const LiveStatus = () => {
                   Auto Flows
                 </button>
               </div>
-
-              {/* Status Rows */}
               <div className="mt-3 space-y-2">
                 {listing.statusItems.map((item, subIdx) => (
-                  <div key={subIdx} className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => handleDotClick(listing, item)}
-                        className={`w-[10px] h-[10px] rounded-full focus:outline-none ${
-                          item.color === 'red'
-                            ? 'bg-red-500'
-                            : item.color === 'green'
-                            ? 'bg-green-500'
-                            : 'bg-gray-400'
-                        }`}
-                      />
-                      <span>{item.channel}</span>
-                      <span className="text-gray-400 ml-2 flex gap-1">
-                        <i className="fa fa-store" />
-                        <i className="fa fa-building" />
-                      </span>
-                    </div>
-                    <div className="text-gray-700">{item.status}</div>
-                    <div className="text-xs text-gray-400 whitespace-nowrap">Hours: {listing.hours}</div>
+                  <div key={subIdx} className="flex items-center text-sm">
+                    <button
+                      onClick={() => handleDotClick(listing, item)}
+                      className={`w-[10px] h-[10px] rounded-full mr-2 focus:outline-none ${
+                        item.color === 'red' ? 'bg-red-500' : item.color === 'green' ? 'bg-green-500' : 'bg-gray-400'
+                      }`}
+                    />
+                    <span className="w-24">{item.channel}</span>
+                    <span className="text-gray-700 flex-1">{item.status}</span>
+                    {(item.color === 'red' || item.color === 'gray') && (
+                      <span className="text-xs text-red-500 w-28">Outage: {item.outage.toFixed(1)} hrs</span>
+                    )}
+                    <span className="text-xs text-gray-400 ml-auto">Hours: {listing.hours}</span>
                   </div>
                 ))}
               </div>
@@ -185,4 +191,3 @@ const LiveStatus = () => {
 };
 
 export default LiveStatus;
-
