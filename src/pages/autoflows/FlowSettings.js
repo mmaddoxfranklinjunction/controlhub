@@ -2,146 +2,101 @@ import React, { useState } from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
 import FilterBar from '../../components/shared/FilterBar';
 
-// Example data for demonstration
-const hostData = [
+
+
+const storefrontSettings = [
   {
-    id: 'host1',
-    name: "Denny's - Franklin Junction",
-    locations: [
-      {
-        id: 'loc1',
-        name: 'DEN7865 - South Seatac (New)',
-        brands: [
-          'DeliverBee - Tori-Yoshi',
-          "DeliverBee - Nathan's Famous",
-          'Deliverbee - Wing Zone',
-          'Deliverbee - The Original Hot Chicken',
-          "DeliverBee - Bennigan's On The Fly",
-          'DeliverBee - Wing Depo'
-        ]
-      },
-      {
-        id: 'loc2',
-        name: 'DEN7861 - Lakewood (New)',
-        brands: ['DeliverBee - Tori-Yoshi', "DeliverBee - Nathan's Famous"]
-      }
+    id: 'store1',
+    storeId: 'DEN7865',
+    name: "South Seatac (New)",
+    settings: [
+      'preptime',
+      'tags',
+      'pause or unpause',
+      'reopen or reactivate',
+      'sync menu and republish',
+      'optimize hours'
     ]
   },
   {
-    id: 'host2',
-    name: "Exp Brands - Revel - Franklin Junction",
-    locations: [
-      {
-        id: 'loc3',
-        name: 'REV9001 - Downtown (New)',
-        brands: ['DeliverBee - Exp Brand A']
-      }
+    id: 'store2',
+    storeId: 'DEN7861',
+    name: "Lakewood (New)",
+    settings: [
+      'pause or unpause',
+      'sync menu and republish'
     ]
   }
 ];
 
+const controlModes = ['Manual Only', 'Insights Recommended', 'AI Controlled'];
+
 const FlowSettings = () => {
-  const [selectedHost, setSelectedHost] = useState(hostData[0].id);
-  const [expandedHosts, setExpandedHosts] = useState({ [hostData[0].id]: true });
-  const [selectedLocation, setSelectedLocation] = useState(hostData[0].locations[0].id);
+  const [selectedStore, setSelectedStore] = useState(storefrontSettings[0].id);
+  const [controls, setControls] = useState({});
 
-  // Find currently selected host and location
-  const host = hostData.find(h => h.id === selectedHost);
-  const location = host.locations.find(l => l.id === selectedLocation);
-
-  const toggleHost = (id) => {
-    setExpandedHosts(prev => ({ ...prev, [id]: !prev[id] }));
-    setSelectedHost(id);
-    // auto-select first location if present
-    const h = hostData.find(hh => hh.id === id);
-    if (h && h.locations.length) setSelectedLocation(h.locations[0].id);
+  const updateControl = (storeId, setting, mode) => {
+    setControls(prev => ({
+      ...prev,
+      [storeId]: {
+        ...(prev[storeId] || {}),
+        [setting]: mode
+      }
+    }));
   };
+
+  const store = storefrontSettings.find(s => s.id === selectedStore);
 
   return (
     <PageWrapper>
-      <div className="px-4 py-2">
-        {/* Logo + Title + FilterBar Row */}
-        <div className="flex items-center gap-3 mb-4">
-        
-          <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Flow Settings</h1>
-          <div className="flex-1">
-            <FilterBar onApply={() => {}} />
-          </div>
-        </div>
+      <div className="px-4 py-6">
+        <h1 className="text-xl font-bold text-[#253847] mb-4">Storefront Flow Settings</h1>
 
-        {/* Subway Stop Progress Bar */}
-        <div className="w-full flex items-center justify-center my-8">
-       
-          <div className="flex w-full max-w-2xl mx-auto justify-between items-center relative z-10">
-            <div className="flex flex-col items-center flex-1">
-              <div className="w-7 h-7 rounded-full bg-[#253847] border-4 border-white flex items-center justify-center z-10" />
-              <span className="mt-2 text-sm font-medium text-[#253847]">Integrate</span>
-            </div>
-            <div className="flex-1 h-2 -mx-2 bg-gray-200 z-0" />
-            <div className="flex flex-col items-center flex-1">
-              <div className="w-7 h-7 rounded-full bg-[#253847] border-4 border-white flex items-center justify-center z-10" />
-              <span className="mt-2 text-sm font-medium text-[#253847]">Analyze</span>
-            </div>
-            <div className="flex-1 h-2 -mx-2 bg-gray-200 z-0" />
-            <div className="flex flex-col items-center flex-1">
-              <div className="w-7 h-7 rounded-full bg-[#253847] border-4 border-white flex items-center justify-center z-10" />
-              <span className="mt-2 text-sm font-medium text-[#253847]">Auto Config</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Drilldown List */}
-        <div className="flex flex-col md:flex-row gap-6 max-w-5xl mx-auto mt-8">
-          {/* Hosts */}
-          <div className="flex-1 min-w-[220px] bg-gray-50 rounded-lg shadow border border-gray-200 p-3">
-            <div className="font-bold mb-2 text-[#253847]">Hosts</div>
-            {hostData.map(h => (
-              <div key={h.id}>
-                <button
-                  className={`flex items-center w-full px-2 py-1 rounded hover:bg-gray-200 ${
-                    selectedHost === h.id ? 'bg-blue-100 text-[#253847] font-semibold' : ''
-                  }`}
-                  onClick={() => toggleHost(h.id)}
-                >
-                  <span className="mr-2">{expandedHosts[h.id] ? '▼' : '▶'}</span>
-                  {h.name}
-                </button>
-                {expandedHosts[h.id] && (
-                  <div className="ml-6 mt-1">
-                    {h.locations.map(loc => (
-                      <button
-                        key={loc.id}
-                        className={`flex items-center w-full px-2 py-1 rounded hover:bg-gray-100 ${
-                          selectedLocation === loc.id ? 'bg-blue-50 text-[#253847] font-semibold' : ''
-                        }`}
-                        onClick={() => setSelectedLocation(loc.id)}
-                      >
-                        <span className="text-xs mr-2">📍</span>
-                        {loc.name}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+        {/* Store Selection */}
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Select Store</label>
+          <select
+            className="border border-gray-300 rounded px-3 py-2 w-full max-w-md"
+            value={selectedStore}
+            onChange={e => setSelectedStore(e.target.value)}
+          >
+            {storefrontSettings.map(s => (
+              <option key={s.id} value={s.id}>
+                {s.storeId} — {s.name}
+              </option>
             ))}
-          </div>
+          </select>
+        </div>
 
-          {/* Brands (for selected location) */}
-          <div className="flex-1 min-w-[220px] bg-gray-50 rounded-lg shadow border border-gray-200 p-3">
-            <div className="font-bold mb-2 text-[#253847]">Brands</div>
-            {location?.brands?.length ? (
-              <ul>
-                {location.brands.map(brand => (
-                  <li key={brand} className="flex items-center gap-2 py-1 pl-2">
-                    <input type="checkbox" className="mr-2" />
-                    <span>{brand}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div className="text-gray-400 pl-2">No brands</div>
-            )}
-          </div>
+        {/* Settings Table */}
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border border-gray-200 rounded-lg">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="text-left px-4 py-2 border-b">Setting</th>
+                <th className="text-left px-4 py-2 border-b">Control Mode</th>
+              </tr>
+            </thead>
+            <tbody>
+              {store.settings.map(setting => (
+                <tr key={setting} className="border-b">
+                  <td className="px-4 py-2 capitalize text-[#253847]">{setting}</td>
+                  <td className="px-4 py-2">
+                    <select
+                      className="border border-gray-300 rounded px-2 py-1"
+                      value={controls[store.id]?.[setting] || ''}
+                      onChange={e => updateControl(store.id, setting, e.target.value)}
+                    >
+                      <option value="">Select</option>
+                      {controlModes.map(mode => (
+                        <option key={mode} value={mode}>{mode}</option>
+                      ))}
+                    </select>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </PageWrapper>
