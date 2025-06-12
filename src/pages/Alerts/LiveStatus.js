@@ -69,17 +69,7 @@ const LiveStatus = () => {
           </div>
         </div>
 
-        {/* Search Row */}
-        <div className="flex items-center justify-between mb-4">
-          <input
-            type="text"
-            placeholder="Search places"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-md text-sm w-full md:w-1/3"
-          />
-          <span className="text-xs text-gray-400 ml-4">Updated {lastUpdated}</span>
-        </div>
+      
 
         {/* Listings */}
         <div className="space-y-4">
