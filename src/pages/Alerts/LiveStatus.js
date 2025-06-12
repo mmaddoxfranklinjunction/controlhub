@@ -7,6 +7,7 @@ const LiveStatus = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [sortKey, setSortKey] = useState('brand');
+  const [modalInfo, setModalInfo] = useState(null);
 
   const listings = [
     {
@@ -54,6 +55,12 @@ const LiveStatus = () => {
       if (sortKey === 'channel') return (a.statusItems[0]?.channel || '').localeCompare(b.statusItems[0]?.channel || '');
       return 0;
     });
+
+  const handleDotClick = (listing, item) => {
+    setModalInfo({ ...listing, ...item });
+  };
+
+  const closeModal = () => setModalInfo(null);
 
   return (
     <PageWrapper>
@@ -128,13 +135,16 @@ const LiveStatus = () => {
                 {listing.statusItems.map((item, subIdx) => (
                   <div key={subIdx} className="flex items-center justify-between text-sm">
                     <div className="flex items-center gap-2">
-                      <span className={`w-[9px] h-[9px] rounded-full inline-block ${
-                        item.color === 'red'
-                          ? 'bg-red-500'
-                          : item.color === 'green'
-                          ? 'bg-green-500'
-                          : 'bg-gray-400'
-                      }`} />
+                      <button
+                        onClick={() => handleDotClick(listing, item)}
+                        className={`w-[10px] h-[10px] rounded-full focus:outline-none ${
+                          item.color === 'red'
+                            ? 'bg-red-500'
+                            : item.color === 'green'
+                            ? 'bg-green-500'
+                            : 'bg-gray-400'
+                        }`}
+                      />
                       <span>{item.channel}</span>
                       <span className="text-gray-400 ml-2 flex gap-1">
                         <i className="fa fa-store" />
@@ -142,18 +152,37 @@ const LiveStatus = () => {
                       </span>
                     </div>
                     <div className="text-gray-700">{item.status}</div>
-                    <div className="text-xs text-gray-400 whitespace-nowrap">
-                      Hours: {listing.hours}
-                    </div>
+                    <div className="text-xs text-gray-400 whitespace-nowrap">Hours: {listing.hours}</div>
                   </div>
                 ))}
               </div>
             </div>
           ))}
         </div>
+
+        {/* Modal */}
+        {modalInfo && (
+          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+            <div className="bg-white w-full max-w-md rounded-lg shadow-xl p-6 text-sm">
+              <h2 className="text-lg font-semibold text-[#253847] mb-2">Confirm Store Action</h2>
+              <p className="mb-1"><strong>Brand:</strong> {modalInfo.brand}</p>
+              <p className="mb-1"><strong>Store ID:</strong> {modalInfo.storeId}</p>
+              <p className="mb-1"><strong>Address:</strong> {modalInfo.address}</p>
+              <p className="mb-4"><strong>Hours:</strong> {modalInfo.hours}</p>
+              <p className="mb-4 text-[#5C6B7A]">
+                You are attempting to <strong>{modalInfo.status.includes('Accepting') ? 'close' : 'open'}</strong> this store on <strong>{modalInfo.channel}</strong>.
+              </p>
+              <div className="flex justify-end gap-3">
+                <button onClick={closeModal} className="px-4 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100">Cancel</button>
+                <button onClick={closeModal} className="px-4 py-1 text-sm bg-[#B3282D] text-white rounded hover:bg-[#a12227]">Confirm</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </PageWrapper>
   );
 };
 
 export default LiveStatus;
+
