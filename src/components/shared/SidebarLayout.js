@@ -18,6 +18,7 @@ import OperationsPerformance from '../../pages/analytics/OperationsPerformance';
 import Reviews from '../../pages/analytics/Reviews';
 
 import Alerts from '../../pages/Alerts/alerts';
+import LiveStatus from '../../pages/Alerts/LiveStatus'; 
 
 import RecommendationsMarketing from '../../pages/recommendations/RecommendationsMarketing';
 import RecommendationsOperations from '../../pages/recommendations/RecommendationsOperations';
@@ -64,7 +65,7 @@ const SidebarLayout = ({ isSidebarOpen }) => {
         <hr className="border-t border-[#e4e7ee] mx-auto w-full" />
         <nav className="flex-1 w-full space-y-6 text-sm">
           {/* Alerts */}
-          <div>
+         <div>
             <button
               onClick={() => toggleSection('alerts')}
               className="w-full flex items-center gap-2 text-white font-medium hover:bg-gray-700 rounded text-sm text-left px-2"
@@ -80,10 +81,12 @@ const SidebarLayout = ({ isSidebarOpen }) => {
                 <Link to="/alerts" className={linkClass('/alerts')}>
                   Alerts Inbox
                 </Link>
+                <Link to="/alerts/livestatus" className={linkClass('/alerts/livestatus')}>
+                  Live Status
+                </Link>
               </div>
             )}
           </div>
-
           {/* Auto Flows */}
           <div>
             <button
@@ -214,7 +217,7 @@ const SidebarLayout = ({ isSidebarOpen }) => {
         <Route path="/control-panel/menu" element={<MenuPanel />} />
 
         <Route path="/alerts" element={<Alerts />} />
-
+ <Route path="/alerts/livestatus" element={<LiveStatus />} />
         <Route path="/analytics/sales" element={<SalesOverview />} />
         <Route path="/analytics/operations" element={<OperationsPerformance />} />
         <Route path="/analytics/ratings" element={<RatingsFeedback />} />
