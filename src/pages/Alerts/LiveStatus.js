@@ -31,7 +31,7 @@ const LiveStatus = () => {
       hours: "12:00 am - 11:59 pm"
     },
     {
-      brand: "Nathan's Famous",
+      brand: "Bennigan's On The Fly",
       storeId: "DEN8786",
       address: "611 North Overland Avenue, Burley, ID, USA",
       statusItems: [
@@ -41,7 +41,7 @@ const LiveStatus = () => {
       hours: "12:00 am - 11:59 pm"
     },
     {
-      brand: "Nathan's Famous",
+      brand: "Bennigan's On The Fly",
       storeId: "DEN8874",
       address: "8431 244th St SW, Edmonds, WA 98026, USA",
       statusItems: [
@@ -80,7 +80,7 @@ const LiveStatus = () => {
       hours: "12:00 am - 11:59 pm"
     },
     {
-      brand: "The Original Hot Chicken",
+      brand: "TOHC",
       storeId: "DEN6773",
       address: "2511 North Ventura Road, Port Hueneme, CA 93041, USA",
       statusItems: [
@@ -90,7 +90,7 @@ const LiveStatus = () => {
       hours: "12:00 am - 11:59 pm"
     },
     {
-      brand: "Nathan's Famous",
+      brand: "TOHC",
       storeId: "DEN7589",
       address: "82120 Hwy 111, Indio, CA 92201, USA",
       statusItems: [
@@ -100,7 +100,7 @@ const LiveStatus = () => {
       hours: "12:00 am - 11:59 pm"
     },
     {
-      brand: "Nathan's Famous",
+      brand: "TOHC",
       storeId: "DEN7860",
       address: "14821 1st Avenue South, Burien, WA 98168, USA",
       statusItems: [
@@ -117,7 +117,6 @@ const LiveStatus = () => {
   const closedExpected = listings.filter(l => l.statusItems.some(i => i.status === 'Has Closed')).length;
   const closedShouldBeOpen = 1;
   const offlineUnexpected = listings.filter(l => l.statusItems.some(i => i.status === 'Orders Unavailable')).length;
-
 
   return (
     <PageWrapper>
@@ -148,23 +147,54 @@ const LiveStatus = () => {
           </div>
         </div>
 
+        {/* Filter Toggles */}
+        <div className="flex flex-wrap gap-4 mb-6 text-sm font-medium">
+          {/* Channel Toggles */}
+          <div className="flex items-center gap-2">
+            {['DoorDash', 'Uber Eats'].map(ch => (
+              <button
+                key={ch}
+                onClick={() => setChannelFilter(prev => ({ ...prev, [ch]: !prev[ch] }))}
+                className={`px-4 py-1 rounded-full border ${channelFilter[ch] ? 'bg-[#B3282D] text-white' : 'text-[#253847] border-gray-300'}`}
+              >
+                {ch}
+              </button>
+            ))}
+          </div>
 
-        {/* Toggle Filters */}
-        <div className="flex gap-6 items-center mb-4 text-sm">
-          <label className="flex items-center gap-2">
-            <input type="checkbox" checked={channelFilter} onChange={() => setChannelFilter(!channelFilter)} />
-            Channel
-          </label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" checked={statusFilter} onChange={() => setStatusFilter(!statusFilter)} />
-            Status
-          </label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" checked={sortAsc} onChange={() => setSortAsc(!sortAsc)} />
-            Outage Time {sortAsc ? '(asc)' : '(desc)'}
-          </label>
+          {/* Status Toggles */}
+          <div className="flex items-center gap-2">
+            {['Online', 'Offline'].map(st => (
+              <button
+                key={st}
+                onClick={() => setStatusFilter(prev => ({ ...prev, [st]: !prev[st] }))}
+                className={`px-4 py-1 rounded-full border ${statusFilter[st] ? 'bg-[#B3282D] text-white' : 'text-[#253847] border-gray-300'}`}
+              >
+                {st}
+              </button>
+            ))}
+          </div>
+
+          {/* Sort Radio */}
+          <div className="flex items-center gap-2">
+            {['outageAsc', 'outageDesc', 'storeAsc', 'storeDesc'].map(opt => (
+              <label key={opt} className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="sortKey"
+                  checked={sortKey === opt}
+                  onChange={() => setSortKey(opt)}
+                />
+                {opt === 'outageAsc' && 'Outage ↑'}
+                {opt === 'outageDesc' && 'Outage ↓'}
+                {opt === 'storeAsc' && 'Store ↑'}
+                {opt === 'storeDesc' && 'Store ↓'}
+              </label>
+            ))}
+          </div>
         </div>
 
+        {/* ... listings and modal rendering logic ... */}
      
 
         {/* Listings */}
