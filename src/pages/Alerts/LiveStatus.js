@@ -55,9 +55,11 @@ const LiveStatus = () => {
 
   return (
     <PageWrapper>
-      <div className="px-4 py-2 font-[Futura, sans-serif]">
+      <div className="px-6 py-4 font-[Futura, sans-serif]">
+        <h1 className="text-2xl font-bold text-[#253847] mb-4">Live Status</h1>
+
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-5 mb-6">
           {[{
             label: '✅ Open — As Expected',
             value: listings.flatMap(l => l.statusItems).filter(i => i.color === 'green').length,
@@ -75,23 +77,20 @@ const LiveStatus = () => {
             value: listings.flatMap(l => l.statusItems).filter(i => i.status === 'Orders Unavailable').length,
             color: 'text-red-600'
           }].map(({ label, value, color }) => (
-            <div key={label} className="bg-white border border-gray-200 rounded-lg px-3 py-2 text-center shadow-sm">
+            <div key={label} className="bg-white border border-gray-200 rounded-xl px-4 py-3 text-center shadow-sm">
               <p className="text-sm font-medium text-[#5C6B7A]">{label}</p>
               <p className={`text-2xl font-bold ${color}`}>{value}</p>
             </div>
           ))}
         </div>
 
-        {/* Title + Filter */}
-        <div className="flex items-center gap-3 mb-4">
-          <h1 className="text-xl font-bold text-[#253847] mr-4 whitespace-nowrap">Live Status</h1>
-          <div className="flex-1">
-            <FilterBar onApply={() => {}} />
-          </div>
+        {/* Filter Bar */}
+        <div className="mb-6">
+          <FilterBar onApply={() => {}} />
         </div>
 
         {/* Listings */}
-        <div className="space-y-3 max-w-6xl mx-auto">
+        <div className="space-y-3 max-w-5xl mx-auto">
           {sorted.map((listing, idx) => (
             <div key={idx} className="bg-white border border-gray-200 rounded-md px-4 py-3 shadow-sm">
               <div className="flex justify-between items-start">
@@ -106,12 +105,12 @@ const LiveStatus = () => {
               </div>
               <div className="mt-2 space-y-1">
                 {listing.statusItems.map((item, subIdx) => (
-                  <div key={subIdx} className="flex items-center text-sm gap-2">
+                  <div key={subIdx} className="flex items-center text-sm gap-3">
                     <button
                       onClick={() => setModalInfo({ ...listing, ...item })}
                       className={`w-[12px] h-[12px] rounded-full ${item.color === 'red' ? 'bg-red-500' : item.color === 'green' ? 'bg-green-500' : 'bg-gray-400'}`}
                     />
-                    <span className="w-24">{item.channel}</span>
+                    <span className="w-20 text-sm text-[#253847]">{item.channel}</span>
                     <span className="flex-1 text-gray-700">{item.status}</span>
                     {(item.color !== 'green') && (
                       <span className="text-xs text-red-500 w-28">Outage: {getOutage(item)} hrs</span>
