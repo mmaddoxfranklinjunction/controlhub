@@ -144,6 +144,29 @@ const LiveStatus = () => {
   return (
     <PageWrapper>
       <div className="px-4 py-2">
+        {/* Summary Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
+          <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
+            <p className="text-sm font-medium">✅ Open — As Expected</p>
+            <p className="text-lg font-semibold text-green-600">0</p>
+          </div>
+          <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
+            <p className="text-sm font-medium">⚠️ Open — Should Be Closed</p>
+            <p className="text-lg font-semibold text-yellow-500">1</p>
+          </div>
+          <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
+            <p className="text-sm font-medium">❌ Closed — As Expected</p>
+            <p className="text-lg font-semibold text-gray-700">0</p>
+          </div>
+          <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
+            <p className="text-sm font-medium">🔥 Closed — Should Be Open</p>
+            <p className="text-lg font-semibold text-orange-600">1</p>
+          </div>
+          <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
+            <p className="text-sm font-medium">🔴 Offline — Unexpected</p>
+            <p className="text-lg font-semibold text-red-600">0</p>
+          </div>
+        </div>
         <h1 className="text-xl font-bold text-[#253847] font-sans mb-4">Live Status</h1>
 
         {/* Label Filters */}
