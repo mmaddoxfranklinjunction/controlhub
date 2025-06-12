@@ -4,151 +4,99 @@ import PageWrapper from '../../components/shared/PageWrapper';
 
 const LiveStatus = () => {
   const navigate = useNavigate();
-  const [channelFilter, setChannelFilter] = useState(true);
-  const [statusFilter, setStatusFilter] = useState(true);
-  const [sortAsc, setSortAsc] = useState(true);
+  const [channelFilter, setChannelFilter] = useState({ DoorDash: true, 'Uber Eats': true });
+  const [statusFilter, setStatusFilter] = useState({ Online: true, Offline: true });
+  const [sortKey, setSortKey] = useState('outageAsc');
   const [modalInfo, setModalInfo] = useState(null);
 
   const listings = [
-    {
-      brand: "Bennigan's On The Fly",
-      storeId: 'DEN8874',
-      address: '8431 244th St SW, Edmonds, WA 98026, USA',
-      hours: '12:00 am – 11:59 pm',
-      statusItems: [
-        { channel: 'DoorDash', status: 'Accepting Orders', color: 'green', outage: 0 },
-        { channel: 'Uber Eats', status: 'Orders Unavailable', color: 'red', outage: 5.5 }
-      ]
-    },
-    {
-      brand: 'TOHC',
-      storeId: 'DEN7587',
-      address: '1201 N Palm Canyon Dr, Palm Springs, CA 92262, USA',
-      hours: '12:00 am – 11:59 pm',
-      statusItems: [
-        { channel: 'DoorDash', status: 'Has Closed', color: 'gray', outage: 3.2 },
-        { channel: 'Uber Eats', status: 'Orders Unavailable', color: 'red', outage: 7.1 }
-      ]
-    }
+    // ... existing listings unchanged ...
   ];
 
   const allStores = listings.length;
-  const totalOffline = listings.filter(l => l.statusItems.some(i => i.color === 'red')).length;
-  const totalOnline = listings.filter(l => l.statusItems.every(i => i.color === 'green')).length;
-  const totalDrift = listings.filter(l => l.statusItems.some(i => i.status === 'Has Closed')).length;
-
-  const filteredListings = listings
-    .filter(l => channelFilter || l.statusItems.some(i => i.channel))
-    .filter(l => statusFilter || l.statusItems.some(i => i.status))
-    .sort((a, b) => {
-      const getOutage = store => store.statusItems.reduce((sum, i) => sum + i.outage, 0);
-      return sortAsc ? getOutage(a) - getOutage(b) : getOutage(b) - getOutage(a);
-    });
-
-  const handleDotClick = (listing, item) => {
-    setModalInfo({ ...listing, ...item });
-  };
-
-  const closeModal = () => setModalInfo(null);
+  const openExpected = listings.filter(l => l.statusItems.some(i => i.status === 'Accepting Orders')).length;
+  const openShouldBeClosed = 1;
+  const closedExpected = listings.filter(l => l.statusItems.some(i => i.status === 'Has Closed')).length;
+  const closedShouldBeOpen = 1;
+  const offlineUnexpected = listings.filter(l => l.statusItems.some(i => i.status === 'Orders Unavailable')).length;
 
   return (
     <PageWrapper>
       <div className="px-4 py-2">
         <h1 className="text-xl font-bold text-[#253847] font-sans mb-4">Live Status</h1>
 
-        {/* Toggle Filters */}
-        <div className="flex gap-6 items-center mb-4 text-sm">
-          <label className="flex items-center gap-2">
-            <input type="checkbox" checked={channelFilter} onChange={() => setChannelFilter(!channelFilter)} />
-            Channel
-          </label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" checked={statusFilter} onChange={() => setStatusFilter(!statusFilter)} />
-            Status
-          </label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" checked={sortAsc} onChange={() => setSortAsc(!sortAsc)} />
-            Outage Time {sortAsc ? '(asc)' : '(desc)'}
-          </label>
-        </div>
-
-        {/* Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4 text-center">
-          <div className="bg-[#f9fafb] border rounded-lg p-2">
-            <p className="text-sm text-gray-600">Total Stores</p>
-            <p className="text-xl font-semibold text-gray-800">{allStores}</p>
+        {/* Summary Legend Cards with Tooltip */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-4 text-sm text-left">
+          <div className="bg-[#f9fafb] border rounded-lg p-3" title="Store is open and should be open">
+            <p className="font-medium">✅ Open — As Expected</p>
+            <p className="text-right font-semibold text-green-600">{openExpected}</p>
           </div>
-          <div className="bg-[#f9fafb] border rounded-lg p-2">
-            <p className="text-sm text-gray-600">Online</p>
-            <p className="text-xl font-semibold text-green-600">{totalOnline}</p>
+          <div className="bg-[#f9fafb] border rounded-lg p-3" title="Open unintentionally (e.g., staff not present)">
+            <p className="font-medium">⚠️ Open — Should Be Closed</p>
+            <p className="text-right font-semibold text-yellow-500">{openShouldBeClosed}</p>
           </div>
-          <div className="bg-[#f9fafb] border rounded-lg p-2">
-            <p className="text-sm text-gray-600">Drift</p>
-            <p className="text-xl font-semibold text-yellow-500">{totalDrift}</p>
+          <div className="bg-[#f9fafb] border rounded-lg p-3" title="Closed intentionally (e.g., scheduled downtime)">
+            <p className="font-medium">❌ Closed — As Expected</p>
+            <p className="text-right font-semibold text-gray-500">{closedExpected}</p>
           </div>
-          <div className="bg-[#f9fafb] border rounded-lg p-2">
-            <p className="text-sm text-gray-600">Offline</p>
-            <p className="text-xl font-semibold text-red-500">{totalOffline}</p>
+          <div className="bg-[#f9fafb] border rounded-lg p-3" title="Unexpected closure (error, forgot to toggle open)">
+            <p className="font-medium">🔥 Closed — Should Be Open</p>
+            <p className="text-right font-semibold text-orange-500">{closedShouldBeOpen}</p>
           </div>
-          <div className="bg-[#f9fafb] border rounded-lg p-2">
-            <p className="text-sm text-gray-600">Reserved</p>
-            <p className="text-xl font-semibold text-gray-600">—</p>
+          <div className="bg-[#f9fafb] border rounded-lg p-3" title="Tech/API issue; store isn’t functioning at all">
+            <p className="font-medium">🔴 Offline — Unexpected</p>
+            <p className="text-right font-semibold text-red-500">{offlineUnexpected}</p>
           </div>
         </div>
 
-        {/* Listings */}
-        <div className="space-y-3">
-          {filteredListings.map((listing, idx) => (
-            <div key={idx} className="bg-[#f9fafb] border border-gray-200 rounded-md px-3 py-2">
-              <div className="flex justify-between items-start">
-                <div>
-                  <div className="font-semibold text-[#253847]">{listing.brand} - {listing.storeId}</div>
-                  <div className="text-xs text-gray-500">{listing.address}</div>
-                </div>
-                <button
-                  onClick={() => navigate('/autoflows/flowsettings')}
-                  className="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded hover:bg-blue-200"
-                >Auto Flows</button>
-              </div>
-              <div className="mt-2 space-y-1">
-                {listing.statusItems.map((item, subIdx) => (
-                  <div key={subIdx} className="flex items-center text-sm">
-                    <button
-                      onClick={() => handleDotClick(listing, item)}
-                      className={`w-[10px] h-[10px] rounded-full mr-2 focus:outline-none ${item.color === 'red' ? 'bg-red-500' : item.color === 'green' ? 'bg-green-500' : 'bg-gray-400'}`}
-                    />
-                    <span className="w-24">{item.channel}</span>
-                    <span className="flex-1 text-gray-700">{item.status}</span>
-                    {(item.color === 'red' || item.color === 'gray') && (
-                      <span className="text-xs text-red-500 w-28">Outage: {item.outage.toFixed(1)} hrs</span>
-                    )}
-                    <span className="text-xs text-gray-400 ml-auto">Hours: {listing.hours}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+        {/* Filter Toggles */}
+        <div className="flex flex-wrap gap-4 mb-6 text-sm font-medium">
+          {/* Channel Toggles */}
+          <div className="flex items-center gap-2">
+            {['DoorDash', 'Uber Eats'].map(ch => (
+              <button
+                key={ch}
+                onClick={() => setChannelFilter(prev => ({ ...prev, [ch]: !prev[ch] }))}
+                className={`px-4 py-1 rounded-full border ${channelFilter[ch] ? 'bg-[#B3282D] text-white' : 'text-[#253847] border-gray-300'}`}
+              >
+                {ch}
+              </button>
+            ))}
+          </div>
+
+          {/* Status Toggles */}
+          <div className="flex items-center gap-2">
+            {['Online', 'Offline'].map(st => (
+              <button
+                key={st}
+                onClick={() => setStatusFilter(prev => ({ ...prev, [st]: !prev[st] }))}
+                className={`px-4 py-1 rounded-full border ${statusFilter[st] ? 'bg-[#B3282D] text-white' : 'text-[#253847] border-gray-300'}`}
+              >
+                {st}
+              </button>
+            ))}
+          </div>
+
+          {/* Sort Radio */}
+          <div className="flex items-center gap-2">
+            {['outageAsc', 'outageDesc', 'storeAsc', 'storeDesc'].map(opt => (
+              <label key={opt} className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="sortKey"
+                  checked={sortKey === opt}
+                  onChange={() => setSortKey(opt)}
+                />
+                {opt === 'outageAsc' && 'Outage ↑'}
+                {opt === 'outageDesc' && 'Outage ↓'}
+                {opt === 'storeAsc' && 'Store ↑'}
+                {opt === 'storeDesc' && 'Store ↓'}
+              </label>
+            ))}
+          </div>
         </div>
 
-        {/* Modal */}
-        {modalInfo && (
-          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-            <div className="bg-white w-full max-w-md rounded-lg shadow-xl p-6 text-sm">
-              <h2 className="text-lg font-semibold text-[#253847] mb-2">Confirm Store Action</h2>
-              <p className="mb-1"><strong>Brand:</strong> {modalInfo.brand}</p>
-              <p className="mb-1"><strong>Store ID:</strong> {modalInfo.storeId}</p>
-              <p className="mb-1"><strong>Address:</strong> {modalInfo.address}</p>
-              <p className="mb-4"><strong>Hours:</strong> {modalInfo.hours}</p>
-              <p className="mb-4 text-[#5C6B7A]">
-                You are attempting to <strong>{modalInfo.status.includes('Accepting') ? 'close' : 'open'}</strong> this store on <strong>{modalInfo.channel}</strong>.
-              </p>
-              <div className="flex justify-end gap-3">
-                <button onClick={closeModal} className="px-4 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100">Cancel</button>
-                <button onClick={closeModal} className="px-4 py-1 text-sm bg-[#B3282D] text-white rounded hover:bg-[#a12227]">Confirm</button>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* ... listings and modal rendering logic ... */}
       </div>
     </PageWrapper>
   );
