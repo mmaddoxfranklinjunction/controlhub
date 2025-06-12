@@ -112,8 +112,8 @@ const LiveStatus = () => {
 ];
 
   const getOutage = (item) => {
-    if (item && (item.color === 'red' || item.color === 'gray')) return 4; // placeholder
-    return 0;
+  if (item?.outage != null && typeof item.outage === 'number') return item.outage.toFixed(1);
+  return null;
 }; // placeholder
 
   const labelType = (item) => {
@@ -148,23 +148,23 @@ const LiveStatus = () => {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
           <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
             <p className="text-sm font-medium">✅ Open — As Expected</p>
-            <p className="text-lg font-semibold text-green-600">0</p>
+            <p className=\"text-lg font-semibold text-green-600\">{listings.flatMap(l => l.statusItems).filter(i => i.color === 'green').length}</p>
           </div>
           <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
             <p className="text-sm font-medium">⚠️ Open — Should Be Closed</p>
-            <p className="text-lg font-semibold text-yellow-500">1</p>
+            <p className=\"text-lg font-semibold text-yellow-500\">{listings.flatMap(l => l.statusItems).filter(i => i.color === 'green' && i.status !== 'Accepting Orders').length}</p>
           </div>
           <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
             <p className="text-sm font-medium">❌ Closed — As Expected</p>
-            <p className="text-lg font-semibold text-gray-700">0</p>
+            <p className=\"text-lg font-semibold text-gray-700\">{listings.flatMap(l => l.statusItems).filter(i => i.status === 'Has Closed').length}</p>
           </div>
           <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
             <p className="text-sm font-medium">🔥 Closed — Should Be Open</p>
-            <p className="text-lg font-semibold text-orange-600">1</p>
+            <p className=\"text-lg font-semibold text-orange-600\">{listings.flatMap(l => l.statusItems).filter(i => i.color === 'gray' && i.status !== 'Has Closed').length}</p>
           </div>
           <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
             <p className="text-sm font-medium">🔴 Offline — Unexpected</p>
-            <p className="text-lg font-semibold text-red-600">0</p>
+            <p className=\"text-lg font-semibold text-red-600\">{listings.flatMap(l => l.statusItems).filter(i => i.status === 'Orders Unavailable').length}</p>
           </div>
         </div>
         <h1 className="text-xl font-bold text-[#253847] font-sans mb-4">Live Status</h1>
@@ -191,7 +191,7 @@ const LiveStatus = () => {
                 </div>
                 <button
                   onClick={() => navigate('/autoflows/flowsettings')}
-                  className="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded hover:bg-blue-200"
+                  className=\"bg-[#E4EAF2] text-[#1B2B41] text-xs font-semibold px-4 py-1 rounded-md hover:bg-[#CBD5E1]\"
                 >Auto Flows</button>
               </div>
               <div className="mt-2 space-y-1">
