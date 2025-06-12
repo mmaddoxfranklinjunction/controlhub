@@ -1,4 +1,4 @@
-// Updated version with dynamic control UX and trended results section
+// Updated version with dynamic control UX and AI-activated trend graph
 import React, { useState } from 'react';
 import PageWrapper from '../../components/shared/PageWrapper';
 import FilterBar from '../../components/shared/FilterBar';
@@ -30,9 +30,25 @@ const storefrontSettings = [
 
 const controlModes = ['Manual Only', 'Insights Recommended', 'AI Controlled'];
 
+const uptimeTrend = [95, 94, 96, 97, 98, 99, 100];
+const aiActivatedIndex = 3;
+
 const FlowSettings = () => {
   const [selectedStore, setSelectedStore] = useState(storefrontSettings[0].id);
-  const [controls, setControls] = useState({});
+  const [controls, setControls] = useState({
+    store1: {
+      'preptime': 'AI Controlled',
+      'tags': 'Insights Recommended',
+      'pause or unpause': 'Manual Only',
+      'reopen or reactivate': 'AI Controlled',
+      'sync menu and republish': 'Insights Recommended',
+      'optimize hours': 'Manual Only'
+    },
+    store2: {
+      'pause or unpause': 'Insights Recommended',
+      'sync menu and republish': 'Manual Only'
+    }
+  });
   const store = storefrontSettings.find(s => s.id === selectedStore);
 
   const updateControl = (storeId, setting, mode) => {
@@ -78,7 +94,9 @@ const FlowSettings = () => {
             <tbody>
               {store.settings.map(setting => (
                 <tr key={setting} className="border-b">
-                  <td className="px-4 py-2 capitalize text-[#253847]">{setting}</td>
+                  <td className="px-4 py-2 capitalize text-[#253847]">
+                    <span title={`Control for ${setting}`}>{setting}</span>
+                  </td>
                   <td className="px-4 py-2">
                     <div className="flex rounded-full bg-gray-100 w-fit px-1 py-1 gap-1">
                       {controlModes.map(mode => (
@@ -109,9 +127,26 @@ const FlowSettings = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white rounded-xl shadow p-4">
               <h3 className="text-sm font-semibold text-[#253847] mb-2">Uptime Over Time</h3>
-              <div className="h-32 bg-gray-100 rounded flex items-center justify-center text-sm text-gray-400">
-                (Graph Placeholder)
-              </div>
+              <svg viewBox="0 0 300 100" className="w-full h-24">
+                <polyline
+                  fill="none"
+                  stroke="#2B7A78"
+                  strokeWidth="2"
+                  points={uptimeTrend.map((val, idx) => `${idx * 40},${100 - val}`).join(' ')}
+                />
+                {uptimeTrend.map((val, idx) => (
+                  <circle
+                    key={idx}
+                    cx={idx * 40}
+                    cy={100 - val}
+                    r={idx === aiActivatedIndex ? 5 : 3}
+                    fill={idx === aiActivatedIndex ? '#B3282D' : '#2B7A78'}
+                  />
+                ))}
+                <text x={aiActivatedIndex * 40 + 6} y={100 - uptimeTrend[aiActivatedIndex] - 6} fontSize="10" fill="#B3282D">
+                  AI
+                </text>
+              </svg>
             </div>
 
             <div className="bg-white rounded-xl shadow p-4">
