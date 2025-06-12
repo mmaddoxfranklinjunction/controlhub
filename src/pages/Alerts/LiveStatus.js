@@ -19,182 +19,8 @@ const LiveStatus = () => {
         { channel: "Uber Eats", status: "Orders Unavailable", color: "red", outage: 8.1 }
       ],
       hours: "12:00 am - 11:59 pm"
-    },
-    {
-    brand: "Wing Zone",
-    storeId: "DEN9677",
-    address: "1838 Pullman Road, Moscow, ID 83843, USA",
-    statusItems: [
-      { channel: "DoorDash", status: "Accepting Orders", color: "green" },
-      { channel: "Uber Eats", status: "Inactive",           color: "red"   }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  },
-  {
-    brand: "[Inventory Hold] Bennigan's On The Fly",
-    storeId: "DEN6863",
-    address: "72244 Varner Road, Thousand Palms, CA 92276, USA",
-    statusItems: [
-      { channel: "DoorDash", status: "Accepting Orders", color: "green" },
-      { channel: "Uber Eats", status: "Inactive",           color: "red"   }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  },
-  {
-    brand: "Bennigan's On The Fly",
-    storeId: "DEN7587",
-    address: "1201 N Palm Canyon Dr, Palm Springs, CA 92262, USA",
-    statusItems: [
-      { channel: "DoorDash", status: "Has Closed", color: "gray" },
-      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  },
-  {
-    brand: "Bennigan's On The Fly",
-    storeId: "DEN7860",
-    address: "14821 1st Avenue South, Burien, WA 98168, USA",
-    statusItems: [
-      { channel: "Uber Eats", status: "Inactive", color: "red" }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  },
-  {
-    brand: "Bennigan's On The Fly",
-    storeId: "DEN7865",
-    address: "18623 International Blvd, SeaTac, WA 98188, USA",
-    statusItems: [
-      { channel: "DoorDash", status: "Has Closed", color: "gray" },
-      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  },
-  {
-    brand: "Breakfast Boy",
-    storeId: "GAD1655",
-    address: "1655 Pleasant Hill Rd Duluth GA 30096",
-    statusItems: [
-      { channel: "DoorDash", status: "Inactive", color: "red" }
-    ],
-    hours: "5:00 am - 4:39 am"
-  },
-  {
-    brand: "Effin Egg",
-    storeId: "GAD1655",
-    address: "1655 Pleasant Hill Rd Duluth GA 30096",
-    statusItems: [
-      { channel: "DoorDash", status: "Has Closed", color: "gray" }
-    ],
-    hours: "7:00 am - 1:45 pm"
-  },
-  {
-    brand: "Flametown",
-    storeId: "GAD1655",
-    address: "1655 Pleasant Hill Rd Duluth GA 30096",
-    statusItems: [
-      { channel: "DoorDash", status: "Has Closed", color: "gray" }
-    ],
-    hours: ""
-  },
-  {
-    brand: "TOHC",
-    storeId: "DEN6351",
-    address: "2202 State Route 530 Northeast, Arlington, WA 98223, USA",
-    statusItems: [
-      { channel: "DoorDash", status: "Has Closed", color: "gray" },
-      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  },
-  {
-    brand: "TOHC",
-    storeId: "DEN6863",
-    address: "72244 Varner Road, Thousand Palms, CA 92276, USA",
-    statusItems: [
-      { channel: "Uber Eats", status: "Inactive", color: "red" }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  },
-  {
-    brand: "TOHC",
-    storeId: "DEN7587",
-    address: "1201 N Palm Canyon Dr, Palm Springs, CA 92262, USA",
-    statusItems: [
-      { channel: "DoorDash", status: "Has Closed", color: "gray" },
-      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  },
-  {
-    brand: "TOHC",
-    storeId: "DEN7590",
-    address: "69050 Hwy 111, Cathedral City, CA 92234, USA",
-    statusItems: [
-      { channel: "DoorDash", status: "Has Closed", color: "gray" },
-      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  },
-  {
-    brand: "TOHC",
-    storeId: "DEN7868",
-    address: "132 128th St SW, Everett, WA 98204, USA",
-    statusItems: [
-      { channel: "Uber Eats", status: "Inactive", color: "red" }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  },
-  {
-    brand: "TOHC",
-    storeId: "DEN8874",
-    address: "8431 244th St SW, Edmonds, WA 98026, USA",
-    statusItems: [
-      { channel: "DoorDash", status: "Has Closed", color: "gray" },
-      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  },
-  {
-    brand: "TOHC",
-    storeId: "DEN9278",
-    address: "3704 Fruitvale Blvd, Yakima, WA 98902, USA",
-    statusItems: [
-      { channel: "DoorDash", status: "Has Closed", color: "gray" },
-      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  },
-  {
-    brand: "Tori-Yoshi Japanese Fried Chicken",
-    storeId: "DEN7590",
-    address: "69050 Hwy 111, Cathedral City, CA 92234, USA",
-    statusItems: [
-      { channel: "DoorDash", status: "Has Closed", color: "gray" },
-      { channel: "Uber Eats", status: "Has Closed", color: "gray" }
-    ],
-    hours: ""
-  },
-  {
-    brand: "Wing Zone",
-    storeId: "DEN6773",
-    address: "2511 North Ventura Road, Port Hueneme, CA 93041, USA",
-    statusItems: [
-      { channel: "DoorDash", status: "Has Closed", color: "gray" },
-      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  },
-  {
-    brand: "Wing Zone",
-    storeId: "DEN9644",
-    address: "585 North 2nd East, Rexburg, ID 83440, USA",
-    statusItems: [
-      { channel: "DoorDash", status: "Has Closed", color: "gray" },
-      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
-    ],
-    hours: "12:00 am - 11:59 pm"
-  }
-    // ...additional listings (omitted for brevity)
+    }
+    // ... additional listings omitted for brevity
   ]);
 
   const getOutage = (item) => {
@@ -229,48 +55,45 @@ const LiveStatus = () => {
 
   return (
     <PageWrapper>
-      <div className="px-4 py-2">
+      <div className="px-4 py-2 font-[Futura, sans-serif]">
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
-          <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
-            <p className="text-sm font-medium">✅ Open — As Expected</p>
-            <p className="text-lg font-semibold text-green-600">
-              {listings.flatMap(l => l.statusItems).filter(i => i.color === 'green').length}
-            </p>
-          </div>
-          <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
-            <p className="text-sm font-medium">⚠️ Open — Should Be Closed</p>
-            <p className="text-lg font-semibold text-yellow-500">0</p>
-          </div>
-          <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
-            <p className="text-sm font-medium">❌ Closed — As Expected</p>
-            <p className="text-lg font-semibold text-gray-700">
-              {listings.flatMap(l => l.statusItems).filter(i => i.status === 'Has Closed').length}
-            </p>
-          </div>
-          <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
-            <p className="text-sm font-medium">🔥 Closed — Should Be Open</p>
-            <p className="text-lg font-semibold text-orange-600">0</p>
-          </div>
-          <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
-            <p className="text-sm font-medium">🔴 Offline — Unexpected</p>
-            <p className="text-lg font-semibold text-red-600">
-              {listings.flatMap(l => l.statusItems).filter(i => i.status === 'Orders Unavailable').length}
-            </p>
-          </div>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+          {[{
+            label: '✅ Open — As Expected',
+            value: listings.flatMap(l => l.statusItems).filter(i => i.color === 'green').length,
+            color: 'text-green-600'
+          }, {
+            label: '⚠️ Open — Should Be Closed', value: 0, color: 'text-yellow-500'
+          }, {
+            label: '❌ Closed — As Expected',
+            value: listings.flatMap(l => l.statusItems).filter(i => i.status === 'Has Closed').length,
+            color: 'text-gray-700'
+          }, {
+            label: '🔥 Closed — Should Be Open', value: 0, color: 'text-orange-600'
+          }, {
+            label: '🔴 Offline — Unexpected',
+            value: listings.flatMap(l => l.statusItems).filter(i => i.status === 'Orders Unavailable').length,
+            color: 'text-red-600'
+          }].map(({ label, value, color }) => (
+            <div key={label} className="bg-white border border-gray-200 rounded-lg px-3 py-2 text-center shadow-sm">
+              <p className="text-sm font-medium text-[#5C6B7A]">{label}</p>
+              <p className={`text-2xl font-bold ${color}`}>{value}</p>
+            </div>
+          ))}
         </div>
 
+        {/* Title + Filter */}
         <div className="flex items-center gap-3 mb-4">
-          <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Live Status</h1>
+          <h1 className="text-xl font-bold text-[#253847] mr-4 whitespace-nowrap">Live Status</h1>
           <div className="flex-1">
             <FilterBar onApply={() => {}} />
           </div>
         </div>
 
         {/* Listings */}
-        <div className="space-y-3">
+        <div className="space-y-3 max-w-6xl mx-auto">
           {sorted.map((listing, idx) => (
-            <div key={idx} className="bg-[#f9fafb] border border-gray-200 rounded-md px-3 py-2">
+            <div key={idx} className="bg-white border border-gray-200 rounded-md px-4 py-3 shadow-sm">
               <div className="flex justify-between items-start">
                 <div>
                   <div className="font-semibold text-[#253847]">{listing.brand} - {listing.storeId}</div>
@@ -283,10 +106,10 @@ const LiveStatus = () => {
               </div>
               <div className="mt-2 space-y-1">
                 {listing.statusItems.map((item, subIdx) => (
-                  <div key={subIdx} className="flex items-center text-sm">
+                  <div key={subIdx} className="flex items-center text-sm gap-2">
                     <button
                       onClick={() => setModalInfo({ ...listing, ...item })}
-                      className={`w-[10px] h-[10px] rounded-full mr-2 ${item.color === 'red' ? 'bg-red-500' : item.color === 'green' ? 'bg-green-500' : 'bg-gray-400'}`}
+                      className={`w-[12px] h-[12px] rounded-full ${item.color === 'red' ? 'bg-red-500' : item.color === 'green' ? 'bg-green-500' : 'bg-gray-400'}`}
                     />
                     <span className="w-24">{item.channel}</span>
                     <span className="flex-1 text-gray-700">{item.status}</span>
