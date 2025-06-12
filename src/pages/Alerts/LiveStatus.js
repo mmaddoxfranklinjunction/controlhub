@@ -19,8 +19,96 @@ const LiveStatus = () => {
         { channel: "Uber Eats", status: "Orders Unavailable", color: "red", outage: 8.1 }
       ],
       hours: "12:00 am - 11:59 pm"
-    }
-    // ... additional listings omitted for brevity
+    },
+    {
+    brand: "Bennigan's On The Fly",
+    storeId: "DEN7589",
+    address: "82120 Hwy 111, Indio, CA 92201, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray", outage: 5.4 },
+      { channel: "Uber Eats", status: "Orders Unavailable", color: "red", outage: 4.9 }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "Bennigan's On The Fly",
+    storeId: "DEN8786",
+    address: "611 North Overland Avenue, Burley, ID, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Accepting Orders", color: "green" },
+      { channel: "Uber Eats", status: "Orders Unavailable", color: "red", outage: 3.2 }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "Bennigan's On The Fly",
+    storeId: "DEN8874",
+    address: "8431 244th St SW, Edmonds, WA 98026, USA",
+    statusItems: [
+      { channel: "Uber Eats", status: "Orders Unavailable", color: "red", outage: 2.7 }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "Bennigan's On The Fly",
+    storeId: "DEN8878",
+    address: "Pole Line Road, Filer, ID, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Accepting Orders", color: "green" },
+      { channel: "Uber Eats", status: "Orders Unavailable", color: "red", outage: 1.8 }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "Bennigan's On The Fly",
+    storeId: "DEN9329",
+    address: "4095 Telegraph Road, Ventura, CA 93003, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray", outage: 6.6 },
+      { channel: "Uber Eats", status: "Orders Unavailable", color: "red", outage: 7.5 }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "Bennigan's On The Fly",
+    storeId: "DEN9377",
+    address: "42455 Washington St, Palm Desert, CA 92211, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray", outage: 4.2 },
+      { channel: "Uber Eats", status: "Orders Unavailable", color: "red", outage: 5.1 }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "TOHC",
+    storeId: "DEN6773",
+    address: "2511 North Ventura Road, Port Hueneme, CA 93041, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray", outage: 6.3 },
+      { channel: "Uber Eats", status: "Orders Unavailable", color: "red", outage: 6.8 }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "TOHC",
+    storeId: "DEN7589",
+    address: "82120 Hwy 111, Indio, CA 92201, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Accepting Orders", color: "green" },
+      { channel: "Uber Eats", status: "Orders Unavailable", color: "red", outage: 2.1 }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "TOHC",
+    storeId: "DEN7860",
+    address: "14821 1st Avenue South, Burien, WA 98168, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Accepting Orders", color: "green" },
+      { channel: "Uber Eats", status: "Orders Unavailable", color: "red", outage: 2.9 }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  }
   ]);
 
   const getOutage = (item) => {
