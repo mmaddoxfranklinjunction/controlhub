@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageWrapper from '../../components/shared/PageWrapper';
+import FilterBar from '../../components/shared/FilterBar';
 
 const LiveStatus = () => {
   const navigate = useNavigate();
@@ -175,7 +176,7 @@ const LiveStatus = () => {
             <p className="text-lg font-semibold text-red-600">0</p>
           </div>
         </div>
-        <h1 className="text-xl font-bold text-[#253847] font-sans mb-4">Live Status</h1>
+    
 
     
 
