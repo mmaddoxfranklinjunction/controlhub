@@ -21,6 +21,7 @@ import Reviews from './pages/analytics/Reviews';
 
 import Alerts from './pages/Alerts/alerts';
 import AlertsPanel from './pages/Alerts/AlertsPanel';
+import LiveStatus from './pages/Alerts/LiveStatus';
 
 import StoreSearch from './pages/store-search/StoreSearch';
 import Settings from './pages/settings/Settings';
@@ -61,6 +62,7 @@ root.render(
         {/* Alerts */}
         <Route path="/alerts/summary" element={<AlertsPanel />} />
         <Route path="/alerts" element={<Alerts />} />
+        <Route path="/alerts/livestatus" element={<LiveStatus />} />
 
         {/* Store Search */}
         <Route path="/store-search" element={<StoreSearch />} />
