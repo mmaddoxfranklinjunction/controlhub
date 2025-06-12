@@ -143,7 +143,15 @@ const LiveStatus = () => {
 
   return (
     <PageWrapper>
-      <div className="px-4 py-2">
+        <div className="px-4 py-2">
+        {/* Logo + Title + FilterBar Row */}
+        <div className="flex items-center gap-3 mb-4">
+        
+          <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Live Status</h1>
+          <div className="flex-1">
+            <FilterBar onApply={() => {}} />
+          </div>
+        </div> <div className="px-4 py-2">
         {/* Summary Cards */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
           <div className="bg-[#f9fafb] border rounded-lg p-3 text-center">
@@ -169,16 +177,7 @@ const LiveStatus = () => {
         </div>
         <h1 className="text-xl font-bold text-[#253847] font-sans mb-4">Live Status</h1>
 
-        {/* Label Filters */}
-        <div className="flex flex-wrap gap-2 mb-4 text-sm font-medium">
-          {['All', ...labelFilter].map(label => (
-            <button
-              key={label}
-              onClick={() => setActiveLabel(label)}
-              className={`px-3 py-1 rounded-full border ${activeLabel === label ? 'bg-[#B3282D] text-white' : 'text-[#253847] border-gray-300'}`}
-            >{label}</button>
-          ))}
-        </div>
+    
 
         {/* Listings */}
         <div className="space-y-3">
