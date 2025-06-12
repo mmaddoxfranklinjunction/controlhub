@@ -9,7 +9,10 @@ const LiveStatus = () => {
   const [sortKey, setSortKey] = useState('outageAsc');
   const [modalInfo, setModalInfo] = useState(null);
 
-  const listings = [
+  const [listings, setListings] = useState([
+  // ...existing listing data here
+
+
   {
     brand: "Bennigan's On The Fly",
     storeId: "DEN6773",
@@ -109,7 +112,7 @@ const LiveStatus = () => {
     ],
     hours: "12:00 am - 11:59 pm"
   }
-];
+]);
 
   const getOutage = (item) => {
   if (item?.outage != null && typeof item.outage === 'number') return item.outage.toFixed(1);
@@ -228,7 +231,30 @@ const LiveStatus = () => {
               </p>
               <div className="flex justify-end gap-3">
                 <button onClick={() => setModalInfo(null)} className="px-4 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100">Cancel</button>
-                <button onClick={() => setModalInfo(null)} className="px-4 py-1 text-sm bg-[#B3282D] text-white rounded hover:bg-[#a12227]">Confirm</button>
+                <button
+  onClick={() => {
+    setListings(prev =>
+      prev.map(store => {
+        if (store.storeId === modalInfo.storeId) {
+          return {
+            ...store,
+            statusItems: store.statusItems.map(item =>
+              item.channel === modalInfo.channel
+                ? { ...item, color: 'green', status: 'Accepting Orders', outage: 0 }
+                : item
+            )
+          };
+        }
+        return store;
+      })
+    );
+    setModalInfo(null);
+  }}
+  className="px-4 py-1 text-sm bg-[#B3282D] text-white rounded hover:bg-[#a12227]"
+>
+  Confirm
+</button>
+
               </div>
             </div>
           </div>
