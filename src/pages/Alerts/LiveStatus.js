@@ -19,7 +19,181 @@ const LiveStatus = () => {
         { channel: "Uber Eats", status: "Orders Unavailable", color: "red", outage: 8.1 }
       ],
       hours: "12:00 am - 11:59 pm"
-    }
+    },
+    {
+    brand: "Wing Zone",
+    storeId: "DEN9677",
+    address: "1838 Pullman Road, Moscow, ID 83843, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Accepting Orders", color: "green" },
+      { channel: "Uber Eats", status: "Inactive",           color: "red"   }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "[Inventory Hold] Bennigan's On The Fly",
+    storeId: "DEN6863",
+    address: "72244 Varner Road, Thousand Palms, CA 92276, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Accepting Orders", color: "green" },
+      { channel: "Uber Eats", status: "Inactive",           color: "red"   }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "Bennigan's On The Fly",
+    storeId: "DEN7587",
+    address: "1201 N Palm Canyon Dr, Palm Springs, CA 92262, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray" },
+      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "Bennigan's On The Fly",
+    storeId: "DEN7860",
+    address: "14821 1st Avenue South, Burien, WA 98168, USA",
+    statusItems: [
+      { channel: "Uber Eats", status: "Inactive", color: "red" }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "Bennigan's On The Fly",
+    storeId: "DEN7865",
+    address: "18623 International Blvd, SeaTac, WA 98188, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray" },
+      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "Breakfast Boy",
+    storeId: "GAD1655",
+    address: "1655 Pleasant Hill Rd Duluth GA 30096",
+    statusItems: [
+      { channel: "DoorDash", status: "Inactive", color: "red" }
+    ],
+    hours: "5:00 am - 4:39 am"
+  },
+  {
+    brand: "Effin Egg",
+    storeId: "GAD1655",
+    address: "1655 Pleasant Hill Rd Duluth GA 30096",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray" }
+    ],
+    hours: "7:00 am - 1:45 pm"
+  },
+  {
+    brand: "Flametown",
+    storeId: "GAD1655",
+    address: "1655 Pleasant Hill Rd Duluth GA 30096",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray" }
+    ],
+    hours: ""
+  },
+  {
+    brand: "TOHC",
+    storeId: "DEN6351",
+    address: "2202 State Route 530 Northeast, Arlington, WA 98223, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray" },
+      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "TOHC",
+    storeId: "DEN6863",
+    address: "72244 Varner Road, Thousand Palms, CA 92276, USA",
+    statusItems: [
+      { channel: "Uber Eats", status: "Inactive", color: "red" }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "TOHC",
+    storeId: "DEN7587",
+    address: "1201 N Palm Canyon Dr, Palm Springs, CA 92262, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray" },
+      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "TOHC",
+    storeId: "DEN7590",
+    address: "69050 Hwy 111, Cathedral City, CA 92234, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray" },
+      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "TOHC",
+    storeId: "DEN7868",
+    address: "132 128th St SW, Everett, WA 98204, USA",
+    statusItems: [
+      { channel: "Uber Eats", status: "Inactive", color: "red" }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "TOHC",
+    storeId: "DEN8874",
+    address: "8431 244th St SW, Edmonds, WA 98026, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray" },
+      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "TOHC",
+    storeId: "DEN9278",
+    address: "3704 Fruitvale Blvd, Yakima, WA 98902, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray" },
+      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "Tori-Yoshi Japanese Fried Chicken",
+    storeId: "DEN7590",
+    address: "69050 Hwy 111, Cathedral City, CA 92234, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray" },
+      { channel: "Uber Eats", status: "Has Closed", color: "gray" }
+    ],
+    hours: ""
+  },
+  {
+    brand: "Wing Zone",
+    storeId: "DEN6773",
+    address: "2511 North Ventura Road, Port Hueneme, CA 93041, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray" },
+      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  },
+  {
+    brand: "Wing Zone",
+    storeId: "DEN9644",
+    address: "585 North 2nd East, Rexburg, ID 83440, USA",
+    statusItems: [
+      { channel: "DoorDash", status: "Has Closed", color: "gray" },
+      { channel: "Uber Eats", status: "Inactive",   color: "red"  }
+    ],
+    hours: "12:00 am - 11:59 pm"
+  }
     // ...additional listings (omitted for brevity)
   ]);
 
