@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PageWrapper from '../../components/shared/PageWrapper';
 import FilterBar from '../../components/shared/FilterBar';
 
 const LiveStatus = () => {
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [sortKey, setSortKey] = useState('brand');
-  const [modalInfo, setModalInfo] = useState(null); // store clicked data
 
   const listings = [
     {
@@ -14,6 +15,7 @@ const LiveStatus = () => {
       address: '8431 244th St SW, Edmonds, WA 98026, USA',
       hours: '12:00 am – 11:59 pm',
       statusItems: [
+        { channel: 'DoorDash', status: 'Accepting Orders', color: 'green' },
         { channel: 'Uber Eats', status: 'Orders Unavailable', color: 'red' }
       ]
     },
@@ -53,16 +55,10 @@ const LiveStatus = () => {
       return 0;
     });
 
-  const handleDotClick = (store, item) => {
-    setModalInfo({ ...store, channel: item.channel, status: item.status, color: item.color });
-  };
-
-  const closeModal = () => setModalInfo(null);
-
   return (
     <PageWrapper>
       <div className="px-6 py-4">
-        {/* Header + Filters */}
+        {/* Header */}
         <div className="flex items-center gap-4 mb-4">
           <h1 className="text-xl font-bold text-[#253847] font-sans mr-4 whitespace-nowrap">Live Status</h1>
           <div className="flex-1">
@@ -111,51 +107,50 @@ const LiveStatus = () => {
         <div className="space-y-4">
           {filteredListings.map((listing, idx) => (
             <div key={idx} className="bg-[#f9fafb] border border-gray-200 rounded-lg px-4 py-3">
-              <div className="font-semibold text-[#253847] mb-1">
-                {listing.brand} - {listing.storeId}
-              </div>
-              <div className="text-xs text-gray-500 mb-2">{listing.address}</div>
-
-              {listing.statusItems.map((item, subIdx) => (
-                <div key={subIdx} className="flex items-center gap-2 text-sm mb-1">
-                  <button
-                    onClick={() => handleDotClick(listing, item)}
-                    className={`w-[9px] h-[9px] rounded-full focus:outline-none ${
-                      item.color === 'red'
-                        ? 'bg-red-500'
-                        : item.color === 'green'
-                        ? 'bg-green-500'
-                        : 'bg-gray-400'
-                    }`}
-                  />
-                  <span>{item.channel}</span>
-                  <span className="ml-2 text-gray-500">{item.status}</span>
-                  <span className="ml-auto text-xs text-gray-400">Hours: {listing.hours}</span>
+              {/* Top Row */}
+              <div className="flex items-start justify-between">
+                <div>
+                  <div className="font-semibold text-[#253847]">
+                    {listing.brand} - {listing.storeId}
+                  </div>
+                  <div className="text-xs text-gray-500">{listing.address}</div>
                 </div>
-              ))}
+                <button
+                  onClick={() => navigate('/autoflows/flowsettings')}
+                  className="bg-blue-100 text-blue-700 font-semibold text-xs px-3 py-1 rounded hover:bg-blue-200"
+                >
+                  Auto Flows
+                </button>
+              </div>
+
+              {/* Status Rows */}
+              <div className="mt-3 space-y-2">
+                {listing.statusItems.map((item, subIdx) => (
+                  <div key={subIdx} className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2">
+                      <span className={`w-[9px] h-[9px] rounded-full inline-block ${
+                        item.color === 'red'
+                          ? 'bg-red-500'
+                          : item.color === 'green'
+                          ? 'bg-green-500'
+                          : 'bg-gray-400'
+                      }`} />
+                      <span>{item.channel}</span>
+                      <span className="text-gray-400 ml-2 flex gap-1">
+                        <i className="fa fa-store" />
+                        <i className="fa fa-building" />
+                      </span>
+                    </div>
+                    <div className="text-gray-700">{item.status}</div>
+                    <div className="text-xs text-gray-400 whitespace-nowrap">
+                      Hours: {listing.hours}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
-
-        {/* Modal */}
-        {modalInfo && (
-          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-            <div className="bg-white w-full max-w-md rounded-lg shadow-xl p-6 text-sm">
-              <h2 className="text-lg font-semibold text-[#253847] mb-2">Confirm Store Action</h2>
-              <p className="mb-1"><strong>Brand:</strong> {modalInfo.brand}</p>
-              <p className="mb-1"><strong>Store ID:</strong> {modalInfo.storeId}</p>
-              <p className="mb-1"><strong>Address:</strong> {modalInfo.address}</p>
-              <p className="mb-4"><strong>Hours:</strong> {modalInfo.hours}</p>
-              <p className="mb-4 text-[#5C6B7A]">
-                You are attempting to <strong>{modalInfo.status.includes('Accepting') ? 'close' : 'open'}</strong> this store on <strong>{modalInfo.channel}</strong>.
-              </p>
-              <div className="flex justify-end gap-3">
-                <button onClick={closeModal} className="px-4 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100">Cancel</button>
-                <button onClick={closeModal} className="px-4 py-1 text-sm bg-[#B3282D] text-white rounded hover:bg-[#a12227]">Confirm</button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </PageWrapper>
   );
